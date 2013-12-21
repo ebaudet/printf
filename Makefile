@@ -32,6 +32,6 @@ gdb:
 	gdb $(NAME)
 clean:
 	rm -f $(OBJS)
-fclean:
+fclean: clean
 	rm -f $(NAME)
 re: fclean all
