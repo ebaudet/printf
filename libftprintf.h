@@ -31,6 +31,7 @@ char	*ft_itoa(int n);
 char	*ft_strcpy(char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 int		ft_printf(const char *format, ...);
+void	print_c(t_data *t);
 void	print_s(t_data *t);
 void	print_d(t_data *t);
 void	putstr_count(t_data *t, char *str);

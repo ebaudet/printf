@@ -12,6 +12,16 @@
 
 #include "libftprintf.h"
 
+void	print_c(t_data *t)
+{
+	char	c;
+
+	c = (va_arg(t->ap, char));
+	ft_putchar(c);
+	t->count += 1;
+	t->i += 1;
+}
+
 void	print_s(t_data *t)
 {
 	char	*str;
@@ -51,8 +61,10 @@ int		is_arg(t_data *t, char *format)
 		else if (format[t->i] == 'd' || format[t->i] == 'i'
 			|| format[t->i] == 'u')
 			print_d(t);
-		else if (format[t->i] == 's' || format[t->i] == 'c')
+		else if (format[t->i] == 's')
 			print_s(t);
+		else if (format[t->i] == 'c')
+			print_c(t);
 		return (1);
 	}
 	return (0);
