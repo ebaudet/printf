@@ -48,7 +48,8 @@ int		is_arg(t_data *t, char *format)
 			return (1);
 		else if (format[t->i] == '%')
 			print_uniq_caract(t, format);
-		else if (format[t->i] == 'd')
+		else if (format[t->i] == 'd' || format[t->i] == 'i'
+			|| format[t->i] == 'u')
 			print_d(t);
 		else if (format[t->i] == 's')
 			print_s(t);
