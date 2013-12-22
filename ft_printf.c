@@ -51,7 +51,7 @@ int		is_arg(t_data *t, char *format)
 		else if (format[t->i] == 'd' || format[t->i] == 'i'
 			|| format[t->i] == 'u')
 			print_d(t);
-		else if (format[t->i] == 's')
+		else if (format[t->i] == 's' || format[t->i] == 'c')
 			print_s(t);
 		return (1);
 	}
