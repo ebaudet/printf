@@ -19,22 +19,38 @@ SRCS	= ft_printf.c\
 		ft_strlen.c\
 		ft_strdup.c
 OBJS	= ${SRCS:.c=.o}
-INC		= ./
-FLAGS	= -Wall -Wextra -Werror
+INC		= ./includes/
+FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
+FLAGS_LESS = -Wall -Wextra -Werror
+DEBUGFLG = -v -da -Q
+CC		= gcc
+AR		= ar rc
+RANLIB	= ranlib
 
-all: $(NAME)
+all: chmod $(NAME)
+
+chmod:
+	@chmod -R +rw .
+	@echo "\n\n > apply correct right [\033[32mDONE\033[m]"
 
 $(NAME): $(OBJS)
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
+	@$(AR) $(NAME) $(OBJS)
+	@$(RANLIB) $(NAME)
+	@echo "\n\n > Compiling libftprintf.a [\033[32mDONE\033[m]"
 
 %.o: %.c
-		cc -c $< -o $@ $(FLAGS) -I$(INC)
+	@$(CC) -c $< -o $@ $(FLAGS_LESS) -I $(INC)
+	@echo -n .
 
 clean:
-		rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "fclean : [\033[32mDONE\033[m]"
 
 re: fclean all
+
+test: re
+	@cc $(FLAGS_LESS) main.c -o test -I $(INC) -L libftprintf libftprintf.a
+	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"

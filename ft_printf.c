@@ -12,11 +12,29 @@
 
 #include "libftprintf.h"
 
+//================ For test ONLY ===============================================
+void	ft_putstr(char const *s)
+{
+	int		i;
+
+	if (s)
+	{
+		i = 0;
+		while (s[i] != 0)
+		{
+			ft_putchar(s[i]);
+			i++;
+		}
+	}
+}
+//==============================================================================
+
+
 void	print_c(t_data *t)
 {
 	char	c;
 
-	c = (va_arg(t->ap, char));
+	c = (char)(va_arg(t->ap, int));
 	ft_putchar(c);
 	t->count += 1;
 	t->i += 1;
@@ -53,7 +71,7 @@ int		is_arg(t_data *t, char *format)
 {
 	if (format[t->i] == '%')
 	{
-		t->i = t->i + 1;
+		t->i += 1;
 		if (!format[t->i])
 			return (1);
 		else if (format[t->i] == '%')
@@ -65,6 +83,7 @@ int		is_arg(t_data *t, char *format)
 			print_s(t);
 		else if (format[t->i] == 'c')
 			print_c(t);
+		t->i += 1;
 		return (1);
 	}
 	return (0);
@@ -98,9 +117,7 @@ int		ft_printf(const char *format, ...)
 	while (format[t.i] != '\0')
 	{
 		print_caract(&t, (char *)format);
-		t.i += 1;
 	}
 	va_end(t.ap);
 	return (t.count);
-
 }
