@@ -13,7 +13,7 @@
 #include "libftprintf.h"
 
 //================ For test ONLY ===============================================
-void	ft_putstr(char const *s)
+/*static void	ft_putstr(char const *s)
 {
 	int		i;
 
@@ -26,11 +26,19 @@ void	ft_putstr(char const *s)
 			i++;
 		}
 	}
-}
+}*/
 //==============================================================================
 
+void	print_p(t_ftprintf *t)
+{
+	char 	*str;
 
-void	print_c(t_data *t)
+	str = ft_lutohex(va_arg(t->ap, long unsigned int));
+	putstr_count(t, str);
+	free(str);
+}
+
+void	print_c(t_ftprintf *t)
 {
 	char	c;
 
@@ -40,7 +48,7 @@ void	print_c(t_data *t)
 	t->i += 1;
 }
 
-void	print_s(t_data *t)
+void	print_s(t_ftprintf *t)
 {
 	char	*str;
 
@@ -49,7 +57,7 @@ void	print_s(t_data *t)
 	free(str);
 }
 
-void	print_d(t_data *t)
+void	print_d(t_ftprintf *t)
 {
 	char	*str;
 
@@ -58,7 +66,7 @@ void	print_d(t_data *t)
 	free(str);
 }
 
-void	putstr_count(t_data *t, char *str)
+void	putstr_count(t_ftprintf *t, char *str)
 {
 	int		size;
 
@@ -67,7 +75,7 @@ void	putstr_count(t_data *t, char *str)
 	t->count += size;
 }
 
-int		is_arg(t_data *t, char *format)
+int		is_arg(t_ftprintf *t, char *format)
 {
 	if (format[t->i] == '%')
 	{
@@ -83,20 +91,22 @@ int		is_arg(t_data *t, char *format)
 			print_s(t);
 		else if (format[t->i] == 'c')
 			print_c(t);
+		else if (format[t->i] == 'p')
+			print_p(t);
 		t->i += 1;
 		return (1);
 	}
 	return (0);
 }
 
-void	print_uniq_caract(t_data *t, char *format)
+void	print_uniq_caract(t_ftprintf *t, char *format)
 {
 	ft_putchar(format[t->i]);
 	t->i = t->i + 1;
 	t->count = t->count + 1;
 }
 
-void	print_caract(t_data *t, char *format)
+void	print_caract(t_ftprintf *t, char *format)
 {
 
 	while (format[t->i] && !is_arg(t, format))
@@ -109,7 +119,7 @@ void	print_caract(t_data *t, char *format)
 
 int		ft_printf(const char *format, ...)
 {
-	t_data		t;
+	t_ftprintf		t;
 
 	va_start(t.ap, format);
 	t.i = 0;
