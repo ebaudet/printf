@@ -20,6 +20,8 @@ int main(void)
 
 	i = 12;
 
+	ft_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois", 'c');
+	ft_printf("char-%c-%s-%s-%c-%s-%c-%-i", 'a', "un", "deux", 'b', "trois", 'd');
     ft_printf("");
 	ft_printf("\n----------\n");
 	ft_printf("\nabcdefg\nh");

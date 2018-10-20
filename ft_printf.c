@@ -16,12 +16,11 @@
 static void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
 {
 	ft_strncat(buf, format + t->i, 1);
-	t->i = t->i + 1;
 }
 
 static void	print_p(t_ftprintf *t, char *buf)
 {
-	char 	*str;
+	char	*str;
 
 	str = ft_lutohex(va_arg(t->ap, long unsigned int));
 	ft_strcat(buf, str);
@@ -34,7 +33,6 @@ static void	print_c(t_ftprintf *t, char *buf)
 
 	c = (char)(va_arg(t->ap, int));
 	ft_strncat(buf, &c, 1);
-	t->i += 1;
 }
 
 static void	print_s(t_ftprintf *t, char *buf)
@@ -76,6 +74,8 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			print_c(t, buf);
 		else if (format[t->i] == 'p')
 			print_p(t, buf);
+		else
+			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		t->i += 1;
 		return (ft_strdup(buf));
 	}
@@ -97,15 +97,13 @@ static char	*print_caract(t_ftprintf *t, char *format)
 			free(tmp);
 			break;
 		}
-		// @todo : pweokfwfe
 		ft_strncat(buf, format + t->i, 1);
-
 		t->i += 1;
 	}
 	return ft_strdup(buf);
 }
 
-char	*ft_getsstr(t_ftprintf *t, const char *format)
+char		*ft_getsstr(t_ftprintf *t, const char *format)
 {
 	char			*str;
 	char			*tmp;
@@ -125,7 +123,7 @@ char	*ft_getsstr(t_ftprintf *t, const char *format)
 }
 
 
-char	*ft_sprintf(const char *format, ...)
+char		*ft_sprintf(const char *format, ...)
 {
 	t_ftprintf	t;
 	char 		*str;
@@ -136,7 +134,7 @@ char	*ft_sprintf(const char *format, ...)
 	return str;
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	t_ftprintf	t;
 	char 		*str;
