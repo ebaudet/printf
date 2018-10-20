@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include <stdio.h> */
+#include <stdio.h>
 #include "libftprintf.h"
 
 int main(void)
@@ -24,11 +24,14 @@ int main(void)
 	ft_printf("\n----------\n");
 	ft_printf("\nabcdefg\nh");
 	ft_printf(". .");
-	ft_printf("coucou\n");
+	ft_printf("ft_printf: coucou\n");
+	printf("printf: coucou\n");
 
-	ft_printf("Je m'appelle %s %s, et j'ai %d ans\n", "Emilien", "Baudet", 29);
+	ft_printf("ft_printf: Je m'appelle %s %s, et j'ai %d ans\n", "Emilien", "Baudet", 29);
+	printf("printf: Je m'appelle %s %s, et j'ai %d ans\n", "Emilien", "Baudet", 29);
 	ft_printf("\n----------\n");
-	ft_printf("&i = %p\n", &i);
+	ft_printf("ft_printf: &i = %p\n", &i);
+	printf("printf: &i = %p\n", &i);
 
 
 
