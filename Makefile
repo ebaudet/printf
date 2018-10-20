@@ -11,16 +11,10 @@
 # **************************************************************************** #
 
 NAME	= libftprintf.a
-SRCS	= ft_printf.c\
-		ft_atoi.c\
-		ft_itoa.c\
-		ft_putchar.c\
-		ft_strcpy.c\
-		ft_strlen.c\
-		ft_strdup.c\
-		ft_lutohex.c
+SRCS	= ft_printf.c
 OBJS	= ${SRCS:.c=.o}
-INC		= ./includes/
+INC		= ./includes/ -I ../libft/includes
+LIB		=  -L ../libft -lft
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
 DEBUGFLG = -v -da -Q
@@ -44,12 +38,13 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f test
 	@echo "fclean : [\033[32mDONE\033[m]"
 
 re: fclean all
 
 test: re
-	@cc $(FLAGS_LESS) main.c -o test -I $(INC) -L libftprintf libftprintf.a
+	@cc $(FLAGS_LESS) main.c -o test -I $(INC) $(LIB) -L . libftprintf.a
 	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"
 
 file_right:
