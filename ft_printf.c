@@ -18,7 +18,7 @@ static void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
 	ft_strncat(buf, format + t->i, 1);
 }
 
-static void	print_p(t_ftprintf *t, char *buf)
+static void	put_p(t_ftprintf *t, char *buf)
 {
 	char	*str;
 
@@ -27,7 +27,7 @@ static void	print_p(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-static void	print_c(t_ftprintf *t, char *buf)
+static void	put_c(t_ftprintf *t, char *buf)
 {
 	char	c;
 
@@ -35,7 +35,7 @@ static void	print_c(t_ftprintf *t, char *buf)
 	ft_strncat(buf, &c, 1);
 }
 
-static void	print_s(t_ftprintf *t, char *buf)
+static void	put_s(t_ftprintf *t, char *buf)
 {
 	char	*str;
 
@@ -44,11 +44,20 @@ static void	print_s(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-static void	print_d(t_ftprintf *t, char *buf)
+static void	put_d(t_ftprintf *t, char *buf)
 {
 	char	*str;
 
 	str = ft_itoa(va_arg(t->ap, int));
+	ft_strcat(buf, str);
+	free(str);
+}
+
+static void	put_f(t_ftprintf *t, char *buf)
+{
+	char	*str;
+
+	str = ft_dtoa(va_arg(t->ap, double), 2);
 	ft_strcat(buf, str);
 	free(str);
 }
@@ -67,13 +76,15 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			print_uniq_caract(t, format, buf);
 		else if (format[t->i] == 'd' || format[t->i] == 'i'
 			|| format[t->i] == 'u')
-			print_d(t, buf);
+			put_d(t, buf);
 		else if (format[t->i] == 's')
-			print_s(t, buf);
+			put_s(t, buf);
 		else if (format[t->i] == 'c')
-			print_c(t, buf);
+			put_c(t, buf);
 		else if (format[t->i] == 'p')
-			print_p(t, buf);
+			put_p(t, buf);
+		else if (format[t->i] == 'f')
+			put_f(t, buf);
 		else
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		t->i += 1;
