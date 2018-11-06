@@ -20,6 +20,9 @@ int main(void)
 
 	i = 12;
 
+	ft_printf("12.5 = %f\n-25.744 = %f\n-25.745 = %f\n3.145 = %f\n3.146 = %f\n3.144 = %f\n",
+	          12.5, -25.744, -25.745, 3.145, 3.146, 3.144);
+
 	ft_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois", 'c');
 	ft_printf("char-%c-%s-%s-%c-%s-%c-%-i", 'a', "un", "deux", 'b', "trois", 'd');
     ft_printf("");
