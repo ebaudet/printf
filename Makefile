@@ -6,15 +6,15 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2013/12/21 21:38:26 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/01/23 14:07:56 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 SRCS	= ft_printf.c
 OBJS	= ${SRCS:.c=.o}
-INC		= ./includes/ -I ../libft/includes
-LIB		=  -L ../libft -lft
+INC		= ./includes/ -I ./libft/includes
+LIB		=  -L libft -lft
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
 DEBUGFLG = -v -da -Q
@@ -24,7 +24,7 @@ RANLIB	= ranlib
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): make_libft $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
 	@$(RANLIB) $(NAME)
 	@echo "\n\n > Compilation \033[36mlibftprintf.a\033[m [\033[32mDONE\033[m]"
@@ -33,12 +33,19 @@ $(NAME): $(OBJS)
 	@$(CC) -c $< -o $@ $(FLAGS_LESS) -I $(INC)
 	@echo -n .
 
+make_libft:
+	@echo "Compilation de la libft :"
+	@make -C libft
+	@echo "\n> Compilation \033[35mlibft\033[m [\033[32mDONE\033[m]"
+
 clean:
 	@rm -f $(OBJS)
+	make -C libft clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f test
+	make -C libft fclean
 	@echo "fclean : [\033[32mDONE\033[m]"
 
 re: fclean all
