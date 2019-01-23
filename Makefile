@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/01/23 16:02:24 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/01/23 21:02:30 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ $(NAME): make_libft $(OBJS)
 make_libft:
 	@echo "Compilation de la libft :"
 	@make -C libft
-	@echo "\n> Compilation \033[35mlibft\033[m [\033[32mDONE\033[m]"
 
 clean:
 	@rm -rf .obj

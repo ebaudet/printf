@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 20:40:16 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 22:15:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@
 
 static t_hadler_case	*put_handler(char format)
 {
-	static t_handler	(handler[7]) = {
+	static t_handler	(handler[10]) = {
+		{.conversion = 'c', .handle = put_c},
+		{.conversion = 's', .handle = put_s},
+		{.conversion = 'p', .handle = put_p},
 		{.conversion = 'd', .handle = put_d},
 		{.conversion = 'i', .handle = put_d},
+		{.conversion = 'o', .handle = put_o},
 		{.conversion = 'u', .handle = put_u},
-		{.conversion = 's', .handle = put_s},
-		{.conversion = 'c', .handle = put_c},
-		{.conversion = 'p', .handle = put_p},
+		{.conversion = 'x', .handle = put_x},
+		{.conversion = 'X', .handle = put_x_cap},
 		{.conversion = 'f', .handle = put_f},
 	};
 	int					i;
 
 	i = -1;
-	while (++i < 7) {
+	while (++i < 10) {
 		if (format == handler[i].conversion)
 			return &handler[i].handle;
 	}
@@ -48,6 +51,8 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		else if (format[t->i] == '%')
 			print_uniq_caract(t, format, buf);
+		else if (ft_strchr("-+ 0#", format[t->i]) != NULL)
+			return (ft_strdup(ft_strncat(buf, "%", 1))); // @TODO: handle it
 		else if ((handler = put_handler(format[t->i])) != NULL)
 			(*handler)(t, buf);
 		else
