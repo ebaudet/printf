@@ -1,0 +1,6 @@
+.DS_Strore
+.obj/*
+test
+libftprintf.a
+libft/.obj/*
+libft/libft.a
