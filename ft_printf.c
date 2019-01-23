@@ -6,30 +6,26 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 18:41:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 20:40:16 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-static void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
-{
-	ft_strncat(buf, format + t->i, 1);
-}
 
 static t_hadler_case	*put_handler(char format)
 {
-	static t_handler (handler[7]) = {
+	static t_handler	(handler[7]) = {
 		{.conversion = 'd', .handle = put_d},
 		{.conversion = 'i', .handle = put_d},
-		{.conversion = 'u', .handle = put_d},
+		{.conversion = 'u', .handle = put_u},
 		{.conversion = 's', .handle = put_s},
 		{.conversion = 'c', .handle = put_c},
 		{.conversion = 'p', .handle = put_p},
 		{.conversion = 'f', .handle = put_f},
 	};
-	int				i;
+	int					i;
 
 	i = -1;
 	while (++i < 7) {

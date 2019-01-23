@@ -6,12 +6,17 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 15:04:00 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 20:42:17 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
+
+void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
+{
+	ft_strncat(buf, format + t->i, 1);
+}
 
 void	put_p(t_ftprintf *t, char *buf)
 {
@@ -44,6 +49,15 @@ void	put_d(t_ftprintf *t, char *buf)
 	char	*str;
 
 	str = ft_itoa(va_arg(t->ap, int));
+	ft_strcat(buf, str);
+	free(str);
+}
+
+void	put_u(t_ftprintf *t, char *buf)
+{
+	char	*str;
+
+	str = ft_itoa(va_arg(t->ap, unsigned int));
 	ft_strcat(buf, str);
 	free(str);
 }

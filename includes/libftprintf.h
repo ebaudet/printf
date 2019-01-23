@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 16:40:18 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 19:34:02 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ char	*ft_sprintf(const char *format, ...);
 int		ft_printf(const char *format, ...);
 
 /* put.c */
+void	print_uniq_caract(t_ftprintf *t, char *format, char *buf);
 void	put_p(t_ftprintf *t, char *buf);
 void	put_c(t_ftprintf *t, char *buf);
 void	put_s(t_ftprintf *t, char *buf);
 void	put_d(t_ftprintf *t, char *buf);
+void	put_u(t_ftprintf *t, char *buf);
 void	put_f(t_ftprintf *t, char *buf);
 
 #endif /* LIBFTPRINTF_H */
