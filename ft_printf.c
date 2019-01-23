@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 16:20:16 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 18:41:11 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,6 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			print_uniq_caract(t, format, buf);
 		else if ((handler = put_handler(format[t->i])) != NULL)
 			(*handler)(t, buf);
-		// else if (format[t->i] == 'd' || format[t->i] == 'i'
-		// 	|| format[t->i] == 'u')
-		// 	put_d(t, buf);
-		// else if (format[t->i] == 's')
-		// 	put_s(t, buf);
-		// else if (format[t->i] == 'c')
-		// 	put_c(t, buf);
-		// else if (format[t->i] == 'p')
-		// 	put_p(t, buf);
-		// else if (format[t->i] == 'f')
-		// 	put_f(t, buf);
 		else
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		t->i += 1;

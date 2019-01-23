@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2013/12/21 20:41:51 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 18:35:57 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,13 @@ int main(void)
 
 	ft_printf("coucou%d\n", i);
 	ft_printf("\n----------\n");
+	printf("%00000002$d %01$d\n", 1, 2);
+	printf("%5d\n%5d\n", 1, 22);
+	printf("'%5d'\n'%-5d'\n", 1, 22);
+	printf("'%+5d'\n'%-+5d'\n", 1, 22);
+	printf("'%+05d'\n'%+05d'\n", 1, 22);
+	printf("%d %.*s %s\n", 12, 3, "abcdef", "asdfghjk");
+	// printf("%hhc %hhc", 1, 'c');
+	printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
 	return (0);
 }
