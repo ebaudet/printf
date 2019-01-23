@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 15:06:54 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 16:40:18 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ typedef struct		s_ftprintf
 	int				count;
 }					t_ftprintf;
 
+typedef void (*t_hadler_case)(t_ftprintf *, char *);
+
 typedef struct		s_handler
 {
 	char			conversion;
-	void			(*handle)(t_ftprintf *, char *);
+	t_hadler_case	handle;
 }					t_handler;
 
 char	*ft_sprintf(const char *format, ...);
