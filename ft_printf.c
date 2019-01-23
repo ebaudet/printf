@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 15:17:09 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 16:20:16 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
 	ft_strncat(buf, format + t->i, 1);
 }
 
-static int	put_handler(char format)
+static t_hadler_case	*put_handler(char format)
 {
 	static t_handler (handler[7]) = {
 		{.conversion = 'd', .handle = put_d},
@@ -29,20 +29,20 @@ static int	put_handler(char format)
 		{.conversion = 'p', .handle = put_p},
 		{.conversion = 'f', .handle = put_f},
 	};
-	int			i;
+	int				i;
 
 	i = -1;
 	while (++i < 7) {
 		if (format == handler[i].conversion)
-			return handler.handle;
+			return &handler[i].handle;
 	}
-	return 0;
+	return NULL;
 }
 
 static char	*is_arg(t_ftprintf *t, char *format)
 {
-	char	buf[256];
-	int		handler;
+	char			buf[256];
+	t_hadler_case	*handler;
 
 	ft_memset(buf, 0, 256);
 	if (format[t->i] == '%')
@@ -52,8 +52,8 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		else if (format[t->i] == '%')
 			print_uniq_caract(t, format, buf);
-		else if ((handler = put_handler(format[t->i])) > 0)
-			handler(t, buf);
+		else if ((handler = put_handler(format[t->i])) != NULL)
+			(*handler)(t, buf);
 		// else if (format[t->i] == 'd' || format[t->i] == 'i'
 		// 	|| format[t->i] == 'u')
 		// 	put_d(t, buf);
