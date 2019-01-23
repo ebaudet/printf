@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2013/12/21 20:45:55 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 15:17:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,53 +18,31 @@ static void	print_uniq_caract(t_ftprintf *t, char *format, char *buf)
 	ft_strncat(buf, format + t->i, 1);
 }
 
-static void	put_p(t_ftprintf *t, char *buf)
+static int	put_handler(char format)
 {
-	char	*str;
+	static t_handler (handler[7]) = {
+		{.conversion = 'd', .handle = put_d},
+		{.conversion = 'i', .handle = put_d},
+		{.conversion = 'u', .handle = put_d},
+		{.conversion = 's', .handle = put_s},
+		{.conversion = 'c', .handle = put_c},
+		{.conversion = 'p', .handle = put_p},
+		{.conversion = 'f', .handle = put_f},
+	};
+	int			i;
 
-	str = ft_lutohex(va_arg(t->ap, long unsigned int));
-	ft_strcat(buf, str);
-	free(str);
-}
-
-static void	put_c(t_ftprintf *t, char *buf)
-{
-	char	c;
-
-	c = (char)(va_arg(t->ap, int));
-	ft_strncat(buf, &c, 1);
-}
-
-static void	put_s(t_ftprintf *t, char *buf)
-{
-	char	*str;
-
-	str = ft_strdup(va_arg(t->ap, char *));
-	ft_strcat(buf, str);
-	free(str);
-}
-
-static void	put_d(t_ftprintf *t, char *buf)
-{
-	char	*str;
-
-	str = ft_itoa(va_arg(t->ap, int));
-	ft_strcat(buf, str);
-	free(str);
-}
-
-static void	put_f(t_ftprintf *t, char *buf)
-{
-	char	*str;
-
-	str = ft_dtoa(va_arg(t->ap, double), 2);
-	ft_strcat(buf, str);
-	free(str);
+	i = -1;
+	while (++i < 7) {
+		if (format == handler[i].conversion)
+			return handler.handle;
+	}
+	return 0;
 }
 
 static char	*is_arg(t_ftprintf *t, char *format)
 {
 	char	buf[256];
+	int		handler;
 
 	ft_memset(buf, 0, 256);
 	if (format[t->i] == '%')
@@ -74,17 +52,19 @@ static char	*is_arg(t_ftprintf *t, char *format)
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		else if (format[t->i] == '%')
 			print_uniq_caract(t, format, buf);
-		else if (format[t->i] == 'd' || format[t->i] == 'i'
-			|| format[t->i] == 'u')
-			put_d(t, buf);
-		else if (format[t->i] == 's')
-			put_s(t, buf);
-		else if (format[t->i] == 'c')
-			put_c(t, buf);
-		else if (format[t->i] == 'p')
-			put_p(t, buf);
-		else if (format[t->i] == 'f')
-			put_f(t, buf);
+		else if ((handler = put_handler(format[t->i])) > 0)
+			handler(t, buf);
+		// else if (format[t->i] == 'd' || format[t->i] == 'i'
+		// 	|| format[t->i] == 'u')
+		// 	put_d(t, buf);
+		// else if (format[t->i] == 's')
+		// 	put_s(t, buf);
+		// else if (format[t->i] == 'c')
+		// 	put_c(t, buf);
+		// else if (format[t->i] == 'p')
+		// 	put_p(t, buf);
+		// else if (format[t->i] == 'f')
+		// 	put_f(t, buf);
 		else
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
 		t->i += 1;
@@ -116,9 +96,9 @@ static char	*print_caract(t_ftprintf *t, char *format)
 
 char		*ft_getsstr(t_ftprintf *t, const char *format)
 {
-	char			*str;
-	char			*tmp;
-	char			*buf;
+	char	*str;
+	char	*tmp;
+	char	*buf;
 
 	str = ft_memalloc(1);
 	t->i = 0;
