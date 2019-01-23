@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 18:35:57 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/23 21:39:46 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ int main(void)
 	ft_printf("\n----------\n");
 	ft_printf("ft_printf: &i = %p\n", &i);
 	printf("printf: &i = %p\n", &i);
+	ft_printf("ft_printf: 1835 = (x)%x, (X)%X, (p)%p\n", 1835, 1835, 1835);
+	printf("printf: 1835 = (x)%x, (X)%X, (p)%d\n", 1835, 1835, 1835);
+	ft_printf("ft_printf: octal 123 = %o\n", 123);
+	printf("printf: octal 123 = %o\n", 123);
 
-
+	printf("printf: 123.37 = %g\n", 123.37);
 
 	ft_printf("coucou%d\n", i);
 	ft_printf("\n----------\n");
