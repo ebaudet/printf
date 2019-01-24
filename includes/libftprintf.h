@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 21:59:02 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/24 20:49:37 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ typedef void (*t_hadler_case)(t_ftprintf *, char *);
 
 typedef struct		s_handler
 {
-	char			conversion;
+	char			value;
 	t_hadler_case	handle;
 }					t_handler;
 
 typedef enum {
-	NONE = 0,
+	NONE_LENGH = 0,
 	HH,		// hh	char
 	H,		// h	short
 	L,		// l	long
@@ -42,23 +42,36 @@ typedef enum {
 	Z,		// z	size_t
 	J,		// j	intmax_t
 	T,		// t	ptrdiff_t
-	num_thing_types /* not a type of thing itself, instead used to find number of things */
-} t_length;
+	MAX_LENGHT /* not a type of thing itself, instead used to find number of things */
+}					t_length;
 
-typedef struct	s_params
+typedef enum {
+	NONE_FLAG = 0,
+	MINUS = 0b1,
+	PLUS = 0b10,
+	SPACE = 0b100,
+	ZERO = 0b1000,
+	HASH = 0b10000,
+	MAX_FLAG = 0b100000
+}					t_flag;
+
+typedef struct		s_params
 {
-	int			parameter;
-	int			flag;
-	int			width;
-	int			precision;
-	t_length	length;
-}				t_params;
+	char			*position;
+	int				size;
+	int				parameter;
+	int				flag;
+	int				width;
+	int				precision;
+	t_length		length;
+	t_hadler_case	*type;
+}					t_params;
 
 char	*ft_sprintf(const char *format, ...);
 int		ft_printf(const char *format, ...);
 
 /* put.c */
-void	print_uniq_caract(t_ftprintf *t, char *format, char *buf);
+void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
 void	put_o(t_ftprintf *t, char *buf);
 void	put_p(t_ftprintf *t, char *buf);
 void	put_x(t_ftprintf *t, char *buf);
