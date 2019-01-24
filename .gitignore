@@ -4,3 +4,4 @@ test
 libftprintf.a
 libft/.obj/*
 libft/libft.a
+test.dSYM/*

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 21:39:46 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/24 20:59:37 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int main(void)
 	          12.5, -25.744, -25.745, 3.145, 3.146, 3.144);
 
 	ft_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois", 'c');
-	ft_printf("char-%c-%s-%s-%c-%s-%c-%-i", 'a', "un", "deux", 'b', "trois", 'd');
+	ft_printf("char-%c-%s-%s-%c-%s-%c-%-i\n", 'a', "un", "deux", 'b', "trois", 'd');
     ft_printf("");
+    ft_printf("|nie% -  %d|");
+    printf("|nie% -  %d|");
 	ft_printf("\n----------\n");
 	ft_printf("\nabcdefg\nh");
 	ft_printf(". .");
@@ -47,11 +49,20 @@ int main(void)
 	ft_printf("coucou%d\n", i);
 	ft_printf("\n----------\n");
 	printf("%00000002$d %01$d\n", 1, 2);
-	printf("%5d\n%5d\n", 1, 22);
-	printf("'%5d'\n'%-5d'\n", 1, 22);
-	printf("'%+5d'\n'%-+5d'\n", 1, 22);
-	printf("'%+05d'\n'%+05d'\n", 1, 22);
+
+	printf("======= TEST DES FLAGS ========\n");
+	printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'\n", 22, -42, 1234567, -1234567);
+	printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'\n", 22, -42, 1234567, -1234567);
+	printf("with plus flag\n'%+5d'\n'%+5d'\n'%+5d'\n'%+5d'\n", 22, -42, 1234567, -1234567);
+	printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'\n", 22, -42, 1234567, -1234567);
+	printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'%05d'\n'%05d'\n", 22, -42, 1234567, -1234567);
+	printf("with zero/plus flag\n'%0+5d'\n'%0+5d'\n'%0+5d'\n'%0+5d'\n", 22, -42, 1234567, -1234567);
+	printf("with space option (ignored with plus option)\n'% 5d'\n'% 5d'\n'% 5d'\n'% 5d'\n", 22, -42, 1234567, -1234567);
+	printf("with space/zero option (ignored with plus option)\n'%0 5d'\n'%0 5d'\n'%0 5d'\n'%0 5d'\n", 22, -42, 1234567, -1234567);
 	printf("%d %.*s %s\n", 12, 3, "abcdef", "asdfghjk");
+
+
+
 	// printf("%hhc %hhc", 1, 'c');
 	printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
 	return (0);
