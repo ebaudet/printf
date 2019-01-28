@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/28 17:59:07 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/28 22:28:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ typedef struct		s_ftprintf
 	va_list			ap;
 	int				i;
 	int				count;
+	char			*buf;
 }					t_ftprintf;
 
 typedef enum {
-	NONE_LENGH = 0,
+	NONE_LENGH		= 0,
 	HH,		// hh	char
 	H,		// h	short
 	L,		// l	long
@@ -38,13 +39,13 @@ typedef enum {
 }					t_length;
 
 typedef enum {
-	NONE_FLAG = 0,
-	MINUS = 0b1,
-	PLUS = 0b10,
-	SPACE = 0b100,
-	ZERO = 0b1000,
-	HASH = 0b10000,
-	MAX_FLAG = 0b100000
+	NONE_FLAG		= 0,
+	MINUS			= 0b1,
+	PLUS			= 0b10,
+	SPACE			= 0b100,
+	ZERO			= 0b1000,
+	HASH			= 0b10000,
+	MAX_FLAG		= 0b100000
 }					t_flag;
 
 
@@ -59,17 +60,23 @@ typedef struct		s_params
 	int				precision;
 	t_length		length;
 	void			(*type)(t_ftprintf *, char *, struct s_params *);
-	// void			(*type)();
-	struct s_params	*next;
+	struct s_params	*next; // todo: not sure to necesite this part.
 }					t_params;
 
 typedef void (*t_hadler_case)(t_ftprintf *, char *, t_params *);
+typedef void (*t_handler_function)(char *, t_ftprintf *, t_params *);
 
 typedef struct		s_handler
 {
 	char			value;
 	t_hadler_case	handle;
 }					t_handler;
+
+typedef struct			s_call_handler
+{
+	char				*value;
+	t_handler_function	handle;
+}						t_call_handler;
 
 char			*ft_sprintf(const char *format, ...);
 int				ft_printf(const char *format, ...);
@@ -91,9 +98,13 @@ char			*find_last_nunber(const char *str);
 char			*ft_strstrchr(const char *haystack, const char *needle);
 
 /* handler.c*/
-t_hadler_case	*put_handler(char format);
-int				flag_handler(char format, int flag);
-int 			length_handler(char *format, t_ftprintf *t);
-int				precision_handler(char *format, t_ftprintf *t);
+int				call_handler(char *format, t_ftprintf *t, t_params *params);
+void			flag_handler(char *format, t_ftprintf *t, t_params *params);
+void			width_handler(char *format, t_ftprintf *t, t_params *params);
+void			precision_handler(char *format, t_ftprintf *t, t_params *params);
+void 			length_handler(char *format, t_ftprintf *t, t_params *params);
+void			type_handler(char *format, t_ftprintf *t, t_params *params);
+
+// t_hadler_case	*type_handler(char format);
 
 #endif /* LIBFTPRINTF_H */
