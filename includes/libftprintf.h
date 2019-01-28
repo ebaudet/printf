@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/24 20:49:37 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/27 17:02:28 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ typedef struct		s_ftprintf
 	int				i;
 	int				count;
 }					t_ftprintf;
-
-typedef void (*t_hadler_case)(t_ftprintf *, char *);
-
-typedef struct		s_handler
-{
-	char			value;
-	t_hadler_case	handle;
-}					t_handler;
 
 typedef enum {
 	NONE_LENGH = 0,
@@ -55,6 +47,14 @@ typedef enum {
 	MAX_FLAG = 0b100000
 }					t_flag;
 
+typedef void (*t_hadler_case)(t_ftprintf *, char *, struct s_params *);
+
+typedef struct		s_handler
+{
+	char			value;
+	t_hadler_case	handle;
+}					t_handler;
+
 typedef struct		s_params
 {
 	char			*position;
@@ -67,19 +67,27 @@ typedef struct		s_params
 	t_hadler_case	*type;
 }					t_params;
 
+
+
+
+
+
+
+
+
 char	*ft_sprintf(const char *format, ...);
 int		ft_printf(const char *format, ...);
 
 /* put.c */
 void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
-void	put_o(t_ftprintf *t, char *buf);
-void	put_p(t_ftprintf *t, char *buf);
-void	put_x(t_ftprintf *t, char *buf);
-void	put_x_cap(t_ftprintf *t, char *buf);
-void	put_c(t_ftprintf *t, char *buf);
-void	put_s(t_ftprintf *t, char *buf);
-void	put_d(t_ftprintf *t, char *buf);
-void	put_u(t_ftprintf *t, char *buf);
-void	put_f(t_ftprintf *t, char *buf);
+void	put_o(t_ftprintf *t, char *buf, t_params *params);
+void	put_p(t_ftprintf *t, char *buf, t_params *params);
+void	put_x(t_ftprintf *t, char *buf, t_params *params);
+void	put_x_cap(t_ftprintf *t, char *buf, t_params *params);
+void	put_c(t_ftprintf *t, char *buf, t_params *params);
+void	put_s(t_ftprintf *t, char *buf, t_params *params);
+void	put_d(t_ftprintf *t, char *buf, t_params *params);
+void	put_u(t_ftprintf *t, char *buf, t_params *params);
+void	put_f(t_ftprintf *t, char *buf, t_params *params);
 
 #endif /* LIBFTPRINTF_H */
