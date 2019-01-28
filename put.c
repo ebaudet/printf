@@ -18,7 +18,7 @@ void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size)
 	ft_strncat(buf, &format[t->i], size);
 }
 
-void	put_o(t_ftprintf *t, char *buf)
+void	put_o(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -27,7 +27,7 @@ void	put_o(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_p(t_ftprintf *t, char *buf)
+void	put_p(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -36,7 +36,7 @@ void	put_p(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_x(t_ftprintf *t, char *buf)
+void	put_x(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -45,7 +45,7 @@ void	put_x(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_x_cap(t_ftprintf *t, char *buf)
+void	put_x_cap(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 	int		i;
@@ -58,7 +58,7 @@ void	put_x_cap(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_c(t_ftprintf *t, char *buf)
+void	put_c(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	c;
 
@@ -66,7 +66,7 @@ void	put_c(t_ftprintf *t, char *buf)
 	ft_strncat(buf, &c, 1);
 }
 
-void	put_s(t_ftprintf *t, char *buf)
+void	put_s(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -75,7 +75,7 @@ void	put_s(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_d(t_ftprintf *t, char *buf)
+void	put_d(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -84,7 +84,7 @@ void	put_d(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_u(t_ftprintf *t, char *buf)
+void	put_u(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -93,7 +93,7 @@ void	put_u(t_ftprintf *t, char *buf)
 	free(str);
 }
 
-void	put_f(t_ftprintf *t, char *buf)
+void	put_f(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 

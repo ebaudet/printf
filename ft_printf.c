@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/24 21:04:08 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/27 16:53:24 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,13 @@ char *ft_strstrchr(const char *haystack, const char *needle)
 		return ((char *)haystack);
 }
 
-static char	*is_arg(t_ftprintf *t, char *format)
+static char	*is_arg(t_ftprintf *t, char *format, t_params *params)
 {
 	char			buf[256];
-	t_params		params;
 	char			*next_modulo;
 	char			*end_arg;
 
 	ft_memset(buf, 0, 256);
-	ft_memset(&params, 0, sizeof(params));
 	if (format[t->i] == '%')
 	{
 		t->i += 1;
@@ -107,15 +105,18 @@ static char	*is_arg(t_ftprintf *t, char *format)
 		end_arg = ft_strstrchr(&format[t->i], "cspdiouxXf");
 		if (next_modulo != NULL && end_arg != NULL && next_modulo < end_arg) {
 			print_uniq_caract(t, format, buf, (int)(format - next_modulo));
-			t->i += (int)(format - next_modulo); // todo: checker here to print correctly %bla% => %
+			t->i += (int)(format - next_modulo);
+			// todo: checker here to print correctly %bla% => %
 		}
 		else if (ft_strchr("-+ 0#", format[t->i]) != NULL)
-			params.flag = flag_handler(format[t->i], params.flag);
+			params->flag = flag_handler(format[t->i], params->flag);
 		else if (ft_strchr("hhlLzjt", format[t->i]) != NULL)
-			params.length = length_handler(&format[t->i], t);
+			params->length = length_handler(&format[t->i], t);
 		else if (ft_strchr("cspdiouxXf", format[t->i]) != NULL) {
-			params.type = put_handler(format[t->i]); // how to call it : (*(params.type))(t, buf);
-			(*(params.type))(t, buf);
+			params->type = put_handler(format[t->i]);
+			// how to call it : (*(params->type))(t, buf);
+			(*(params->type))(t, buf, params);
+			ft_memset(params, 0, sizeof(params));
 		}
 		else
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
@@ -127,13 +128,15 @@ static char	*is_arg(t_ftprintf *t, char *format)
 
 static char	*print_caract(t_ftprintf *t, char *format)
 {
-	char	buf[256];
-	char	*tmp;
+	char		buf[256];
+	char		*tmp;
+	t_params	params;
 
+	ft_memset(&params, 0, sizeof(params));
 	ft_memset(buf, 0, 256);
 	while (format[t->i])
 	{
-		tmp = is_arg(t, format);
+		tmp = is_arg(t, format, &params);
 		if (tmp != NULL)
 		{
 			ft_strcat(buf, tmp);
