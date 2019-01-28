@@ -6,13 +6,14 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/01/23 21:02:30 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/01/28 17:31:52 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
-SRCS	= ft_printf.c put.c
-OBJS	= ${SRCS:%.c=.obj/%.o}
+FILES	= ft_printf.c put.c
+SRCS	= $(addprefix srcs/, $(FILES))
+OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= ./includes/ -I ./libft/includes
 LIB		=  -L libft -lft
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
@@ -29,7 +30,7 @@ $(NAME): make_libft $(OBJS)
 	@$(RANLIB) $(NAME)
 	@echo "\n\n > Compilation \033[36mlibftprintf.a\033[m [\033[32mDONE\033[m]"
 
-.obj/%.o: %.c
+.obj/%.o: srcs/%.c
 	@mkdir -p .obj
 	@$(CC) -c $< -o $@ $(FLAGS_LESS) -I $(INC)
 	@echo -n .

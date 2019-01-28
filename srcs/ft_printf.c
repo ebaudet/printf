@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/27 16:53:24 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/28 17:33:01 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ int 	length_handler(char *format, t_ftprintf *t)
 	return NONE_LENGH;
 }
 
+int		precision_handler(char *format, t_ftprintf *t)
+{
+	if (format[t->i] != '.')
+		return 0;
+	t->i++;
+	return 1;
+}
+
 /*
 * This function search the first occurance of one of the caraters of needle in
 * heystack.
@@ -110,13 +118,15 @@ static char	*is_arg(t_ftprintf *t, char *format, t_params *params)
 		}
 		else if (ft_strchr("-+ 0#", format[t->i]) != NULL)
 			params->flag = flag_handler(format[t->i], params->flag);
+		else if (format[t->i] == '.')
+			params->precision = precision_handler(&format[t->i], t);
 		else if (ft_strchr("hhlLzjt", format[t->i]) != NULL)
 			params->length = length_handler(&format[t->i], t);
 		else if (ft_strchr("cspdiouxXf", format[t->i]) != NULL) {
-			params->type = put_handler(format[t->i]);
+			params->type = *put_handler(format[t->i]);
 			// how to call it : (*(params->type))(t, buf);
 			(*(params->type))(t, buf, params);
-			ft_memset(params, 0, sizeof(params));
+			ft_memset(params, 0, sizeof(params)); // todo: check leak
 		}
 		else
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
