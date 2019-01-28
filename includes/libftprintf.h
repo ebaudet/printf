@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/27 17:02:28 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/28 16:09:42 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ typedef enum {
 	MAX_FLAG = 0b100000
 }					t_flag;
 
-typedef void (*t_hadler_case)(t_ftprintf *, char *, struct s_params *);
 
-typedef struct		s_handler
-{
-	char			value;
-	t_hadler_case	handle;
-}					t_handler;
 
 typedef struct		s_params
 {
@@ -64,16 +58,18 @@ typedef struct		s_params
 	int				width;
 	int				precision;
 	t_length		length;
-	t_hadler_case	*type;
+	void			(*type)(t_ftprintf *, char *, struct s_params *);
+	// void			(*type)();
+	struct s_params	*next;
 }					t_params;
 
+typedef void (*t_hadler_case)(t_ftprintf *, char *, t_params *);
 
-
-
-
-
-
-
+typedef struct		s_handler
+{
+	char			value;
+	t_hadler_case	handle;
+}					t_handler;
 
 char	*ft_sprintf(const char *format, ...);
 int		ft_printf(const char *format, ...);
