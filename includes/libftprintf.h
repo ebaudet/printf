@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/28 16:09:42 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/28 17:59:07 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,29 @@ typedef struct		s_handler
 	t_hadler_case	handle;
 }					t_handler;
 
-char	*ft_sprintf(const char *format, ...);
-int		ft_printf(const char *format, ...);
+char			*ft_sprintf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 
 /* put.c */
-void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
-void	put_o(t_ftprintf *t, char *buf, t_params *params);
-void	put_p(t_ftprintf *t, char *buf, t_params *params);
-void	put_x(t_ftprintf *t, char *buf, t_params *params);
-void	put_x_cap(t_ftprintf *t, char *buf, t_params *params);
-void	put_c(t_ftprintf *t, char *buf, t_params *params);
-void	put_s(t_ftprintf *t, char *buf, t_params *params);
-void	put_d(t_ftprintf *t, char *buf, t_params *params);
-void	put_u(t_ftprintf *t, char *buf, t_params *params);
-void	put_f(t_ftprintf *t, char *buf, t_params *params);
+void			print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
+void			put_o(t_ftprintf *t, char *buf, t_params *params);
+void			put_p(t_ftprintf *t, char *buf, t_params *params);
+void			put_x(t_ftprintf *t, char *buf, t_params *params);
+void			put_x_cap(t_ftprintf *t, char *buf, t_params *params);
+void			put_c(t_ftprintf *t, char *buf, t_params *params);
+void			put_s(t_ftprintf *t, char *buf, t_params *params);
+void			put_d(t_ftprintf *t, char *buf, t_params *params);
+void			put_u(t_ftprintf *t, char *buf, t_params *params);
+void			put_f(t_ftprintf *t, char *buf, t_params *params);
+
+/* functions.c */
+char			*find_last_nunber(const char *str);
+char			*ft_strstrchr(const char *haystack, const char *needle);
+
+/* handler.c*/
+t_hadler_case	*put_handler(char format);
+int				flag_handler(char format, int flag);
+int 			length_handler(char *format, t_ftprintf *t);
+int				precision_handler(char *format, t_ftprintf *t);
 
 #endif /* LIBFTPRINTF_H */
