@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/28 16:50:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/28 17:49:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	put_f(t_ftprintf *t, char *buf, t_params *params)
 
 	if (params)
 		params->size = params->size;
-	str = ft_dtoa(va_arg(t->ap, double), 2);
+	str = ft_dtoa(va_arg(t->ap, double), 6);
 	ft_strcat(buf, str);
 	free(str);
 }
