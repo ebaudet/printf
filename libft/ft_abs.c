@@ -6,13 +6,13 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:39:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/03/25 21:43:17 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/29 17:50:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_abs(int i)
 {
 	if (i < 0)
-		return -i;
-	return i;
+		return (-i);
+	return (i);
 }

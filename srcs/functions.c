@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:58:12 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/28 19:19:38 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/29 17:35:53 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*find_last_nunber(const char *str)
 	int		i;
 
 	i = 0;
-	while (str && str[i] && str[i] > '0' && str[i] < '9')
+	while (str && str[i] && str[i] >= '0' && str[i] <= '9')
 		i++;
 	return (char *)&str[i];
 }

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2018/10/19 20:45:55 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/29 17:39:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char		*ft_lutohex(long unsigned int lu)
 {
-	char				hexadecimalNumber[100];
+	char				hexadecimal_number[100];
 	long unsigned int	temp;
 	int					i;
 
-	ft_memset(hexadecimalNumber, 0, 100);
+	ft_memset(hexadecimal_number, 0, 100);
 	i = 0;
 	if (lu == 0)
-		hexadecimalNumber[i++] = 0 + '0';
+		hexadecimal_number[i++] = 0 + '0';
 	while (lu != 0)
 	{
 		temp = lu % 16;
@@ -29,10 +29,10 @@ char		*ft_lutohex(long unsigned int lu)
 			temp = temp + '0';
 		else
 			temp = temp + 'a' - 10;
-		hexadecimalNumber[i++] = temp;
+		hexadecimal_number[i++] = temp;
 		lu = lu / 16;
 	}
-	ft_strcat(hexadecimalNumber + i, "x0");
-	ft_strreverse(hexadecimalNumber);
-	return ft_strdup(hexadecimalNumber);
+	ft_strcat(hexadecimal_number + i, "x0");
+	ft_strreverse(hexadecimal_number);
+	return (ft_strdup(hexadecimal_number));
 }

@@ -6,14 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/28 22:32:39 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/29 17:35:30 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-int				call_handler(char *format, t_ftprintf *t, t_params *params)
+int		call_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	static t_call_handler	(handler[5]) = {
 		{.value = "-+ 0#", .handle = flag_handler},
@@ -31,11 +31,6 @@ int				call_handler(char *format, t_ftprintf *t, t_params *params)
 	{
 		if (ft_strchr(handler[i].value, format[t->i]))
 		{
-			ft_putstr("__");
-			ft_putchar(format[t->i]);
-			ft_putchar('|');
-			ft_putstr(handler[i].value);
-			ft_putstr("__");
 			(handler[i].handle)(&format[t->i], t, params);
 			do_stuff++;
 			if (i == 4)
@@ -45,7 +40,7 @@ int				call_handler(char *format, t_ftprintf *t, t_params *params)
 	return (do_stuff);
 }
 
-void			flag_handler(char *format, t_ftprintf *t, t_params *params)
+void	flag_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	if (format[0] == '-')
 		params->flag |= MINUS;
@@ -62,54 +57,55 @@ void			flag_handler(char *format, t_ftprintf *t, t_params *params)
 	t->i++;
 }
 
-void			width_handler(char *format, t_ftprintf *t, t_params *params)
+void	width_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	char	*last_number;
 	char	number[26];
 
-	if (format[t->i] == '*' && ++t->i)
+	if (format[0] == '*' && ++t->i)
 	{
 		params->width = va_arg(t->ap, unsigned int);
 		return ;
 	}
-	last_number = find_last_nunber(&format[t->i]);
-	if (last_number == &format[t->i])
+	last_number = find_last_nunber(format);
+	if (last_number == format)
 	{
 		params->width = 0;
 		return ;
 	}
-	ft_strncpy(number, &format[t->i], last_number - &format[t->i]);
-	t->i += last_number - &format[t->i];
+	ft_strncpy(number, format, last_number - format);
+	t->i += last_number - format;
 	params->width = ft_atoi(number);
 }
 
-void			precision_handler(char *format, t_ftprintf *t, t_params *params)
+void	precision_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	char	*last_number;
 	char	number[26];
 
-	if (format[t->i] != '.')
+	if (format[0] != '.')
 	{
 		params->precision = 0;
 		return ;
 	}
-	else if (format[++t->i] == '*' && ++t->i)
+	else if (format[1] && format[1] == '*')
 	{
 		params->precision = va_arg(t->ap, unsigned int);
+		t->i += 2;
 		return ;
 	}
-	last_number = find_last_nunber(&format[t->i]);
-	if (last_number == &format[t->i])
+	last_number = find_last_nunber(&format[1]);
+	if (last_number == format)
 	{
 		params->precision = 0;
 		return ;
 	}
-	ft_strncpy(number, &format[t->i], last_number - &format[t->i]);
-	t->i += last_number - &format[t->i];
+	ft_strncpy(number, &format[1], last_number - &format[1]);
+	t->i += last_number - format;
 	params->precision = ft_atoi(number);
 }
 
-void			length_handler(char *format, t_ftprintf *t, t_params *params)
+void	length_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	if (format[0] == 'h')
 	{
@@ -151,20 +147,12 @@ void	type_handler(char *format, t_ftprintf *t, t_params *params)
 	};
 	int					i;
 
-	ft_putstr("~~");
-	ft_putstr(format);
-	ft_putstr("~~");
-
 	i = -1;
 	while (++i < 10)
 	{
 		if (format[0] == handler[i].value)
 		{
-			ft_putchar('\'');
-			ft_putchar(handler[i].value);
-			ft_putchar('\'');
 			(*handler[i].handle)(t, t->buf, params);
-			// params->type = &handler[i].handle;
 			t->i++;
 			return ;
 		}
