@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:39:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/03/25 21:43:17 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/29 17:51:16 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static int	ft_nbchar(double d, unsigned int precision)
 	i = 0;
 	if (precision > 0)
 		i = precision + 1;
-	if (d < 0) {
+	if (d < 0)
+	{
 		i++;
 		d = ft_fabs(d);
 	}
 	i += ceil(log10(d));
-	return d;
+	return (d);
 }
 
-static void put_decimals(double d, unsigned int precision, char *str)
+static void	put_decimals(double d, unsigned int precision, char *str)
 {
 	char	*tmp;
 	double	decimals;
@@ -37,7 +38,7 @@ static void put_decimals(double d, unsigned int precision, char *str)
 	int		symbol;
 
 	if (precision == 0)
-		return;
+		return ;
 	symbol = 1;
 	if (d < 0)
 		symbol = -1;
@@ -53,7 +54,7 @@ static void put_decimals(double d, unsigned int precision, char *str)
 	free(tmp);
 }
 
-char	*ft_dtoa(double d, unsigned int precision)
+char		*ft_dtoa(double d, unsigned int precision)
 {
 	char	*str;
 	char	*tmp;
@@ -63,5 +64,5 @@ char	*ft_dtoa(double d, unsigned int precision)
 	str = ft_strcat(str, tmp);
 	free(tmp);
 	put_decimals(d, precision, str);
-	return str;
+	return (str);
 }
