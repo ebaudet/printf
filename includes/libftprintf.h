@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:07:44 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 18:09:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,14 @@ int						ft_printf(const char *format, ...);
 
 /* put.c */
 void					print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
-void					type_o(t_ftprintf *t, char *buf, t_params *params);
-void					type_p(t_ftprintf *t, char *buf, t_params *params);
-void					type_x(t_ftprintf *t, char *buf, t_params *params);
-void					type_x_cap(t_ftprintf *t, char *buf, t_params *params);
 void					type_c(t_ftprintf *t, char *buf, t_params *params);
 void					type_s(t_ftprintf *t, char *buf, t_params *params);
+void					type_p(t_ftprintf *t, char *buf, t_params *params);
 void					type_d(t_ftprintf *t, char *buf, t_params *params);
+void					type_o(t_ftprintf *t, char *buf, t_params *params);
 void					type_u(t_ftprintf *t, char *buf, t_params *params);
+void					type_x(t_ftprintf *t, char *buf, t_params *params);
+void					type_x_cap(t_ftprintf *t, char *buf, t_params *params);
 void					type_f(t_ftprintf *t, char *buf, t_params *params);
 
 /* functions.c */
