@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:09:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 23:04:48 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ typedef enum {
 	MAX_FLAG			= 0b100000
 }						t_flag;
 
-
-
 typedef struct			s_params
 {
 	char				*position;
@@ -60,7 +58,6 @@ typedef struct			s_params
 	int					precision;
 	t_length			length;
 	void				(*type)(t_ftprintf *, char *, struct s_params *);
-	struct s_params		*next; // todo: not sure to necesite this part.
 }						t_params;
 
 typedef void (*t_hadler_case)(t_ftprintf *, char *, t_params *);
@@ -86,9 +83,12 @@ typedef struct			s_handler_len
 	t_len_decimal		handle;
 }						t_handler_len;
 
-
+/* ft_printf.c */
 char					*ft_sprintf(const char *format, ...);
 int						ft_printf(const char *format, ...);
+
+/* params.c */
+t_params				*params_init(t_params *params);
 
 /* put.c */
 void					print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size);
@@ -105,6 +105,8 @@ void					type_f(t_ftprintf *t, char *buf, t_params *params);
 /* functions.c */
 char					*find_last_nunber(const char *str);
 char					*ft_strstrchr(const char *haystack, const char *needle);
+char					*fill_string(char *str, int c, size_t len, int pos);
+
 
 /* handler.c */
 int						call_handler(char *format, t_ftprintf *t, t_params *params);
@@ -120,7 +122,5 @@ long long int			get_dec_hh_length(t_ftprintf *t);
 long long int			get_dec_h_length(t_ftprintf *t);
 long long int			get_dec_l_length(t_ftprintf *t);
 long long int			get_dec_ll_length(t_ftprintf *t);
-
-// t_hadler_case	*type_handler(char format);
 
 #endif /* LIBFTPRINTF_H */

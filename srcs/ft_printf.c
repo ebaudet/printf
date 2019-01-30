@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 17:29:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 23:05:20 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*print_caract(t_ftprintf *t, char *format)
 	char		*tmp;
 	t_params	params;
 
-	ft_memset(&params, 0, sizeof(params));
+	params_init(&params);
 	ft_memset(buf, 0, 256);
 	while (format[t->i])
 	{
