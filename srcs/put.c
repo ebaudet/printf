@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:07:35 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 18:09:48 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,6 @@ void	type_d(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	type_u(t_ftprintf *t, char *buf, t_params *params)
-{
-	char	*str;
-
-	if (params->length)
-		str = ft_itoa(get_dec_length_handler(t, params->length));
-	else
-		str = ft_itoa(va_arg(t->ap, unsigned int));
-	ft_strcat(buf, str);
-	free(str);
-}
-
 void	type_o(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
@@ -87,6 +75,18 @@ void	type_o(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
+
+void	type_u(t_ftprintf *t, char *buf, t_params *params)
+{
+	char	*str;
+
+	if (params->length)
+		str = ft_itoa(get_dec_length_handler(t, params->length));
+	else
+		str = ft_itoa(va_arg(t->ap, unsigned int));
+	ft_strcat(buf, str);
+	free(str);
+}
 
 void	type_x(t_ftprintf *t, char *buf, t_params *params)
 {
