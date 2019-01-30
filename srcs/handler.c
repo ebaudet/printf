@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 16:24:34 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 18:07:56 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,16 +134,16 @@ void	length_handler(char *format, t_ftprintf *t, t_params *params)
 void	type_handler(char *format, t_ftprintf *t, t_params *params)
 {
 	static t_handler	(handler[10]) = {
-		{.value = 'c', .handle = put_c},
-		{.value = 's', .handle = put_s},
-		{.value = 'p', .handle = put_p},
-		{.value = 'd', .handle = put_d},
-		{.value = 'i', .handle = put_d},
-		{.value = 'o', .handle = put_o},
-		{.value = 'u', .handle = put_u},
-		{.value = 'x', .handle = put_x},
-		{.value = 'X', .handle = put_x_cap},
-		{.value = 'f', .handle = put_f},
+		{.value = 'c', .handle = type_c},
+		{.value = 's', .handle = type_s},
+		{.value = 'p', .handle = type_p},
+		{.value = 'd', .handle = type_d},
+		{.value = 'i', .handle = type_d},
+		{.value = 'o', .handle = type_o},
+		{.value = 'u', .handle = type_u},
+		{.value = 'x', .handle = type_x},
+		{.value = 'X', .handle = type_x_cap},
+		{.value = 'f', .handle = type_f},
 	};
 	int					i;
 

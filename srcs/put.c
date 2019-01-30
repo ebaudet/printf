@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:01:14 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 18:07:35 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size)
 	ft_strncat(buf, &format[t->i], size);
 }
 
-void	put_c(t_ftprintf *t, char *buf, t_params *params)
+void	type_c(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	c;
 
@@ -28,7 +28,7 @@ void	put_c(t_ftprintf *t, char *buf, t_params *params)
 	ft_strncat(buf, &c, 1);
 }
 
-void	put_s(t_ftprintf *t, char *buf, t_params *params)
+void	type_s(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -39,7 +39,7 @@ void	put_s(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_p(t_ftprintf *t, char *buf, t_params *params)
+void	type_p(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -50,7 +50,7 @@ void	put_p(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_d(t_ftprintf *t, char *buf, t_params *params)
+void	type_d(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -62,7 +62,7 @@ void	put_d(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_u(t_ftprintf *t, char *buf, t_params *params)
+void	type_u(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -74,7 +74,7 @@ void	put_u(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_o(t_ftprintf *t, char *buf, t_params *params)
+void	type_o(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -88,7 +88,7 @@ void	put_o(t_ftprintf *t, char *buf, t_params *params)
 }
 
 
-void	put_x(t_ftprintf *t, char *buf, t_params *params)
+void	type_x(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
@@ -100,7 +100,7 @@ void	put_x(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_x_cap(t_ftprintf *t, char *buf, t_params *params)
+void	type_x_cap(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 	int		i;
@@ -116,7 +116,7 @@ void	put_x_cap(t_ftprintf *t, char *buf, t_params *params)
 	free(str);
 }
 
-void	put_f(t_ftprintf *t, char *buf, t_params *params)
+void	type_f(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
