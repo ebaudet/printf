@@ -6,12 +6,12 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/01/30 18:03:16 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/01/30 23:04:21 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
-FILES	= ft_printf.c put.c handler.c functions.c get_dec_lenght.c
+FILES	= ft_printf.c put.c handler.c functions.c get_dec_lenght.c params.c
 SRCS	= $(addprefix srcs/, $(FILES))
 OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= ./includes/ -I ./libft/includes

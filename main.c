@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 17:17:41 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/30 23:34:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int main(void)
 {
 
-	int i;
+	int		i;
+	char	*pointer = NULL;
 
 	i = 12;
 
@@ -49,10 +50,12 @@ int main(void)
 	ft_printf("\n----------\n");
 	printf("   printf: &i = %p\n", &i);
 	ft_printf("ft_printf: &i = %p\n", &i);
-	printf("   printf: 1835 = (x)%x, (X)%X, (p)%d\n", 1835, 1835, 1835);
-	ft_printf("ft_printf: 1835 = (x)%x, (X)%X, (p)%p\n", 1835, 1835, 1835);
-	printf("   printf: octal 123 = %o\n", 123);
-	ft_printf("ft_printf: octal 123 = %o\n", 123);
+	printf("   printf: 1835 = (x)%x, (X)%X, (p)%p\n", 1835, 1835, pointer);
+	ft_printf("ft_printf: 1835 = (x)%x, (X)%X, (p)%p\n", 1835, 1835, pointer);
+	printf("   printf: 1835 = (x)%#x, (X)%#X, (p)%p\n", 1835, 1835, pointer);
+	ft_printf("ft_printf: 1835 = (x)%#x, (X)%#X, (p)%p\n", 1835, 1835, pointer);
+	printf("   printf: octal 123 = %o %#o %o %#o\n", 123, 123, -123, -123);
+	ft_printf("ft_printf: octal 123 = %o %#o %o %#o\n", 123, 123, -123, -123);
 	printf("   printf: 123.37 = %g\n", 123.37);
 	ft_printf("ft_printf: 123.37 = %g\n", 123.37);
 
@@ -82,8 +85,14 @@ int main(void)
 	printf("%f\n", 123456789123.12);
 	// printf("%hhs\n", 'c');
 
+	printf("%1$o => %1$#o, %1$x => %1$#x, %1$X => %1$#X\n", 15);
+	printf("%x %x\n", 12, -12);
 
 	// printf("%hhc %hhc", 1, 'c');
 	printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
+	printf("\e[36;1myolo\e[0m \e[31;1mzbra\e[0m\n");
+	ft_printf("%f, %.1f, %.2f, %.3f, %.4f, %f\n", 123.456, 123.456, 123.456, 123.456, 123.456, 123.456);
+	printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
+	ft_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
 	return (0);
 }
