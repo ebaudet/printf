@@ -6,12 +6,11 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 16:25:25 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 19:35:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
 long long int	get_dec_length_handler(t_ftprintf *t, t_length length)
 {

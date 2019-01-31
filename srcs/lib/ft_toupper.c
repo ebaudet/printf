@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:35:58 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:56:02 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/01/31 19:59:15 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-t_params	*params_init(t_params *params)
+int		ft_toupper(int c)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	if (c >= 'a' && c <= 'z')
+		c = c + 'A' - 'a';
+	return (c);
 }

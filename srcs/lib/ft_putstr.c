@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:35:58 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:48:03 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/01/31 19:58:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-t_params	*params_init(t_params *params)
+void	ft_putstr(char const *s)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	int		i;
+
+	if (s)
+	{
+		i = 0;
+		while (s[i] != 0)
+		{
+			ft_putchar(s[i]);
+			i++;
+		}
+	}
 }
