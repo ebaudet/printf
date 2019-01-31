@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 23:04:48 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 17:44:01 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct			s_params
 	char				*position;
 	int					size;
 	int					parameter;
-	int					flag;
+	t_flag				flag;
 	int					width;
 	int					precision;
 	t_length			length;
@@ -106,6 +106,9 @@ void					type_f(t_ftprintf *t, char *buf, t_params *params);
 char					*find_last_nunber(const char *str);
 char					*ft_strstrchr(const char *haystack, const char *needle);
 char					*fill_string(char *str, int c, size_t len, int pos);
+char					*fill_zero(char *str, size_t len);
+int						check_flag(t_params *params, t_flag flag);
+
 
 
 /* handler.c */

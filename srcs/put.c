@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 23:33:27 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 19:23:59 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	type_s(t_ftprintf *t, char *buf, t_params *params)
 	if (params->precision >= 0 && (len > (size_t)params->precision))
 		ft_memset(str + params->precision, 0, len - params->precision);
 	ft_strcat(buf, str);
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
 
@@ -53,8 +52,7 @@ void	type_p(t_ftprintf *t, char *buf, t_params *params)
 		params->size = params->size;
 	str = ft_lutohex(va_arg(t->ap, long unsigned int));
 	ft_strcat(buf, str);
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
 
@@ -68,19 +66,18 @@ void	type_d(t_ftprintf *t, char *buf, t_params *params)
 	else
 		value = va_arg(t->ap, int);
 	str = ft_itoa(value);
-	if ((params->flag | PLUS) == params->flag)
+	if (check_flag(params, PLUS))
 	{
 		if (value > 0)
 			ft_strcat(buf, "+");
 	}
-	else if ((params->flag | SPACE) == params->flag)
-	{
+	else if (check_flag(params, SPACE))
 		if (value > 0)
 			ft_strcat(buf, " ");
-	}
 	ft_strcat(buf, str);
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
+		buf = fill_zero(buf, params->width);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
 
@@ -89,19 +86,19 @@ void	type_o(t_ftprintf *t, char *buf, t_params *params)
 	char	*str;
 
 	if (params->length)
-		str = ft_lutooct((long unsigned int)get_dec_length_handler
-		                 (t, params->length));
+		str = ft_lutooct((long unsigned int)get_dec_length_handler(t,
+			 params->length));
 	else
 		str = ft_lutooct(va_arg(t->ap, long unsigned int));
-	if ((params->flag | HASH) == params->flag)
+	if (check_flag(params, HASH))
 		ft_strcat(buf, str);
 	else
 		ft_strcat(buf, str + 1 * sizeof(char));
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
+		buf = fill_zero(buf, params->width);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
-
 
 void	type_u(t_ftprintf *t, char *buf, t_params *params)
 {
@@ -112,8 +109,7 @@ void	type_u(t_ftprintf *t, char *buf, t_params *params)
 	else
 		str = ft_itoa(va_arg(t->ap, unsigned int));
 	ft_strcat(buf, str);
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
 
@@ -125,12 +121,11 @@ void	type_x(t_ftprintf *t, char *buf, t_params *params)
 		str = ft_lutohex(get_dec_length_handler(t, params->length));
 	else
 		str = ft_lutohex(va_arg(t->ap, long unsigned int));
-	if ((params->flag | HASH) == params->flag)
+	if (check_flag(params, HASH))
 		ft_strcat(buf, str);
 	else
 		ft_strcat(buf, str + 2 * sizeof(char));
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
 
@@ -156,18 +151,19 @@ void	type_f(t_ftprintf *t, char *buf, t_params *params)
 	str = (params->precision == -1)
 		? ft_dtoa(value, 6)
 		: ft_dtoa(value, params->precision);
-	if ((params->flag | PLUS) == params->flag)
+	if (check_flag(params, PLUS))
 	{
 		if (value > 0)
 			ft_strcat(buf, "+");
 	}
-	else if ((params->flag | SPACE) == params->flag)
+	else if (check_flag(params, SPACE))
 	{
 		if (value > 0)
 			ft_strcat(buf, " ");
 	}
 	ft_strcat(buf, str);
-	buf = fill_string(buf, ' ', params->width, (params->flag | MINUS)
-	                  == params->flag);
+	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
+		buf = fill_zero(buf, params->width);
+	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:03:04 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 16:25:25 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ long long int	get_dec_length_handler(t_ftprintf *t, t_length length)
 		{.value = L, .handle = get_dec_l_length},
 		{.value = LL, .handle = get_dec_ll_length},
 	};
-	int					i;
+	int						i;
 
 	i = -1;
 	while (++i < 4)
