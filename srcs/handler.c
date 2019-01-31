@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 18:07:56 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 16:08:38 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	precision_handler(char *format, t_ftprintf *t, t_params *params)
 	char	*last_number;
 	char	number[26];
 
+	ft_memset(number, 0, 26);
 	if (format[0] != '.')
 	{
 		params->precision = 0;

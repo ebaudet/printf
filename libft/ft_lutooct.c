@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/29 17:39:41 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 16:21:46 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char		*ft_lutooct(long unsigned int lu)
 		octal_number[i++] = temp;
 		lu = lu / 8;
 	}
+	octal_number[i++] = '0';
 	ft_strreverse(octal_number);
 	return (ft_strdup(octal_number));
 }

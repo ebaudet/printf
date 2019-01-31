@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 23:34:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 19:23:42 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int main(void)
 {
-
 	int		i;
 	char	*pointer = NULL;
 
@@ -85,8 +84,13 @@ int main(void)
 	printf("%f\n", 123456789123.12);
 	// printf("%hhs\n", 'c');
 
-	printf("%1$o => %1$#o, %1$x => %1$#x, %1$X => %1$#X\n", 15);
+	printf("%o => %#o, %x => %#x, %X => %#X\n", 15, 15, 15, 15, 15, 15);
+	ft_printf("%o => %#o, %x => %#x, %X => %#X\n", 15, 15, 15, 15, 15, 15);
 	printf("%x %x\n", 12, -12);
+	printf("%.2f %08.2f %08.2f\n", 12.5, 12.5, -12.5);
+	ft_printf("%.2f %08.2f %08.2f\n", 12.5, 12.5, -12.5);
+	printf("%o %05o\n", 12, 12);
+	ft_printf("%o %05o\n", 12, 12);
 
 	// printf("%hhc %hhc", 1, 'c');
 	printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
