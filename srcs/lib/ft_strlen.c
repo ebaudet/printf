@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:35:58 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:50:59 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/01/31 19:59:04 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-t_params	*params_init(t_params *params)
+size_t	ft_strlen(const char *s)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	size_t	cpt;
+
+	if (!s)
+		return (0);
+	cpt = 0;
+	while (s[cpt] != 0)
+		cpt++;
+	return (cpt);
 }

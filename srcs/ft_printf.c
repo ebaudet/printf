@@ -6,12 +6,11 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/30 23:05:20 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 19:41:49 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
 #include <stdio.h>
 
@@ -67,7 +66,7 @@ static char	*print_caract(t_ftprintf *t, char *format)
 	return (ft_strdup(buf));
 }
 
-char		*ft_getsstr(t_ftprintf *t, const char *format)
+static char		*ft_getsstr(t_ftprintf *t, const char *format)
 {
 	char	*str;
 	char	*tmp;

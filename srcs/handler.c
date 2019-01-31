@@ -6,12 +6,11 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 16:08:38 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/01/31 19:36:02 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
 int		call_handler(char *format, t_ftprintf *t, t_params *params)
 {
