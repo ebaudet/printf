@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:35:42 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 00:33:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	type_s(t_ftprintf *t, char *buf, t_params *params)
 	char	*str;
 	size_t	len;
 
-	if (params)
-		params->size = params->size;
 	str = ft_strdup(va_arg(t->ap, char *));
 	len = ft_strlen(str);
 	if (params->precision >= 0 && (len > (size_t)params->precision))
@@ -47,8 +45,6 @@ void	type_p(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
-	if (params)
-		params->size = params->size;
 	str = ft_lutohex(va_arg(t->ap, long unsigned int));
 	ft_strcat(buf, str);
 	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
@@ -61,7 +57,7 @@ void	type_d(t_ftprintf *t, char *buf, t_params *params)
 	long long int	value;
 
 	if (params->length)
-		value = get_dec_length_handler(t, params->length);
+		value = get_signed_int_handler(t, params->length);
 	else
 		value = va_arg(t->ap, int);
 	str = ft_itoa(value);
@@ -85,7 +81,7 @@ void	type_o(t_ftprintf *t, char *buf, t_params *params)
 	char	*str;
 
 	if (params->length)
-		str = ft_lutooct((long unsigned int)get_dec_length_handler(t,
+		str = ft_lutooct((long unsigned int)get_signed_int_handler(t,
 			 params->length));
 	else
 		str = ft_lutooct(va_arg(t->ap, long unsigned int));
@@ -104,7 +100,7 @@ void	type_u(t_ftprintf *t, char *buf, t_params *params)
 	char	*str;
 
 	if (params->length)
-		str = ft_itoa(get_dec_length_handler(t, params->length));
+		str = ft_itoa(get_signed_int_handler(t, params->length));
 	else
 		str = ft_itoa(va_arg(t->ap, unsigned int));
 	ft_strcat(buf, str);
@@ -116,14 +112,18 @@ void	type_x(t_ftprintf *t, char *buf, t_params *params)
 {
 	char	*str;
 
-	if (params->length)
-		str = ft_lutohex(get_dec_length_handler(t, params->length));
+	if (params->length == 0)
+		str = ft_lutohex(va_arg(t->ap, unsigned int));
+	// else if (params->length == L)
+	// 	str = ft_lutohex(va_arg(t->ap, long unsigned int));
 	else
-		str = ft_lutohex(va_arg(t->ap, long unsigned int));
+		str = ft_lutohex(get_signed_int_handler(t, params->length));
 	if (check_flag(params, HASH))
 		ft_strcat(buf, str);
 	else
 		ft_strcat(buf, str + 2 * sizeof(char));
+	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
+		buf = fill_zero(buf, params->width);
 	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }

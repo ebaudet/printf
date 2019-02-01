@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:36:02 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 00:19:13 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,37 @@
 
 int		call_handler(char *format, t_ftprintf *t, t_params *params)
 {
-	static t_call_handler	(handler[5]) = {
+	static t_call_handler	(handler[6]) = {
 		{.value = "-+ 0#", .handle = flag_handler},
 		{.value = "123456789", .handle = width_handler},
 		{.value = ".", .handle = precision_handler},
 		{.value = "hhlLzjt", .handle = length_handler},
 		{.value = "cspdiouxXf", .handle = type_handler},
+		{.value = "%", .handle = modulo_handler},
 	};
 	int						i;
 	int						do_stuff;
 
 	do_stuff = 0;
 	i = -1;
-	while (++i < 5)
+	while (++i < 6)
 	{
 		if (ft_strchr(handler[i].value, format[t->i]))
 		{
 			(handler[i].handle)(&format[t->i], t, params);
 			do_stuff++;
-			if (i == 4)
+			if (i == 4 || i == 5)
 				return (-1);
 		}
 	}
 	return (do_stuff);
+}
+
+void	modulo_handler(char *format, t_ftprintf *t, t_params *params)
+{
+	ft_strncat(t->buf, format, 1);
+	t->buf = fill_string(t->buf, ' ', params->width, check_flag(params, MINUS));
+	t->i++;
 }
 
 void	flag_handler(char *format, t_ftprintf *t, t_params *params)
@@ -127,7 +135,8 @@ void	length_handler(char *format, t_ftprintf *t, t_params *params)
 		params->length = Z;
 	else if (format[0] == 't')
 		params->length = T;
-	params->length = NONE_LENGH;
+	else
+		params->length = NONE_LENGH;
 	t->i++;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:41:49 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 00:36:26 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*is_arg(t_ftprintf *t, char *format, t_params *params)
 
 	ft_memset(buf, 0, 256);
 	t->buf = buf;
-	if (format[t->i] == '%' && ++t->i)
+	if (format[t->i] == '%' && ++(t->i))
 	{
 		if (!format[t->i])
 			return (ft_strdup(ft_strncat(buf, "%", 1)));
@@ -30,14 +30,8 @@ static char	*is_arg(t_ftprintf *t, char *format, t_params *params)
 		end_arg = ft_strstrchr(&format[t->i], "cspdiouxXf");
 		if (end_arg == NULL && next_modulo == NULL)
 			return (ft_strdup(ft_strncat(buf, "[FORMAT ERROR]", 14)));
-		if ((next_modulo != NULL && next_modulo < end_arg) || end_arg == NULL)
-		{
-			t->i += (int)(next_modulo - &format[t->i] + 1);
-			return (ft_strdup(ft_strncat(buf, "%", 1)));
-		}
-		else
-			while (format[t->i] && call_handler(format, t, params) > 0)
-				;
+		while (format[t->i] && call_handler(format, t, params) > 0)
+			;
 		return (ft_strdup(buf));
 	}
 	return (NULL);
