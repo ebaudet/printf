@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 00:10:47 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 12:04:13 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int main(void)
 {
+	/*
 	int		i;
 	char	*pointer = NULL;
 
@@ -100,10 +101,11 @@ int main(void)
 	ft_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
 	ft_printf("'%5%'' '%-5%'\n");
 	ft_printf("%010x\n", 542);
+	*/
 	ft_printf("%x\n", -42);
-	ft_printf("%x~o\n", 4294967296);
+	ft_printf("~%x~o\n", 4294967296);
 	ft_printf("~%lx~o\n", 4294967296);
 	ft_printf("~%llx~o\n", 4294967296);
-	printf("%lx", 4294967296);
+	// printf("%lx %llx", 4294967296, 4294967651465465296);
 	return (0);
 }

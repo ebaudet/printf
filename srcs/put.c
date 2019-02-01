@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 00:33:52 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 12:03:43 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ void	type_x(t_ftprintf *t, char *buf, t_params *params)
 
 	if (params->length == 0)
 		str = ft_lutohex(va_arg(t->ap, unsigned int));
-	// else if (params->length == L)
-	// 	str = ft_lutohex(va_arg(t->ap, long unsigned int));
 	else
 		str = ft_lutohex(get_signed_int_handler(t, params->length));
 	if (check_flag(params, HASH))
