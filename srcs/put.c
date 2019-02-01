@@ -6,11 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 12:03:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:08:23 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "libft.h"
 
 void	print_uniq_caract(t_ftprintf *t, char *format, char *buf, int size)
 {
@@ -97,12 +98,13 @@ void	type_o(t_ftprintf *t, char *buf, t_params *params)
 
 void	type_u(t_ftprintf *t, char *buf, t_params *params)
 {
-	char	*str;
+	char					*str;
+	unsigned long long int	value;
 
-	if (params->length)
-		str = ft_itoa(get_signed_int_handler(t, params->length));
-	else
-		str = ft_itoa(va_arg(t->ap, unsigned int));
+	value = (params->length == 0)
+		? va_arg(t->ap, unsigned int)
+		: get_signed_int_handler(t, params->length);
+	str = ft_itoa(value);
 	ft_strcat(buf, str);
 	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
@@ -110,16 +112,24 @@ void	type_u(t_ftprintf *t, char *buf, t_params *params)
 
 void	type_x(t_ftprintf *t, char *buf, t_params *params)
 {
-	char	*str;
+	char			*str;
+	long long int	value;
 
-	if (params->length == 0)
-		str = ft_lutohex(va_arg(t->ap, unsigned int));
-	else
-		str = ft_lutohex(get_signed_int_handler(t, params->length));
-	if (check_flag(params, HASH))
+	value = (params->length == 0)
+		? va_arg(t->ap, unsigned int)
+		: get_signed_int_handler(t, params->length);
+	str = ft_lutohex(value);
+	if (params->precision == 0 && ft_strcmp("0", str))
+		str[0] = '\0';
+	// ft_strcat(buf, str);
+	// buf = fill_string(buf, '0', params->precision, 0);
+	if ((value != 0) && check_flag(params, HASH))
 		ft_strcat(buf, str);
 	else
 		ft_strcat(buf, str + 2 * sizeof(char));
+	// precision part :
+	// si presion == 0 -> supprime tous les 0 avant X
+
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
 		buf = fill_zero(buf, params->width);
 	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));

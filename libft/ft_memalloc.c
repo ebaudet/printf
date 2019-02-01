@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:42:02 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/01/04 18:42:53 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <stdlib.h>
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+void	*ft_memalloc(size_t size)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)malloc(size * sizeof(unsigned char));
+	if (ptr == NULL)
+		return (NULL);
+	ft_memset(ptr, 0, size);
+	return (ptr);
 }

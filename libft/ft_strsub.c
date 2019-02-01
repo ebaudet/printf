@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:54:29 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/03/25 21:43:55 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <stdlib.h>
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	char		*res;
+	size_t		i;
+
+	if (!s)
+		return (NULL);
+	res = (char *)malloc((len + 1) * sizeof(*res));
+	if (res)
+	{
+		i = 0;
+		while (i < len)
+		{
+			res[i] = s[start + (unsigned int)i];
+			i++;
+		}
+		res[i] = 0;
+		return (res);
+	}
+	else
+		return (NULL);
 }

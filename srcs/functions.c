@@ -6,11 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:58:12 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/31 19:36:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:21:44 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "libft.h"
 
 /*
 ** This function find the last numeric char of chained numeric chars.

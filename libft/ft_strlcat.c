@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:50:48 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:50:49 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	size_t		i;
+	size_t		re;
+
+	re = ft_strlen(src);
+	i = 0;
+	while (dst[i] && i < size)
+		i++;
+	re += (i < size) ? i : size;
+	if ((int)(size - ft_strlen(dst) - 1) > 0)
+		ft_strncat(dst, src, size - ft_strlen(dst) - 1);
+	return (re);
 }

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 12:04:13 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:17:49 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main(void)
 {
-	/*
+
 	int		i;
 	char	*pointer = NULL;
 
@@ -101,11 +101,34 @@ int main(void)
 	ft_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
 	ft_printf("'%5%'' '%-5%'\n");
 	ft_printf("%010x\n", 542);
-	*/
-	ft_printf("%x\n", -42);
-	ft_printf("~%x~o\n", 4294967296);
-	ft_printf("~%lx~o\n", 4294967296);
-	ft_printf("~%llx~o\n", 4294967296);
+
+
 	// printf("%lx %llx", 4294967296, 4294967651465465296);
+
+	/* # 0046 (int)
+	  ft_printf("@moulitest: %#.x %#.0x", 0, 0);
+	  1. (   15) -->@moulitest: 0 0<--
+	  2. (   13) -->@moulitest:  <--
+
+	# 0047 (int)
+	  ft_printf("@moulitest: %.x %.0x", 0, 0);
+	  1. (   15) -->@moulitest: 0 0<--
+	  2. (   13) -->@moulitest:  <--
+
+	# 0048 (int)
+	  ft_printf("@moulitest: %5.x %5.0x", 0, 0);
+	  1. (   23) -->@moulitest:     0     0<--
+	  2. (   23) -->@moulitest:            <--
+  	*/
+  	ft_printf("@moulitest: '%.x' '%.0x' '%#.x' '%#.0x' '%#.0x' '%#.1x' '%#.12x' '%#12x' \
+  		 '%#12.5x' '%#-12.5x' '%#05.12x' '%#05.12x'\n", 0, 0, 0, 0, 1, 1, 1, 1,\
+  		  1, 1, 1, 0);
+  	printf("@moulitest: '%.x' '%.0x' '%#.x' '%#.0x' '%#.0x' '%#.1x' '%#.12x' '%#12x' \
+  		 '%#12.5x' '%#-12.5x' '%#05.12x' '%#05.12x'\n", 0, 0, 0, 0, 1, 1, 1, 1,\
+  		  1, 1, 1, 0);
+
+  	printf("%.5x %#.5x %3.5x %#3.5x\n", 1,1,1,1);
+  	printf("yop '%d' '%.0d' '%.0d' '%.12d' '%.12d'\n", 0,0,1,0,1);
+
 	return (0);
 }
