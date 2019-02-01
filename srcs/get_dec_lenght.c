@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 12:04:53 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 12:56:25 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ long long int	get_signed_int_handler(t_ftprintf *t, t_length length)
 	while (++i < 4)
 	{
 		if (length == handler[i].value)
-		{
-			i++;
 			return ((*handler[i].handle)(t));
-		}
 	}
 	return (0);
 }
