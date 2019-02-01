@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:42:48 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:42:48 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	size_t			i;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
+
+	if (!s1 && !s2)
+		return (0);
+	else if (!s1 || !s2)
+		return (1);
+	ptr1 = (unsigned char *)s1;
+	ptr2 = (unsigned char *)s2;
+	i = 0;
+	while ((i + 1) < n && ptr1[i] == ptr2[i])
+		i++;
+	return ((int)ptr1[i] - (int)ptr2[i]);
 }

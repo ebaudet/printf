@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:40:38 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:40:39 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+int		ft_isdigit(int c)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:39:09 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/01/29 17:49:54 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
+#include <math.h>
 
-t_params	*params_init(t_params *params)
+int		ft_isspace(int c)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	static char	search[7] = " \t\n\v\f\r\0";
+
+	if (ft_strchr(search, c) == NULL)
+		return (0);
+	return (1);
 }

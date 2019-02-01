@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:51:25 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/01/04 18:44:20 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <stdlib.h>
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	char			*res;
+	unsigned int	i;
+
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	res = (char *)malloc(ft_strlen(s) * sizeof(*res));
+	while (s[i])
+	{
+		res[i] = f(i, s[i]);
+		i++;
+	}
+	return (res);
 }

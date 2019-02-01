@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:52:06 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:52:07 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+char	*ft_strncpy(char *s1, const char *s2, size_t n)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	size_t		i;
+
+	i = 0;
+	while (s2[i] && i < n)
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	while (i < n)
+	{
+		s1[i] = 0;
+		i++;
+	}
+	return (s1);
 }

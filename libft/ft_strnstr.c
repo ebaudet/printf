@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 23:00:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:09:01 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:52:55 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:52:56 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-t_params	*params_init(t_params *params)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	ft_memset(params, 0, sizeof(*params));
-	params->precision = -1;
-	return (params);
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	if (!*s2)
+		return ((char *)s1);
+	while (s1[i] && i < n)
+	{
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] && s2[j] && (i + j) < n)
+			j++;
+		if (!s2[j])
+			return ((char *)&s1[i]);
+		i++;
+	}
+	return (NULL);
 }

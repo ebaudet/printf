@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 12:56:25 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 13:09:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 long long int	get_signed_int_handler(t_ftprintf *t, t_length length)
 {
-	static t_handler_len	(handler[4]) = {
+	static t_handler_len	(handler[6]) = {
 		{.value = HH, .handle = get_signed_hh_length},
 		{.value = H, .handle = get_signed_h_length},
 		{.value = L, .handle = get_signed_l_length},
 		{.value = LL, .handle = get_signed_ll_length},
+		{.value = Z, .handle = get_signed_z_length},
+		{.value = J, .handle = get_signed_j_length},
 	};
 	int						i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 6)
 	{
 		if (length == handler[i].value)
 			return ((*handler[i].handle)(t));
@@ -49,4 +51,14 @@ long long int	get_signed_l_length(t_ftprintf *t)
 long long int	get_signed_ll_length(t_ftprintf *t)
 {
 	return (va_arg(t->ap, long long int));
+}
+
+long long int	get_signed_z_length(t_ftprintf *t)
+{
+	return (va_arg(t->ap, size_t));
+}
+
+long long int	get_signed_j_length(t_ftprintf *t)
+{
+	return (va_arg(t->ap, intmax_t));
 }

@@ -6,11 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 00:19:13 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:08:39 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "libft.h"
 
 int		call_handler(char *format, t_ftprintf *t, t_params *params)
 {
@@ -133,6 +134,8 @@ void	length_handler(char *format, t_ftprintf *t, t_params *params)
 		params->length = LD;
 	else if (format[0] == 'z')
 		params->length = Z;
+	else if (format[0] == 'j')
+		params->length = J;
 	else if (format[0] == 't')
 		params->length = T;
 	else

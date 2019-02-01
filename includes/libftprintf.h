@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 12:04:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:01:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ char					*fill_string(char *str, int c, size_t len, int pos);
 char					*fill_zero(char *str, size_t len);
 int						check_flag(t_params *params, t_flag flag);
 
-
-
 /* handler.c */
 int						call_handler(char *format, t_ftprintf *t, t_params *params);
 void					modulo_handler(char *format, t_ftprintf *t, t_params *params);
@@ -126,30 +124,33 @@ long long int			get_signed_hh_length(t_ftprintf *t);
 long long int			get_signed_h_length(t_ftprintf *t);
 long long int			get_signed_l_length(t_ftprintf *t);
 long long int			get_signed_ll_length(t_ftprintf *t);
+long long int			get_signed_z_length(t_ftprintf *t);
+long long int			get_signed_j_length(t_ftprintf *t);
 
 /* lib functions */
-void	*ft_memset(void *b, int c, size_t len);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-void	*ft_memalloc(size_t size);
-char	*ft_strchr(const char *s, int c);
-void	ft_putchar(char c);
-void	ft_putstr(char const *s);
-void	ft_putnbr(int n);
-void	ft_putendl(char const *s);
-char	*ft_strcat(char *s1, const char *s2);
-char	*ft_strncat(char *s1, const char *s2, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_lutohex(long unsigned int lu);
-char	*ft_lutooct(long unsigned int lu);
-int		ft_toupper(int c);
-int		ft_atoi(const char *str);
-char	*ft_strcpy(char *s1, const char *s2);
-char	*ft_strncpy(char *s1, const char *s2, size_t n);
-char	*ft_dtoa(double d, unsigned int precision);
-char	*ft_itoa(int n);
-double	ft_fabs(double i);
-void	ft_strreverse(char *str);
+// void					*ft_memset(void *b, int c, size_t len);
+// size_t					ft_strlen(const char *s);
+// char					*ft_strdup(const char *s1);
+// void					*ft_memalloc(size_t size);
+// char					*ft_strchr(const char *s, int c);
+// void					ft_putchar(char c);
+// void					ft_putstr(char const *s);
+// void					ft_putnbr(int n);
+// void					ft_putendl(char const *s);
+// char					*ft_strcat(char *s1, const char *s2);
+// char					*ft_strncat(char *s1, const char *s2, size_t n);
+// char					*ft_strjoin(char const *s1, char const *s2);
+// int						ft_strcmp(const char *s1, const char *s2);
+// char					*ft_lutohex(long unsigned int lu);
+// char					*ft_lutooct(long unsigned int lu);
+// int						ft_toupper(int c);
+// int						ft_atoi(const char *str);
+// char					*ft_strcpy(char *s1, const char *s2);
+// char					*ft_strncpy(char *s1, const char *s2, size_t n);
+// char					*ft_dtoa(double d, unsigned int precision);
+// char					*ft_itoa(int n);
+// double					ft_fabs(double i);
+// void					ft_strreverse(char *str);
 
 
 /*
@@ -171,7 +172,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strstr(const char *s1, const char *s2);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

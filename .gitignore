@@ -6,3 +6,4 @@ libft/.obj/*
 libft/libft.a
 test.dSYM/*
 libft-extra/*
+includes/libft.h
