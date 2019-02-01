@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 00:21:56 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/01 12:04:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,6 @@ typedef struct			s_handler_len
 	t_len_decimal		handle;
 }						t_handler_len;
 
-typedef long long unsigned int (*t_lenu_decimal)(t_ftprintf *);
-
-typedef struct			s_handler_lenu
-{
-	char				value;
-	t_lenu_decimal		handle;
-}						t_handler_lenu;
-
 /* ft_printf.c */
 char					*ft_sprintf(const char *format, ...);
 int						ft_printf(const char *format, ...);
@@ -134,12 +126,6 @@ long long int			get_signed_hh_length(t_ftprintf *t);
 long long int			get_signed_h_length(t_ftprintf *t);
 long long int			get_signed_l_length(t_ftprintf *t);
 long long int			get_signed_ll_length(t_ftprintf *t);
-
-long long unsigned int	get_unsigned_int_handler(t_ftprintf *t, t_length length);
-long long unsigned int	get_uns_hh_length(t_ftprintf *t);
-long long unsigned int	get_uns_h_length(t_ftprintf *t);
-long long unsigned int	get_uns_l_length(t_ftprintf *t);
-long long unsigned int	get_uns_ll_length(t_ftprintf *t);
 
 /* lib functions */
 void	*ft_memset(void *b, int c, size_t len);
