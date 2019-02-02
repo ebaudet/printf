@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 11:44:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 16:31:42 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 19:48:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 */
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
-void	*ft_memcpy(void *s1, void const *s2, size_t n);
-void	*ft_memccpy(void *s1, void const *s2, int c, size_t n);
-void	*ft_memmove(void *s1, const void *s2, size_t n);
+void	*ft_memcpy(void *dst, void const *src, size_t n);
+void	*ft_memccpy(void *dst, void const *src, int c, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t	ft_strlen(const char *s);

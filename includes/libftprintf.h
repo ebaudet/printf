@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 16:29:06 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 20:18:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct			s_ftprintf
-{
-	va_list				ap;
-	int					i;
-	int					count;
-	char				*buf;
-}						t_ftprintf;
+# define BUFF_PARAMS 256
+
+# define P_FLAGS "-+ 0#"
+# define P_WIDTH "123456789"
+# define P_PRECISION "."
+# define P_LENGTH "hhlLzjt"
+# define P_TYPE "cspdiouxXf"
+# define P_MODULO "%"
 
 /*
 ** hh - char
@@ -58,20 +59,41 @@ typedef enum {
 	MAX_FLAG = 0b100000
 }	t_flag;
 
+/*
+** Global structure for printf
+*/
+typedef struct			s_ftprintf
+{
+	va_list				ap;
+	int					i;
+	char				*str;
+	int					size;
+}						t_ftprintf;
+
+typedef struct 			s_sprintf
+{
+	char				*str;
+	int					size;
+}						t_sprintf;
+
+/*
+** Structure for params printf
+*/
 typedef struct			s_params
 {
-	char				*position;
-	int					size;
 	int					parameter;
 	t_flag				flag;
 	int					width;
 	int					precision;
 	t_length			length;
+	char				*pos;
+	int					size;
+	char				buf[BUFF_PARAMS];
 	void				(*type)(t_ftprintf *, char *, struct s_params *);
 }						t_params;
 
-typedef void	(*t_hadler_case)(t_ftprintf *, char *, t_params *);
-typedef void	(*t_handler_function)(char *, t_ftprintf *, t_params *);
+typedef void	(*t_hadler_case)(t_ftprintf *, t_params *);
+typedef void	(*t_handler_function)(const char *, t_ftprintf *, t_params *);
 
 typedef struct			s_handler
 {
@@ -96,28 +118,28 @@ typedef struct			s_handler_len
 /*
 ** ft_printf.c
 */
-char					*ft_sprintf(const char *format, ...);
+t_sprintf				*ft_sprintf(const char *format, ...);
 int						ft_printf(const char *format, ...);
 
 /*
 ** params.c
 */
-t_params				*params_init(t_params *params);
+t_params				*params_reset(t_params *params);
 
 /*
 ** put.c
 */
-void					print_uniq_caract(t_ftprintf *t, char *format,
-						char *buf, int size);
-void					type_c(t_ftprintf *t, char *buf, t_params *params);
-void					type_s(t_ftprintf *t, char *buf, t_params *params);
-void					type_p(t_ftprintf *t, char *buf, t_params *params);
-void					type_d(t_ftprintf *t, char *buf, t_params *params);
-void					type_o(t_ftprintf *t, char *buf, t_params *params);
-void					type_u(t_ftprintf *t, char *buf, t_params *params);
-void					type_x(t_ftprintf *t, char *buf, t_params *params);
-void					type_x_cap(t_ftprintf *t, char *buf, t_params *params);
-void					type_f(t_ftprintf *t, char *buf, t_params *params);
+// void					print_uniq_caract(t_ftprintf *t, char *format,
+// 						char *buf, int size);
+void					type_c(t_ftprintf *t, t_params *params);
+void					type_s(t_ftprintf *t, t_params *params);
+void					type_p(t_ftprintf *t, t_params *params);
+void					type_d(t_ftprintf *t, t_params *params);
+void					type_o(t_ftprintf *t, t_params *params);
+void					type_u(t_ftprintf *t, t_params *params);
+void					type_x(t_ftprintf *t, t_params *params);
+void					type_x_cap(t_ftprintf *t, t_params *params);
+void					type_f(t_ftprintf *t, t_params *params);
 
 /*
 ** functions.c
@@ -131,19 +153,19 @@ int						check_flag(t_params *params, t_flag flag);
 /*
 ** handler.c
 */
-int						call_handler(char *format, t_ftprintf *t,
+int						call_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					modulo_handler(char *format, t_ftprintf *t,
+void					modulo_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					flag_handler(char *format, t_ftprintf *t,
+void					flag_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					width_handler(char *format, t_ftprintf *t,
+void					width_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					precision_handler(char *format, t_ftprintf *t,
+void					precision_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					length_handler(char *format, t_ftprintf *t,
+void					length_handler(const char *format, t_ftprintf *t,
 						t_params *params);
-void					type_handler(char *format, t_ftprintf *t,
+void					type_handler(const char *format, t_ftprintf *t,
 						t_params *params);
 
 /*

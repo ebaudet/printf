@@ -6,12 +6,13 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 16:13:39 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 20:38:37 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libftprintf.h"
+#include "libft.h"
 
 int main(void)
 {
@@ -129,6 +130,9 @@ int main(void)
 
   	// printf("%.5x %#.5x %3.5x %#3.5x\n", 1,1,1,1);
   	// printf("yop '%d' '%.0d' '%.0d' '%.12d' '%.12d'\n", 0,0,1,0,1);
-
+  	// ft_printf("@moulitest: %s", NULL);
+  	ft_printf("%5c %-5c\n|", 42, 42);
+  	ft_putchar(0);
+  	ft_printf("|%c|\n",0);
 	return (0);
 }
