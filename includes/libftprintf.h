@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 20:18:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 21:47:01 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFF_PARAMS 256
+# define BUFF_PARAMS 255
 
 # define P_FLAGS "-+ 0#"
 # define P_WIDTH "123456789"
@@ -70,11 +70,15 @@ typedef struct			s_ftprintf
 	int					size;
 }						t_ftprintf;
 
-typedef struct 			s_sprintf
+/*
+** Return structur for the function ft_sprintf.
+** This contains the string and the size of the string.
+*/
+typedef struct 			s_ftsprintf
 {
 	char				*str;
-	int					size;
-}						t_sprintf;
+	int					len;
+}						t_ftsprintf;
 
 /*
 ** Structure for params printf
@@ -118,7 +122,7 @@ typedef struct			s_handler_len
 /*
 ** ft_printf.c
 */
-t_sprintf				*ft_sprintf(const char *format, ...);
+t_ftsprintf				*ft_sprintf(const char *format, ...);
 int						ft_printf(const char *format, ...);
 
 /*
