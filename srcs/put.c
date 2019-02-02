@@ -6,12 +6,37 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 21:50:35 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 22:59:34 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
+
+static void	precision(char *str, int precision)
+{
+	int		len;
+	char	tmp[BUFF_PARAMS];
+	int		i;
+
+	if (precision < 0)
+		return ;
+	len = ft_strlen(str);
+	if (len > precision)
+	{
+		i = 0;
+		while (str[i] == '0' && (len - i) >= precision)
+			i++;
+		ft_strcpy(tmp, str + i);
+	}
+	else
+	{
+		ft_memset(tmp, '0', precision - len);
+		ft_strcpy(tmp + precision - len, str);
+	}
+	ft_strclr(str);
+	ft_strcpy(str, tmp);
+}
 
 void	type_c(t_ftprintf *t, t_params *params)
 {
@@ -80,15 +105,19 @@ void	type_d(t_ftprintf *t, t_params *params)
 	str = ft_itoa(value);
 	if (check_flag(params, PLUS))
 	{
-		if (value > 0)
+		if (value >= 0)
 			ft_strcat(params->buf, "+");
 	}
 	else if (check_flag(params, SPACE))
-		if (value > 0)
+		if (value >= 0)
 			ft_strcat(params->buf, " ");
 	ft_strcat(params->buf, str);
+	if (ft_strchr(" +-", params->buf[0]))
+		precision(&params->buf[1], params->precision);
+	else
+		precision(params->buf, params->precision);
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
-		fill_zero(params->buf, params->width);
+		fill_zero(params->buf, ft_min(params->width, params->precision));
 	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
 	free(str);
@@ -96,19 +125,26 @@ void	type_d(t_ftprintf *t, t_params *params)
 
 void	type_o(t_ftprintf *t, t_params *params)
 {
-	char	*str;
+	char					*str;
+	unsigned long long int	value;
 
-	if (params->length)
-		str = ft_lutooct((long unsigned int)get_signed_int_handler(t,
-			params->length));
-	else
-		str = ft_lutooct(va_arg(t->ap, long unsigned int));
+	value = (params->length == 0)
+		? va_arg(t->ap, unsigned long long int)
+		: (unsigned long long int)get_signed_int_handler(t, params->length);
+	str = ft_lutooct(value);
 	if (check_flag(params, HASH))
-		ft_strcat(params->buf, str);
+	{
+		ft_strcat(params->buf, "0");
+		ft_strcat(&params->buf[1], str);
+		precision(&params->buf[1], params->precision);
+	}
 	else
-		ft_strcat(params->buf, str + 1 * sizeof(char));
+	{
+		ft_strcat(params->buf, str);
+		precision(params->buf, params->precision);
+	}
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
-		fill_zero(params->buf, params->width);
+		fill_zero(params->buf, ft_min(params->width, params->precision));
 	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
 	free(str);
@@ -138,18 +174,19 @@ void	type_x(t_ftprintf *t, t_params *params)
 		? va_arg(t->ap, unsigned int)
 		: get_signed_int_handler(t, params->length);
 	str = ft_lutohex(value);
-	if (params->precision == 0 && ft_strcmp("0", str))
-		str[0] = '\0';
-	// ft_strcat(params->buf, str);
-	// params->buf = fill_string(buf, '0', params->precision, 0);
 	if ((value != 0) && check_flag(params, HASH))
+	{
 		ft_strcat(params->buf, "0x");
-	ft_strcat(params->buf, str);
-	// precision part :
-	// si presion == 0 -> supprime tous les 0 avant X
-
+		ft_strcat(&params->buf[2], str);
+		precision(&params->buf[2], params->precision);
+	}
+	else
+	{
+		ft_strcat(params->buf, str);
+		precision(params->buf, params->precision);
+	}
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
-		fill_zero(params->buf, params->width);
+		fill_zero(params->buf, ft_min(params->width, params->precision));
 	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
 	free(str);
