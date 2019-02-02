@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 20:43:07 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/03 00:09:32 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-static int	is_arg(t_ftprintf *t, const char *format, t_params *params)
+int		is_arg(t_ftprintf *t, const char *format, t_params *params)
 {
 	char			*next_modulo;
 	char			*end_arg;
@@ -102,5 +102,5 @@ int			ft_printf(const char *format, ...)
 	va_end(t.ap);
 	write(1, t.str, t.size);
 	free(t.str);
-	return(t.size);
+	return (t.size);
 }

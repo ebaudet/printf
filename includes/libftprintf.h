@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 22:01:48 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/03 00:08:56 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 # define P_LENGTH "hhlLzjt"
 # define P_TYPE "cspdiouxXf"
 # define P_MODULO "%"
+
+/*
+** color code for opion k - color
+*/
+# define K_BLACK 30
+# define K_RED 31
+# define K_GREEN 32
+# define K_YELLOW 33
+# define K_BLUE 34
+# define K_ROSE 35
+# define K_CYAN 36
+# define K_WHITE 37
 
 /*
 ** hh - char
@@ -74,7 +86,7 @@ typedef struct			s_ftprintf
 ** Return structur for the function ft_sprintf.
 ** This contains the string and the size of the string.
 */
-typedef struct 			s_ftsprintf
+typedef struct			s_ftsprintf
 {
 	char				*str;
 	int					len;
@@ -133,8 +145,6 @@ t_params				*params_reset(t_params *params);
 /*
 ** put.c
 */
-// void					print_uniq_caract(t_ftprintf *t, char *format,
-// 						char *buf, int size);
 void					type_c(t_ftprintf *t, t_params *params);
 void					type_s(t_ftprintf *t, t_params *params);
 void					type_p(t_ftprintf *t, t_params *params);
