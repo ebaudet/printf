@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 11:44:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/23 21:36:01 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 16:31:42 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int		ft_abs(int i);
 double	ft_fabs(double i);
 char	*ft_dtoa(double d, unsigned int precision);
 
-
+/*
+** LIBFT_H
+*/
 #endif

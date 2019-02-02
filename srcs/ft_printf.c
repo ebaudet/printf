@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:08:04 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 16:33:34 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*print_caract(t_ftprintf *t, char *format)
 	return (ft_strdup(buf));
 }
 
-static char		*ft_getsstr(t_ftprintf *t, const char *format)
+static char	*ft_getsstr(t_ftprintf *t, const char *format)
 {
 	char	*str;
 	char	*tmp;

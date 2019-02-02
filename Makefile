@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/01 18:22:28 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/02/02 15:07:38 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -f test
 	make -C libft fclean
+	@rm -f includes/libft.h
 	@echo "fclean : [\033[32mDONE\033[m]"
 
 re: fclean all

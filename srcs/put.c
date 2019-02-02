@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:08:23 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 16:30:25 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	type_o(t_ftprintf *t, char *buf, t_params *params)
 
 	if (params->length)
 		str = ft_lutooct((long unsigned int)get_signed_int_handler(t,
-			 params->length));
+			params->length));
 	else
 		str = ft_lutooct(va_arg(t->ap, long unsigned int));
 	if (check_flag(params, HASH))
@@ -124,9 +124,8 @@ void	type_x(t_ftprintf *t, char *buf, t_params *params)
 	// ft_strcat(buf, str);
 	// buf = fill_string(buf, '0', params->precision, 0);
 	if ((value != 0) && check_flag(params, HASH))
-		ft_strcat(buf, str);
-	else
-		ft_strcat(buf, str + 2 * sizeof(char));
+		ft_strcat(buf, "0x");
+	ft_strcat(buf, str);
 	// precision part :
 	// si presion == 0 -> supprime tous les 0 avant X
 

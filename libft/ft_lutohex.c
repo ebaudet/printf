@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/01/29 17:39:09 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 15:10:28 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char		*ft_lutohex(long unsigned int lu)
 		hexadecimal_number[i++] = temp;
 		lu = lu / 16;
 	}
-	ft_strcat(hexadecimal_number + i, "x0");
 	ft_strreverse(hexadecimal_number);
 	return (ft_strdup(hexadecimal_number));
 }
