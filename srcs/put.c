@@ -6,20 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 20:36:30 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 21:50:35 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
-
-// void	print_uniq_caract(t_ftprintf *t, char *format, int size)
-// {
-// 	ft_strncat(buf, &format[t->i], size);
-// 	params->size += ft_strlen(buf);
-// 	ft_strncat(params->buf, params, size);
-// 	params->size += ft_strlen(buf);
-// }
 
 void	type_c(t_ftprintf *t, t_params *params)
 {
@@ -28,34 +20,41 @@ void	type_c(t_ftprintf *t, t_params *params)
 	if (params)
 		params->size = params->size;
 	c = (char)(va_arg(t->ap, int));
-	ft_putstr("char c[");
-	ft_putchar(c);
-	ft_putstr("]");
-	params->buf[0] = c;
-	// ft_strncat(params->buf, &c, 1);
-	params->size += (params->width) ? params->width : 1;
-	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
+	if (params->width <= 0)
+	{
+		params->buf[0] = c;
+		params->size = 1;
+		return;
+	}
+	params->size = params->width;
+	if (check_flag(params, MINUS))
+	{
+		params->buf[0] = c;
+		ft_memset(&params->buf[1], ' ', params->width - 1);
+	}
+	else
+	{
+		ft_memset(params->buf, ' ', params->width - 1);
+		params->buf[params->width - 1] = c;
+	}
 }
 
 void	type_s(t_ftprintf *t, t_params *params)
 {
 	char	*str;
-	size_t	len;
 
 	str = va_arg(t->ap, char *);
 	if (str == NULL)
 		ft_strcat(params->buf, "(null)");
 	else
 	{
-		str = ft_strdup(str);
-		len = ft_strlen(str);
-		if (params->precision >= 0 && (len > (size_t)params->precision))
-			ft_memset(str + params->precision, 0, len - params->precision);
-		ft_strcat(params->buf, str);
+		if (params->precision >= 0)
+			ft_strncpy(params->buf, str, params->precision);
+		else
+			ft_strcpy(params->buf, str);
 	}
 	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
-	free(str);
 }
 
 void	type_p(t_ftprintf *t, t_params *params)
