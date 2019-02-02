@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 16:30:25 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 17:12:14 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,17 @@ void	type_s(t_ftprintf *t, char *buf, t_params *params)
 	char	*str;
 	size_t	len;
 
-	str = ft_strdup(va_arg(t->ap, char *));
-	len = ft_strlen(str);
-	if (params->precision >= 0 && (len > (size_t)params->precision))
-		ft_memset(str + params->precision, 0, len - params->precision);
-	ft_strcat(buf, str);
+	str = va_arg(t->ap, char *);
+	if (str == NULL)
+		ft_strcat(buf, "(null)");
+	else
+	{
+		str = ft_strdup(str);
+		len = ft_strlen(str);
+		if (params->precision >= 0 && (len > (size_t)params->precision))
+			ft_memset(str + params->precision, 0, len - params->precision);
+		ft_strcat(buf, str);
+	}
 	buf = fill_string(buf, ' ', params->width, check_flag(params, MINUS));
 	free(str);
 }
