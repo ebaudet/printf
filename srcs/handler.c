@@ -6,22 +6,22 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:08:39 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/02 20:11:53 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-int		call_handler(char *format, t_ftprintf *t, t_params *params)
+int		call_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	static t_call_handler	(handler[6]) = {
-		{.value = "-+ 0#", .handle = flag_handler},
-		{.value = "123456789", .handle = width_handler},
-		{.value = ".", .handle = precision_handler},
-		{.value = "hhlLzjt", .handle = length_handler},
-		{.value = "cspdiouxXf", .handle = type_handler},
-		{.value = "%", .handle = modulo_handler},
+		{.value = P_FLAGS, .handle = flag_handler},
+		{.value = P_WIDTH, .handle = width_handler},
+		{.value = P_PRECISION, .handle = precision_handler},
+		{.value = P_LENGTH, .handle = length_handler},
+		{.value = P_TYPE, .handle = type_handler},
+		{.value = P_MODULO, .handle = modulo_handler},
 	};
 	int						i;
 	int						do_stuff;
@@ -41,14 +41,15 @@ int		call_handler(char *format, t_ftprintf *t, t_params *params)
 	return (do_stuff);
 }
 
-void	modulo_handler(char *format, t_ftprintf *t, t_params *params)
+void	modulo_handler(const char *format, t_ftprintf *t, t_params *params)
 {
-	ft_strncat(t->buf, format, 1);
-	t->buf = fill_string(t->buf, ' ', params->width, check_flag(params, MINUS));
+	ft_strncat(params->buf, format, 1);
+	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
+	params->size += ft_strlen(params->buf);
 	t->i++;
 }
 
-void	flag_handler(char *format, t_ftprintf *t, t_params *params)
+void	flag_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	if (format[0] == '-')
 		params->flag |= MINUS;
@@ -65,7 +66,7 @@ void	flag_handler(char *format, t_ftprintf *t, t_params *params)
 	t->i++;
 }
 
-void	width_handler(char *format, t_ftprintf *t, t_params *params)
+void	width_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	char	*last_number;
 	char	number[26];
@@ -86,7 +87,7 @@ void	width_handler(char *format, t_ftprintf *t, t_params *params)
 	params->width = ft_atoi(number);
 }
 
-void	precision_handler(char *format, t_ftprintf *t, t_params *params)
+void	precision_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	char	*last_number;
 	char	number[26];
@@ -114,7 +115,7 @@ void	precision_handler(char *format, t_ftprintf *t, t_params *params)
 	params->precision = ft_atoi(number);
 }
 
-void	length_handler(char *format, t_ftprintf *t, t_params *params)
+void	length_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	if (format[0] == 'h')
 	{
@@ -143,7 +144,7 @@ void	length_handler(char *format, t_ftprintf *t, t_params *params)
 	t->i++;
 }
 
-void	type_handler(char *format, t_ftprintf *t, t_params *params)
+void	type_handler(const char *format, t_ftprintf *t, t_params *params)
 {
 	static t_handler	(handler[10]) = {
 		{.value = 'c', .handle = type_c},
@@ -164,7 +165,7 @@ void	type_handler(char *format, t_ftprintf *t, t_params *params)
 	{
 		if (format[0] == handler[i].value)
 		{
-			(*handler[i].handle)(t, t->buf, params);
+			(*handler[i].handle)(t, params);
 			t->i++;
 			return ;
 		}
