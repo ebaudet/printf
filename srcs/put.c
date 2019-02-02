@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/03 00:15:42 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/03 00:25:05 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	type_d(t_ftprintf *t, t_params *params)
 	str = ft_itoa(value);
 	if (check_flag(params, PLUS) && (value >= 0))
 		ft_strcat(params->buf, "+");
-	if (check_flag(params, SPACE) && (value >= 0))
+	if (!check_flag(params, PLUS) && check_flag(params, SPACE) && (value >= 0))
 		ft_strcat(params->buf, " ");
 	ft_strcat(params->buf, str);
 	if (ft_strchr(" +-", params->buf[0]))
@@ -212,7 +212,7 @@ void	type_f(t_ftprintf *t, t_params *params)
 		: ft_dtoa(value, params->precision);
 	if (check_flag(params, PLUS) && (value > 0))
 		ft_strcat(params->buf, "+");
-	if (check_flag(params, SPACE) && (value > 0))
+	if (!check_flag(params, PLUS) && check_flag(params, SPACE) && (value > 0))
 		ft_strcat(params->buf, " ");
 	ft_strcat(params->buf, str);
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
