@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 22:59:34 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/03 00:15:42 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	type_c(t_ftprintf *t, t_params *params)
 	{
 		params->buf[0] = c;
 		params->size = 1;
-		return;
+		return ;
 	}
 	params->size = params->width;
 	if (check_flag(params, MINUS))
@@ -103,14 +103,10 @@ void	type_d(t_ftprintf *t, t_params *params)
 	else
 		value = va_arg(t->ap, int);
 	str = ft_itoa(value);
-	if (check_flag(params, PLUS))
-	{
-		if (value >= 0)
-			ft_strcat(params->buf, "+");
-	}
-	else if (check_flag(params, SPACE))
-		if (value >= 0)
-			ft_strcat(params->buf, " ");
+	if (check_flag(params, PLUS) && (value >= 0))
+		ft_strcat(params->buf, "+");
+	if (check_flag(params, SPACE) && (value >= 0))
+		ft_strcat(params->buf, " ");
 	ft_strcat(params->buf, str);
 	if (ft_strchr(" +-", params->buf[0]))
 		precision(&params->buf[1], params->precision);
@@ -194,7 +190,7 @@ void	type_x(t_ftprintf *t, t_params *params)
 
 void	type_x_cap(t_ftprintf *t, t_params *params)
 {
-	int		i;
+	int	i;
 
 	type_x(t, params);
 	i = -1;
@@ -214,16 +210,10 @@ void	type_f(t_ftprintf *t, t_params *params)
 	str = (params->precision == -1)
 		? ft_dtoa(value, 6)
 		: ft_dtoa(value, params->precision);
-	if (check_flag(params, PLUS))
-	{
-		if (value > 0)
-			ft_strcat(params->buf, "+");
-	}
-	else if (check_flag(params, SPACE))
-	{
-		if (value > 0)
-			ft_strcat(params->buf, " ");
-	}
+	if (check_flag(params, PLUS) && (value > 0))
+		ft_strcat(params->buf, "+");
+	if (check_flag(params, SPACE) && (value > 0))
+		ft_strcat(params->buf, " ");
 	ft_strcat(params->buf, str);
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
 		fill_zero(params->buf, params->width);
