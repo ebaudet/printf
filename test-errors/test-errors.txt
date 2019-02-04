@@ -1,0 +1,99 @@
+$ ./test
+======= STARTING TESTS ========
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b', "trois", 'd', -12)
+(                                                   69) -->char-a-un-deux-b-trois-d--12
+<--
+(   30) -->char-a-un-deux-b-trois-d--12
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("123.37 = %g", 123.37)
+(   10) -->123.37 = g<--
+(                                                   15) -->123.37 = 123.37<--
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("%00000002$d %01$d", 1, 2)
+(                                                    5) -->$d $d<--
+(                                                    3) -->2 1<--
+======= TEST DES FLAGS ========
+[ERROR] : ft_printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'", 22, -42, 1234567, -1234567)
+(                                                  241) -->without any flags
+'                                                   22'
+'                                                  -42'
+'                                              1234567'
+'                                             -1234567'<--
+(   54) -->without any flags
+'   22'
+'  -42'
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'", 22, -42, 1234567, -1234567)
+(                                                  145) -->with minus flag
+'22   '
+'-42                                                  '
+'1234567'
+'-1234567                                             '<--
+(   52) -->with minus flag
+'22   '
+'-42  '
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with plus flag\n'%+5d'\n'%+5d'\n'%+5d'\n'%+5d'", 22, -42, 1234567, -1234567)
+(                                                  238) -->with plus flag
+'                                                  +22'
+'                                                  -42'
+'                                             +1234567'
+'                                             -1234567'<--
+(   52) -->with plus flag
+'  +22'
+'  -42'
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'", 22, -42, 1234567, -1234567)
+(                                                  244) -->with plus/minus flag
+'+22                                                  '
+'-42                                                  '
+'+1234567                                             '
+'-1234567                                             '<--
+(   58) -->with plus/minus flag
+'+22  '
+'-42  '
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'%05d'\n'%05d'", 22, -42, 1234567, -1234567)
+(                                                  171) -->with zero flag (ignored if minus option)
+'00000000000000000000000000000000000000000000000000022'
+'-0042'
+'00000000000000000000000000000000000000000000001234567'
+'-1234567'<--
+(   77) -->with zero flag (ignored if minus option)
+'00022'
+'-0042'
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with zero/plus flag\n'%0+5d'\n'%0+5d'\n'%0+5d'\n'%0+5d'", 22, -42, 1234567, -1234567)
+(  243) -->with zero/plus flag
+'+0000000000000000000000000000000000000000000000000022'
+'-0000000000000000000000000000000000000000000000000042'
+'+0000000000000000000000000000000000000000000001234567'
+'-0000000000000000000000000000000000000000000001234567'<--
+(   57) -->with zero/plus flag
+'+0022'
+'-0042'
+'+1234567'
+'-1234567'<--
+[1]    37375 abort      ./test

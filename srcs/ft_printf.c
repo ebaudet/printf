@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 22:27:46 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 23:56:44 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ int			is_arg(t_ftprintf *t, const char *format, t_params *params)
 	if (format[t->i] == '%' && ++(t->i))
 	{
 		if (!format[t->i])
-		{
-			ft_strncat(params->buf, "%", 1);
-			params->size = 1;
 			return (1);
-		}
 		next_modulo = ft_strchr(&format[t->i], '%');
 		end_arg = ft_strstrchr(&format[t->i], P_TYPE);
 		if (end_arg == NULL && next_modulo == NULL)
