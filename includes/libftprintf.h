@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 16:21:59 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 18:37:26 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # define BUFF_PARAMS 255
 
 # define P_FLAGS "-+ 0#"
-# define P_WIDTH "123456789"
+# define P_WIDTH "123456789*"
 # define P_PRECISION "."
 # define P_LENGTH "hhlLzjt"
-# define P_TYPE "cspdiouxXf"
+# define P_TYPE "cspdiouxXfk"
 # define P_MODULO "%"
 
 /*
@@ -154,6 +154,7 @@ void					type_u(t_ftprintf *t, t_params *params);
 void					type_x(t_ftprintf *t, t_params *params);
 void					type_x_cap(t_ftprintf *t, t_params *params);
 void					type_f(t_ftprintf *t, t_params *params);
+void					type_k(t_ftprintf *t, t_params *params);
 
 /*
 ** functions.c

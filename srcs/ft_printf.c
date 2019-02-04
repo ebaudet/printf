@@ -6,16 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/03 00:09:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 22:27:46 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-#include <stdio.h>
-
-int		is_arg(t_ftprintf *t, const char *format, t_params *params)
+int			is_arg(t_ftprintf *t, const char *format, t_params *params)
 {
 	char			*next_modulo;
 	char			*end_arg;
@@ -31,11 +29,7 @@ int		is_arg(t_ftprintf *t, const char *format, t_params *params)
 		next_modulo = ft_strchr(&format[t->i], '%');
 		end_arg = ft_strstrchr(&format[t->i], P_TYPE);
 		if (end_arg == NULL && next_modulo == NULL)
-		{
-			ft_strncat(params->buf, "[FORMAT ERROR]", 14);
-			params->size = 14;
 			return (1);
-		}
 		while (format[t->i] && call_handler(format, t, params) > 0)
 			;
 		return (1);
@@ -43,7 +37,7 @@ int		is_arg(t_ftprintf *t, const char *format, t_params *params)
 	return (0);
 }
 
-void	ft_concat_param(t_ftprintf *t, t_params *params)
+void		ft_concat_param(t_ftprintf *t, t_params *params)
 {
 	char	*tmp;
 
@@ -76,7 +70,7 @@ static char	*ft_getsstr(t_ftprintf *t, const char *format)
 	return (t->str);
 }
 
-t_ftsprintf		*ft_sprintf(const char *format, ...)
+t_ftsprintf	*ft_sprintf(const char *format, ...)
 {
 	t_ftprintf	t;
 	char		*str;
@@ -100,7 +94,7 @@ int			ft_printf(const char *format, ...)
 	va_start(t.ap, format);
 	ft_getsstr(&t, format);
 	va_end(t.ap);
-	write(1, t.str, t.size);
+	write(STDOUT_FILENO, t.str, t.size);
 	free(t.str);
 	return (t.size);
 }
