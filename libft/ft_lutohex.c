@@ -6,17 +6,17 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 15:10:28 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:50:35 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_lutohex(long unsigned int lu)
+char		*ft_lutohex(uintmax_t lu)
 {
-	char				hexadecimal_number[100];
-	long unsigned int	temp;
-	int					i;
+	char		hexadecimal_number[100];
+	uintmax_t	temp;
+	int			i;
 
 	ft_memset(hexadecimal_number, 0, 100);
 	i = 0;

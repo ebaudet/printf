@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/03 00:08:56 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 16:21:59 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,8 @@ void					type_handler(const char *format, t_ftprintf *t,
 /*
 ** get_dec_lenght.c
 */
-long long int			get_signed_int_handler(t_ftprintf *t, t_length length);
-long long int			get_signed_hh_length(t_ftprintf *t);
-long long int			get_signed_h_length(t_ftprintf *t);
-long long int			get_signed_l_length(t_ftprintf *t);
-long long int			get_signed_ll_length(t_ftprintf *t);
-long long int			get_signed_z_length(t_ftprintf *t);
-long long int			get_signed_j_length(t_ftprintf *t);
+intmax_t				get_signed_int_handler(t_ftprintf *t, t_length length);
+uintmax_t				get_usigned_int_handler(t_ftprintf *t, t_length length);
 
 /*
 ** LIBFTPRINTF_H
