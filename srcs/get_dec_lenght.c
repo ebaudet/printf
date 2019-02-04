@@ -6,59 +6,46 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 13:09:45 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 16:25:41 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-long long int	get_signed_int_handler(t_ftprintf *t, t_length length)
+intmax_t	get_signed_int_handler(t_ftprintf *t, t_length length)
 {
-	static t_handler_len	(handler[6]) = {
-		{.value = HH, .handle = get_signed_hh_length},
-		{.value = H, .handle = get_signed_h_length},
-		{.value = L, .handle = get_signed_l_length},
-		{.value = LL, .handle = get_signed_ll_length},
-		{.value = Z, .handle = get_signed_z_length},
-		{.value = J, .handle = get_signed_j_length},
-	};
-	int						i;
-
-	i = -1;
-	while (++i < 6)
-	{
-		if (length == handler[i].value)
-			return ((*handler[i].handle)(t));
-	}
-	return (0);
+	if (length == NONE_LENGH)
+		return (va_arg(t->ap, int));
+	if (length == HH)
+		return ((char)va_arg(t->ap, int));
+	if (length == H)
+		return ((short)va_arg(t->ap, int));
+	if (length == L)
+		return (va_arg(t->ap, long int));
+	if (length == LL)
+		return (va_arg(t->ap, long long int));
+	if (length == Z)
+		return (va_arg(t->ap, size_t));
+	if (length == J)
+		return (va_arg(t->ap, intmax_t));
+	return (va_arg(t->ap, int));
 }
 
-long long int	get_signed_hh_length(t_ftprintf *t)
+uintmax_t	get_usigned_int_handler(t_ftprintf *t, t_length length)
 {
-	return ((char)va_arg(t->ap, int));
-}
-
-long long int	get_signed_h_length(t_ftprintf *t)
-{
-	return ((short)va_arg(t->ap, int));
-}
-
-long long int	get_signed_l_length(t_ftprintf *t)
-{
-	return (va_arg(t->ap, long int));
-}
-
-long long int	get_signed_ll_length(t_ftprintf *t)
-{
-	return (va_arg(t->ap, long long int));
-}
-
-long long int	get_signed_z_length(t_ftprintf *t)
-{
-	return (va_arg(t->ap, size_t));
-}
-
-long long int	get_signed_j_length(t_ftprintf *t)
-{
-	return (va_arg(t->ap, intmax_t));
+	if (length == NONE_LENGH)
+		return (va_arg(t->ap, unsigned int));
+	if (length == HH)
+		return ((unsigned char)va_arg(t->ap, unsigned int));
+	if (length == H)
+		return ((unsigned short)va_arg(t->ap, unsigned int));
+	if (length == L)
+		return (va_arg(t->ap, unsigned long int));
+	if (length == LL)
+		return (va_arg(t->ap, unsigned long long int));
+	if (length == Z)
+		return (va_arg(t->ap, size_t));
+	if (length == J)
+		return (va_arg(t->ap, uintmax_t));
+	return (va_arg(t->ap, unsigned int));
 }

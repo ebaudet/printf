@@ -6,17 +6,17 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 22:26:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:51:13 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_lutooct(long unsigned int lu)
+char		*ft_lutooct(uintmax_t lu)
 {
-	char				octal_number[100];
-	long unsigned int	temp;
-	int					i;
+	char		octal_number[100];
+	uintmax_t	temp;
+	int			i;
 
 	ft_memset(octal_number, 0, 100);
 	i = 0;

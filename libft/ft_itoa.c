@@ -6,14 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:41:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/01/04 18:57:29 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 16:31:32 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int		ft_nbchar(int n)
+static int		ft_nbchar(intmax_t n)
 {
 	int		i;
 
@@ -28,13 +28,13 @@ static int		ft_nbchar(int n)
 	return (i + 1);
 }
 
-static char		*ft_invnb(int n)
+static char		*ft_invnb(intmax_t n)
 {
 	char	*str;
 	int		i;
 
 	i = 0;
-	str = (char *)malloc(12 * sizeof(char));
+	str = (char *)malloc(20 * sizeof(char));
 	if (n == 0)
 		str[i++] = '0';
 	while (n)
@@ -46,15 +46,15 @@ static char		*ft_invnb(int n)
 	return (str);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(intmax_t n)
 {
 	char	*str;
 	char	*strinv;
 	int		i;
 	int		j;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
+	if (n < -9223372036854775807)
+		return (ft_strdup("-9223372036854775808"));
 	i = 0;
 	str = (char *)malloc(ft_nbchar(n) * sizeof(char));
 	if (n < 0)

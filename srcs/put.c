@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/03 00:25:05 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 16:30:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,12 @@ void	type_o(t_ftprintf *t, t_params *params)
 
 void	type_u(t_ftprintf *t, t_params *params)
 {
-	char					*str;
-	unsigned long long int	value;
+	char		*str;
+	uintmax_t	value;
 
 	value = (params->length == 0)
 		? va_arg(t->ap, unsigned int)
-		: get_signed_int_handler(t, params->length);
+		: get_usigned_int_handler(t, params->length);
 	str = ft_itoa(value);
 	ft_strcat(params->buf, str);
 	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
@@ -168,7 +168,7 @@ void	type_x(t_ftprintf *t, t_params *params)
 
 	value = (params->length == 0)
 		? va_arg(t->ap, unsigned int)
-		: get_signed_int_handler(t, params->length);
+		: get_usigned_int_handler(t, params->length);
 	str = ft_lutohex(value);
 	if ((value != 0) && check_flag(params, HASH))
 	{

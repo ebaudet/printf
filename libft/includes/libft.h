@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 11:44:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 22:53:29 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:55:34 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define BUFF_SIZE 32
 # include <string.h>
 # include <stdarg.h>
+# include <inttypes.h>
 
 /*
 ** functions part 1
@@ -66,7 +67,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s);
 char	**ft_strsplit(char const *s, char c);
-char	*ft_itoa(int n);
+char	*ft_itoa(intmax_t n);
 void	ft_putchar(char c);
 void	ft_putstr(char const *s);
 void	ft_putendl(char const *s);
@@ -86,8 +87,8 @@ char	*ft_concat2c(const char *s1, const char *s2, char c);
 char	*ft_concat(int nb_elem, ...);
 char	*ft_concatc(int nb_elem, ...);
 void	ft_strreverse(char *str);
-char	*ft_lutohex(long unsigned int lu);
-char	*ft_lutooct(long unsigned int lu);
+char	*ft_lutohex(uintmax_t lu);
+char	*ft_lutooct(uintmax_t lu);
 int		ft_isspace(int c);
 double	ft_atof(const char *str);
 int		ft_abs(int i);
