@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 22:42:39 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/04 18:20:26 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	length_handler(const char *format, t_ftprintf *t, t_params *params)
 
 void	type_handler(const char *format, t_ftprintf *t, t_params *params)
 {
-	static t_handler	(handler[10]) = {
+	static t_handler	(handler[11]) = {
 		{.value = 'c', .handle = type_c},
 		{.value = 's', .handle = type_s},
 		{.value = 'p', .handle = type_p},
@@ -157,11 +157,12 @@ void	type_handler(const char *format, t_ftprintf *t, t_params *params)
 		{.value = 'x', .handle = type_x},
 		{.value = 'X', .handle = type_x_cap},
 		{.value = 'f', .handle = type_f},
+		{.value = 'k', .handle = type_k},
 	};
 	int					i;
 
 	i = -1;
-	while (++i < 10)
+	while (++i < 11)
 	{
 		if (format[0] == handler[i].value)
 		{

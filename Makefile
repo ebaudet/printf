@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/02 15:07:38 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/02/04 23:49:21 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@cc $(FLAGS_LESS) main.c -o test $(INC) $(LIB)
+	@cc main.c -o test $(INC) $(LIB)
 	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"
 
 file_right:
