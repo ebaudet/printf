@@ -1,0 +1,181 @@
+ > test compilation [DONE]
+
+  -----------------------------------
+ |  ======= STARTING TESTS ========  |
+  -----------------------------------
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+======= TEST DES FLAGS ========
+TEST: OK
+[ERROR] : ft_printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'", 22, -42, 1234567, -1234567)
+(   97) -->with minus flag
+'22                                                '
+'-42  '
+'1234567'
+'-1234567'<--
+(   52) -->with minus flag
+'22   '
+'-42  '
+'1234567'
+'-1234567'<--
+TEST: OK
+[ERROR] : ft_printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'", 22, -42, 1234567, -1234567)
+(  100) -->with plus/minus flag
+'+22  '
+'-42  '
+'+1234567'
+'-1234567                                          '<--
+(                                                58) -->with plus/minus flag
+'+22  '
+'-42  '
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'%05d'\n'%05d'", 22, -42, 1234567, -1234567)
+(  164) -->with zero flag (ignored if minus option)
+'00022'
+'-0000000000000000000000000000000000000000000000042'
+'1234567'
+'-0000000000000000000000000000000000000000001234567'<--
+(                                                77) -->with zero flag (ignored if minus option)
+'00022'
+'-0042'
+'1234567'
+'-1234567'<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+======= TEST DES TYPES ========
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("'%5%'' '%-5%'\n")
+(   62) -->'                                                 %'' '%    '
+<--
+(   17) -->'    %'' '%    '
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("@moulitest: %5.x %5.0x", 0, 0)
+(   68) -->@moulitest:                                                         <--
+(   23) -->@moulitest:            <--
+TEST: OK
+[ERROR] : ft_printf("%.5x %#.5x %3.5x %#3.5x\n", 1,1,1,1)
+(                                                51) -->00001 0x00001 00001                        0x00001
+<--
+(   28) -->00001 0x00001 00001 0x00001
+<--
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("%5c %-5c\n|", 42, 42)
+(                                               103) -->                                                 * *
+|<--
+(   13) -->    * *
+|<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("%5u\n", 4294967295)
+(   51) -->                                        4294967295
+<--
+(                                                11) -->4294967295
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test errors :
+TEST: OK
+[ERROR] : ft_printf("%-5.2s is a string", "")
+(   62) -->                                                   is a string<--
+(                                                17) -->      is a string<--
+[ERROR] : ft_printf("%#6o", 2500)
+(   60) -->                                                       04704<--
+(    6) --> 04704<--
+[ERROR] : ft_printf("@moulitest: %5.d %5.0d", 0, 0)
+(   68) -->@moulitest:                                                         <--
+(   23) -->@moulitest:            <--
+TEST: OK
+[ERROR] : ft_printf("%-5.2s is a string", "")
+(   62) -->                                                   is a string<--
+(                                                17) -->      is a string<--
+[ERROR] : ft_printf("%#6o", 2500)
+(   60) -->                                                       04704<--
+(    6) --> 04704<--
+[ERROR] : ft_printf("@moulitest: %5.d %5.0d", 0, 0)
+(   68) -->@moulitest:                                                         <--
+(   23) -->@moulitest:            <--
+TEST: OK
+
+Test des couleurs :
+normal colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ underline colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ italic colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ backgroud colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ bold colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+
+Test des pointeurs :
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test des modulos :
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test des Unefinded behavior :
+TEST: OK
+
+Test des types non gérés :
+
+
+------------------------------------
+74/88 tests réussi (14 errors)

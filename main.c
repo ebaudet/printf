@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 00:01:20 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 00:40:23 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,8 @@ int main(void)
 	test_printf("1835 = (x)%x, (X)%X, (p)%p", 1835, 1835, pointer);
 	test_printf("1835 = (x)%#x, (X)%#X, (p)%p", 1835, 1835, pointer);
 	test_printf("octal 123 = %o %#o %o %#o", 123, 123, -123, -123);
-	test_printf("123.37 = %g", 123.37);
 	test_printf("coucou%d", i);
 	test_printf("\n----------");
-	test_printf("%00000002$d %01$d", 1, 2);
 
 	ft_printf("%#k======= TEST DES FLAGS ========%k\n");
 	test_printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'", 22, -42, 1234567, -1234567);
@@ -163,14 +161,13 @@ int main(void)
 	test_printf("with space/zero option (ignored with plus option)\n'%0 5d'\n'%0 5d'\n'%0 5d'\n'%0 5d'", 22, -42, 1234567, -1234567);
 	test_printf("%d %.*s %s", 12, 3, "abcdef", "asdfghjk");
 
-	// printf("%hhs\n", 'c');
 	ft_printf("%#k======= TEST DES TYPES ========%k\n");
 	test_printf("%o => %#o, %x => %#x, %X => %#X\n", 15, 15, 15, 15, 15, 15);
 	test_printf("%x %x\n", 12, -12);
 	test_printf("%.2f %08.2f %08.2f\n", 12.5, 12.5, -12.5);
 	test_printf("%o %05o\n", 12, 12);
 
-	// printf("%hhc %hhc", 1, 'c');
+	test_printf("%hhc %hhc", 1, 'c');
 	test_printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
 	test_printf("\e[36;1myolo\e[0m \e[31;1mzbra\e[0m\n");
 	test_printf("%f, %.1f, %.2f, %.3f, %.4f, %f\n", 123.456, 123.456, 123.456, 123.456, 123.456, 123.456);
@@ -218,9 +215,7 @@ int main(void)
 	test_printf("%#6o", 2500);
 	test_printf("@moulitest: %5.d %5.0d", 0, 0);
 	test_printf("%lu", -42);
-	test_printf("%U", 4294967295);
-	test_printf("%hU", 4294967296);
-	test_printf("%U", 4294967296);
+
 
 
 
@@ -285,26 +280,38 @@ int main(void)
 	** Unefinded behavior tests
 	*/
 	ft_printf("\n%#kTest des Unefinded behavior :%k\n");
-	test_printf("% ");
-	test_printf("% h");
-	test_printf("% hZ");
-	test_printf("%05%");
-	test_printf("% Z", "test");
-	test_printf("% Z ", "test");
-	test_printf("%010s is a string", "this");
-	test_printf("%05c", 42);
-	test_printf("% Z", 42);
-	test_printf("%zhd", 4294967296);
-	test_printf("%jhd", 9223372036854775807);
-	test_printf("%lhl", 9223372036854775807);
-	test_printf("%lhlz", 9223372036854775807);
-	test_printf("%zj", 9223372036854775807);
-	test_printf("%lhh", 2147483647);
+	test_printf("%hhs\n", "c");
+	// test_printf("% ");
+	// test_printf("% h");
+	// test_printf("% hZ");
+	// test_printf("%05%");
+	// test_printf("% Z", "test");
+	// test_printf("% Z ", "test");
+	// test_printf("%010s is a string", "this");
+	// test_printf("%05c", 42);
+	// test_printf("% Z", 42);
+	// test_printf("%zhd", 4294967296);
+	// test_printf("%jhd", 9223372036854775807);
+	// test_printf("%lhl", 9223372036854775807);
+	// test_printf("%lhlz", 9223372036854775807);
+	// test_printf("%zj", 9223372036854775807);
+	// test_printf("%lhh", 2147483647);
 
+
+
+	/*
+	** Types non gérés
+	*/
+	ft_printf("\n%#kTest des types non gérés :%k\n");
+	// test_printf("123.37 = %g", 123.37);
+	// test_printf("%00000002$d %01$d", 1, 2);
+	// test_printf("%U", 4294967295);
+	// test_printf("%hU", 4294967296);
+	// test_printf("%U", 4294967296);
 
 	fflush(stdout);
 	ft_printf("\n\n------------------------------------\n");
-	ft_printf("%d/%d tests réussi\n", test - errors, test);
+	ft_printf("%d/%d tests réussi (%*k%d errors%k)\n", test - errors, test, errors ? K_RED : K_GREEN, errors);
 
 	return (0);
 }
