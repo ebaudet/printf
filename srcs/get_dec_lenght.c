@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 16:10:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 16:25:41 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 17:42:03 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ intmax_t	get_signed_int_handler(t_ftprintf *t, t_length length)
 		return (va_arg(t->ap, long int));
 	if (length == LL)
 		return (va_arg(t->ap, long long int));
+	if (length == LD)
+		return ((intmax_t)va_arg(t->ap, double));
 	if (length == Z)
 		return (va_arg(t->ap, size_t));
 	if (length == J)
@@ -43,6 +45,8 @@ uintmax_t	get_usigned_int_handler(t_ftprintf *t, t_length length)
 		return (va_arg(t->ap, unsigned long int));
 	if (length == LL)
 		return (va_arg(t->ap, unsigned long long int));
+	if (length == LD)
+		return ((uintmax_t)va_arg(t->ap, double));
 	if (length == Z)
 		return (va_arg(t->ap, size_t));
 	if (length == J)

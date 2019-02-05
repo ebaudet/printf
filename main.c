@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 02:38:45 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:43:42 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,24 @@ static void	capture_stdout_destroy(void);
 
 int			main(void)
 {
-	int test = 0;
-	int errors = 0;
+	int		test = 0;
+	int		errors = 0;
 	int		printf_ret;
-	char 	*printf_out;
+	char	*printf_out;
 	int		ft_printf_ret;
-	char 	*ft_printf_out;
+	char	*ft_printf_out;
 	int		i;
 	char	*pointer = NULL;
 
 	i = 12;
+
+	ft_printf("% ");
+	// exit(0);
+
+
+	// exit(0);
+
+	// ft_putstr("% ");
 	ft_printf("%#k  -----------------------------------  %k\n");
 	ft_printf("%#k |  ======= STARTING TESTS ========  | %k\n");
 	ft_printf("%#k  -----------------------------------  %k\n");
@@ -98,7 +106,7 @@ int			main(void)
 	test_printf("\nabcdefg\nh");
 	test_printf(". .\n");
 	test_printf("coucou\n");
-	test_printf("\n%bla% => %\n");
+	test_printf("\n%yla% => %\n");
 	// exit(0);
 	// printf("%bla% => %\n");
 	test_printf("|nie% -  %d|\n");
@@ -257,6 +265,8 @@ int			main(void)
 	ft_printf("\n%#kTest des Unefinded behavior :%k\n");
 	test_printf("%hhs\n", "c");
 	test_printf("% ");
+	test_printf("%    ");
+	test_printf("% \t   ");
 	test_printf("% h");
 	test_printf("% hZ");
 	test_printf("%05%");
@@ -266,7 +276,9 @@ int			main(void)
 	test_printf("%05c", 42);
 	test_printf("% Z", 42);
 	test_printf("%zhd", 4294967296);
+	test_printf("%zd", 4294967296);
 	test_printf("%jhd", 9223372036854775807);
+	test_printf("%jd", 9223372036854775807);
 	test_printf("%lhl", 9223372036854775807);
 	test_printf("%lhlz", 9223372036854775807);
 	test_printf("%zj", 9223372036854775807);
@@ -281,6 +293,36 @@ int			main(void)
 	// test_printf("%U", 4294967295);
 	// test_printf("%hU", 4294967296);
 	// test_printf("%U", 4294967296);
+
+	/*
+	** Test des binaires
+	*/
+	ft_printf("\n%#kTest des binaires :%k\n");
+	for (i = -10; i <= 10; i++)
+		ft_printf("% 3d = %032b\n", i, i);
+	ft_printf("% 10f = %jb\n", 2.5, 2.5);
+	ft_printf("% 10f = %jb\n", -2.5, -2.5);
+	ft_printf("% 10f = %jb\n", 42.5, 42.5);
+	ft_printf("% 10f = %jb\n", -42.5, -42.5);
+	ft_printf("% 10f = %b\n", 2.5, 2.5);
+	ft_printf("% 10f = %b\n", -2.5, -2.5);
+	ft_printf("% 10f = %b\n", 42.5, 42.5);
+	ft_printf("% 10f = %b\n", -42.5, -42.5);
+	ft_printf("% 10f = %064Lb\n", 2.5, 2.5);
+	ft_printf("% 10f = %064Lb\n", -2.5, -2.5);
+	ft_printf("% 10f = %064Lb\n", 42.5, 42.5);
+	ft_printf("% 10f = %064Lb\n", -42.5, -42.5);
+
+	ft_printf("\n%#kTest des modulos :%k\n");
+	test_printf("  ");
+	test_printf(" ");
+	test_printf("% ");
+	test_printf("%");
+	test_printf(" %");
+	test_printf(" % ");
+	test_printf("%    ");
+	test_printf("% \t   ");
+	test_printf("%d",1);
 
 	fflush(stdout);
 	ft_printf("\n\n------------------------------------\n");

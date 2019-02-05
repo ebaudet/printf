@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 21:07:38 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 18:17:30 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void	type_c(t_ftprintf *t, t_params *params)
 	if (check_flag(params, MINUS))
 	{
 		params->buf[0] = c;
-		ft_memset(&params->buf[1], ' ', params->width - 1);
+		ft_memset(&params->buf[1], check_flag(params, ZERO) ? '0' : ' ',
+		          params->width - 1);
 	}
 	else
 	{
-		ft_memset(params->buf, ' ', params->width - 1);
+		ft_memset(params->buf, check_flag(params, ZERO) ? '0' : ' ',
+		          params->width - 1);
 		params->buf[params->width - 1] = c;
 	}
 }
@@ -78,7 +80,7 @@ void	type_s(t_ftprintf *t, t_params *params)
 		else
 			ft_strcpy(params->buf, str);
 	}
-	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
+	fill_string(params->buf, check_flag(params, ZERO) ? '0' : ' ', params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
 }
 
@@ -132,6 +134,33 @@ void	type_o(t_ftprintf *t, t_params *params)
 	if (check_flag(params, HASH))
 	{
 		ft_strcat(params->buf, "0");
+		ft_strcat(&params->buf[1], str);
+		precision(&params->buf[1], params->precision);
+	}
+	else
+	{
+		ft_strcat(params->buf, str);
+		precision(params->buf, params->precision);
+	}
+	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
+		fill_zero(params->buf, ft_min(params->width, params->precision));
+	fill_string(params->buf, ' ', params->width, check_flag(params, MINUS));
+	params->size += ft_strlen(params->buf);
+	free(str);
+}
+
+void	type_b(t_ftprintf *t, t_params *params)
+{
+	char			*str;
+	long long int	value;
+
+	value = (params->length == 0)
+		? va_arg(t->ap, long long int)
+		: (long long int)get_signed_int_handler(t, params->length);
+	str = ft_lutobin(value);
+	if (check_flag(params, HASH))
+	{
+		ft_strcat(params->buf, "b");
 		ft_strcat(&params->buf[1], str);
 		precision(&params->buf[1], params->precision);
 	}
