@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 18:37:26 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:26:47 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define P_WIDTH "123456789*"
 # define P_PRECISION "."
 # define P_LENGTH "hhlLzjt"
-# define P_TYPE "cspdiouxXfk"
+# define P_TYPE "cspdiouxXfkb"
 # define P_MODULO "%"
 
 /*
@@ -150,6 +150,7 @@ void					type_s(t_ftprintf *t, t_params *params);
 void					type_p(t_ftprintf *t, t_params *params);
 void					type_d(t_ftprintf *t, t_params *params);
 void					type_o(t_ftprintf *t, t_params *params);
+void					type_b(t_ftprintf *t, t_params *params);
 void					type_u(t_ftprintf *t, t_params *params);
 void					type_x(t_ftprintf *t, t_params *params);
 void					type_x_cap(t_ftprintf *t, t_params *params);

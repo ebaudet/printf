@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 11:44:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 14:55:34 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 16:57:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*ft_concatc(int nb_elem, ...);
 void	ft_strreverse(char *str);
 char	*ft_lutohex(uintmax_t lu);
 char	*ft_lutooct(uintmax_t lu);
+char	*ft_lutobin(uintmax_t lu);
 int		ft_isspace(int c);
 double	ft_atof(const char *str);
 int		ft_abs(int i);
