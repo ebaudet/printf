@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 00:40:23 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 01:59:03 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,21 @@ int main(void)
 	ft_printf("%#k |  ======= STARTING TESTS ========  | %k\n");
 	ft_printf("%#k  -----------------------------------  %k\n");
 
-	test_printf("12.5 = %f\n-25.744 = %f\n-25.745 = %f\n3.145 = %f\n3.146 = %f\n3.144 = %f\n",
-	          12.5, -25.744, -25.745, 3.145, 3.146, 3.144);
-	test_printf("1111123.3456 = %f\n", 1111123.3456);
+	ft_printf("%#kTest des float :%k\n");
+	test_printf("12.5 = %f", 12.5);
+	test_printf("-25.744 = %f", -25.744);
+	test_printf("-25.745 = %f", -25.745);
+	test_printf("3.145 = %f", 3.145);
+	test_printf("3.146 = %f", 3.146);
+	test_printf("3.144 = %f", 3.144);
+	test_printf("1111123.3456 = %f", 1111123.3456);
 
 	// todo: handle float 2^65 -> long long
 	// ft_printf("36893488147419103232.0 = %f\n", 36893488147419103232.0);
 	// test_printf("%f\n", 36893488147419103232.0); //14925 segmentation fault
 	// printf("%f\n", 123456789123.12);
 	// => handle this
-
+	ft_printf("%#kTest différents types :%k\n");
 	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois", 'e');
 	test_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b', "trois", 'd', -12);
     test_printf("");
@@ -164,7 +169,9 @@ int main(void)
 	ft_printf("%#k======= TEST DES TYPES ========%k\n");
 	test_printf("%o => %#o, %x => %#x, %X => %#X\n", 15, 15, 15, 15, 15, 15);
 	test_printf("%x %x\n", 12, -12);
-	test_printf("%.2f %08.2f %08.2f\n", 12.5, 12.5, -12.5);
+	test_printf("%.2f", 12.5);
+	test_printf("%08.2f", 12.5);
+	test_printf("%08.2f", -12.5);
 	test_printf("%o %05o\n", 12, 12);
 
 	test_printf("%hhc %hhc", 1, 'c');
@@ -178,10 +185,19 @@ int main(void)
 	test_printf("@moulitest: %#.x %#.0x", 0, 0);
 	test_printf("@moulitest: %.x %.0x", 0, 0);
 	test_printf("@moulitest: %5.x %5.0x", 0, 0);
-  	test_printf("'%.x' '%.0x' '%#.x' '%#.0x' '%#.0x' '%#.1x' '%#.12x' '%#12x' \
-'%#12.5x' '%#-12.5x' '%.5x' '%#.5x' '%#05.12x'\n",
-				0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0);
-
+  	test_printf("'%.x'", 0);
+	test_printf("'%.0x'", 0);
+	test_printf("'%#.x'", 0);
+	test_printf("'%#.0x'", 0);
+	test_printf("'%#.0x'", 1);
+	test_printf("'%#.1x'", 1);
+	test_printf("'%#.12x'", 1);
+	test_printf("'%#12x'", 1);
+	test_printf("'%#12.5x'", 1);
+	test_printf("'%#-12.5x'", 1);
+	test_printf("'%.5x'", 1);
+	test_printf("'%#.5x'", 1);
+	test_printf("'%#05.12x'", 0);
   	test_printf("%.5x %#.5x %3.5x %#3.5x\n", 1,1,1,1);
   	test_printf("yop '%d' '%.0d' '%.0d' '%.12d' '%.12d'\n", 0,0,1,0,1);
   	test_printf("@moulitest: %s", NULL);

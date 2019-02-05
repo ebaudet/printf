@@ -1,0 +1,261 @@
+ > test compilation [DONE]
+
+  -----------------------------------
+ |  ======= STARTING TESTS ========  |
+  -----------------------------------
+Test des float :
+TEST: OK
+[ERROR] : ft_printf("-25.744 = %f", -25.744)
+(                                                  27) -->-25.744 = 4294967271.744000<--
+(                                                  20) -->-25.744 = -25.744000<--
+[ERROR] : ft_printf("-25.745 = %f", -25.745)
+(                                                  27) -->-25.745 = 4294967271.745000<--
+(                                                  20) -->-25.745 = -25.745000<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+Test différents types :
+TEST: OK
+[ERROR] : ft_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b', "trois", 'd', -12)
+(                                                  68) -->char-a-un-deux-b-trois-d--12
+<--
+(   30) -->char-a-un-deux-b-trois-d--12
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+======= TEST DES FLAGS ========
+[ERROR] : ft_printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'", 22, -42, 1234567, -1234567)
+(                                                 192) -->without any flags
+'                                                  22'
+'                                                 -42'
+'1234567'
+'                                            -1234567'<--
+(   54) -->without any flags
+'   22'
+'  -42'
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'", 22, -42, 1234567, -1234567)
+(                                                 188) -->with minus flag
+'22   '
+'-42                                                 '
+'1234567                                             '
+'-1234567                                            '<--
+(   52) -->with minus flag
+'22   '
+'-42  '
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with plus flag\n'%+5d'\n'%+5d'\n'%+5d'\n'%+5d'", 22, -42, 1234567, -1234567)
+(                                                 234) -->with plus flag
+'                                                 +22'
+'                                                 -42'
+'                                            +1234567'
+'                                            -1234567'<--
+(   52) -->with plus flag
+'  +22'
+'  -42'
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'", 22, -42, 1234567, -1234567)
+(                                                 240) -->with plus/minus flag
+'+22                                                 '
+'-42                                                 '
+'+1234567                                            '
+'-1234567                                            '<--
+(   58) -->with plus/minus flag
+'+22  '
+'-42  '
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'%05d'\n'%05d'", 22, -42, 1234567, -1234567)
+(                                                 213) -->with zero flag (ignored if minus option)
+'0000000000000000000000000000000000000000000000000022'
+'-0042'
+'0000000000000000000000000000000000000000000001234567'
+'-000000000000000000000000000000000000000000001234567'<--
+(   77) -->with zero flag (ignored if minus option)
+'00022'
+'-0042'
+'1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with zero/plus flag\n'%0+5d'\n'%0+5d'\n'%0+5d'\n'%0+5d'", 22, -42, 1234567, -1234567)
+(  239) -->with zero/plus flag
+'+000000000000000000000000000000000000000000000000022'
+'-000000000000000000000000000000000000000000000000042'
+'+000000000000000000000000000000000000000000001234567'
+'-000000000000000000000000000000000000000000001234567'<--
+(   57) -->with zero/plus flag
+'+0022'
+'-0042'
+'+1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with space option (ignored with plus option)\n'% 5d'\n'% 5d'\n'% 5d'\n'% 5d'", 22, -42, 1234567, -1234567)
+(                                                 264) -->with space option (ignored with plus option)
+'                                                  22'
+'                                                 -42'
+'                                             1234567'
+'                                            -1234567'<--
+(   82) -->with space option (ignored with plus option)
+'   22'
+'  -42'
+' 1234567'
+'-1234567'<--
+[ERROR] : ft_printf("with space/zero option (ignored with plus option)\n'%0 5d'\n'%0 5d'\n'%0 5d'\n'%0 5d'", 22, -42, 1234567, -1234567)
+(                                                 225) -->with space/zero option (ignored with plus option)
+' 000000000000000000000000000000000000000000000000022'
+'-000000000000000000000000000000000000000000000000042'
+' 1234567'
+'-000000000000000000000000000000000000000000001234567'<--
+(   87) -->with space/zero option (ignored with plus option)
+' 0022'
+'-0042'
+' 1234567'
+'-1234567'<--
+TEST: OK
+======= TEST DES TYPES ========
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("%08.2f", -12.5)
+(                                                  13) -->4294967284.50<--
+(                                                   8) -->-0012.50<--
+[ERROR] : ft_printf("%o %05o\n", 12, 12)
+(                                                  56) -->14 0000000000000000000000000000000000000000000000000014
+<--
+(                                                   9) -->14 00014
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop")
+(                                                  90) -->'     qwertyuiop' '            qwe' '                                       qwe' '' 'qwe'
+<--
+(   52) -->'     qwertyuiop' '            qwe' ' qwe' '' 'qwe'
+<--
+[ERROR] : ft_printf("'%5%'' '%-5%'\n")
+(                                                  64) -->'    %'' '%                                                   '
+<--
+(                                                  17) -->'    %'' '%    '
+<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("@moulitest: %5.x %5.0x", 0, 0)
+(                                                  70) -->@moulitest:                                                           <--
+(                                                  23) -->@moulitest:            <--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("'%#05.12x'", 0)
+(                                                  54) -->'                                        000000000000'<--
+(                                                  14) -->'000000000000'<--
+[ERROR] : ft_printf("%.5x %#.5x %3.5x %#3.5x\n", 1,1,1,1)
+(   55) -->00001 0x00001                            00001 0x00001
+<--
+(                                                  28) -->00001 0x00001 00001 0x00001
+<--
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("%5c %-5c\n|", 42, 42)
+(   60) -->    * *
+|<--
+(                                                  13) -->    * *
+|<--
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test errors :
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("@moulitest: %5.d %5.0d", 0, 0)
+(                                                  70) -->@moulitest:                                                           <--
+(                                                  23) -->@moulitest:            <--
+TEST: OK
+TEST: OK
+TEST: OK
+[ERROR] : ft_printf("@moulitest: %5.d %5.0d", 0, 0)
+(                                                  70) -->@moulitest:                                                           <--
+(                                                  23) -->@moulitest:            <--
+TEST: OK
+
+Test des couleurs :
+normal colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ underline colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ italic colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ backgroud colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+ bold colors :
+color normal - color 30 - color 31 - color 32 - color 33 - color 34 - color 35 - color 36 - color 37
+
+Test des pointeurs :
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test des modulos :
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+TEST: OK
+
+Test des Unefinded behavior :
+TEST: OK
+
+Test des types non gérés :
+
+
+------------------------------------
+86/107 tests réussi (21 errors)
+^[[A
