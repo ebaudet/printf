@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 01:59:03 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 02:38:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include <assert.h>
 #include <fcntl.h>
-// # include <capture.h>
 
 #define test_printf(...) \
 	capture_stdout(); \
@@ -26,85 +25,40 @@
 	ft_printf_out = strdup(capture_stdout_get_buffer()); \
 	capture_stdout_destroy(); \
 	test++; \
-	if ((printf_ret == ft_printf_ret) && !ft_strcmp(printf_out, ft_printf_out)) \
+	if ((printf_ret == ft_printf_ret) && !ft_strcmp(printf_out, ft_printf_out))\
 		ft_putstr("TEST: \033[32;1mOK\033[0m\n"); \
 	else \
 	{ \
 		errors++; \
-		ft_printf("\033[31;1m[ERROR]\033[0m : ft_printf(\033[34;1m%s\033[0m)\n(%5d) -->%s<--\n(%5d) -->%s<--\n", #__VA_ARGS__, ft_printf_ret, ft_printf_out, printf_ret, printf_out); \
+		ft_printf("\033[31;1m[ERROR]\033[0m : ft_printf(\033[34;1m%s\033[0m)\n\
+(%5d) -->%s<--\n(%5d) -->%s<--\n", #__VA_ARGS__, ft_printf_ret, ft_printf_out,\
+printf_ret, printf_out); \
 	} \
 	free(printf_out); \
 	free(ft_printf_out);
 
-const int READ = 0;
-const int WRITE = 1;
+const int	READ = 0;
+const int	WRITE = 1;
 
 int	out_pipe[2];
 char out_buffer[10 * 1000];
 
 #include <unistd.h>
 #define NO_FD_OPENED -1
-int saved_stdout = NO_FD_OPENED;
+int			saved_stdout = NO_FD_OPENED;
 
-static void capture_close_saved_stdout(void)
-{
-	extern int saved_stdout;
+static void	capture_close_saved_stdout(void);
+static void	capture_stdout(void);
+static void	capture_unblock_fd(int fd);
+static char	*capture_stdout_get_buffer(void);
+static void	capture_stdout_destroy(void);
 
-	if (saved_stdout != NO_FD_OPENED)
-	{
-		// fprintf(stderr, "== close %d ==\n", saved_stdout);
-		dup2(saved_stdout, STDOUT_FILENO);
-		close(saved_stdout); /* important ! */
-		saved_stdout = NO_FD_OPENED;
-		close(out_pipe[READ]);
-		close(out_pipe[WRITE]);
-	}
-}
-
-static void	capture_stdout(void)
-{
-	capture_close_saved_stdout();
-	if( pipe(out_pipe) != 0 ) {          /* make a pipe */
-		assert(0);
-	}
-	assert(saved_stdout < 100);
-	saved_stdout = dup(STDOUT_FILENO); /* save stdout for display later */
-	dup2(out_pipe[WRITE], STDOUT_FILENO);   /* redirect stdout to the pipe */
-}
-
-static void capture_unblock_fd(int fd)
-{
-
-	int flags = fcntl(fd, F_GETFL, 0);
-	fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-}
-
-static char	*capture_stdout_get_buffer(void)
-{
-	int ret;
-	fflush(stdout);
-
-	capture_unblock_fd(out_pipe[0]);
-	*(out_buffer) = '\0';
-	ret = read(out_pipe[READ], out_buffer, 42000); /* read from pipe into buffer */
-	out_buffer[ret] = '\0';
-	return (out_buffer);
-}
-
-static void			capture_stdout_destroy(void)
-{
-	extern int saved_stdout;
-	dup2(saved_stdout, STDOUT_FILENO);  /* reconnect stdout for testing */
-	capture_close_saved_stdout();
-
-	// free(cap);
-}
-// ============================================================================/
+// ============== MAIN DE TEST ================================================/
 /*
 ** MAIN DE TEST GENERAL :
 */
 
-int main(void)
+int			main(void)
 {
 	int test = 0;
 	int errors = 0;
@@ -135,8 +89,10 @@ int main(void)
 	// printf("%f\n", 123456789123.12);
 	// => handle this
 	ft_printf("%#kTest différents types :%k\n");
-	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois", 'e');
-	test_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b', "trois", 'd', -12);
+	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois",
+	 'e');
+	test_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b',
+	            "trois", 'd', -12);
     test_printf("");
 	test_printf("\n----------\n");
 	test_printf("\nabcdefg\nh");
@@ -146,7 +102,8 @@ int main(void)
 	// exit(0);
 	// printf("%bla% => %\n");
 	test_printf("|nie% -  %d|\n");
-	test_printf("Je m'appelle %s %s, et j'ai %d ans\n", "Emilien", "Baudet", 29);
+	test_printf("Je m'appelle %s %s, et j'ai %d ans\n", "Emilien", "Baudet",
+	            29);
 	test_printf("\n----------\n");
 	test_printf("&i = %p\n", &i);
 	test_printf("1835 = (x)%x, (X)%X, (p)%p", 1835, 1835, pointer);
@@ -156,14 +113,22 @@ int main(void)
 	test_printf("\n----------");
 
 	ft_printf("%#k======= TEST DES FLAGS ========%k\n");
-	test_printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'", 22, -42, 1234567, -1234567);
-	test_printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'", 22, -42, 1234567, -1234567);
-	test_printf("with plus flag\n'%+5d'\n'%+5d'\n'%+5d'\n'%+5d'", 22, -42, 1234567, -1234567);
-	test_printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'", 22, -42, 1234567, -1234567);
-	test_printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'%05d'\n'%05d'", 22, -42, 1234567, -1234567);
-	test_printf("with zero/plus flag\n'%0+5d'\n'%0+5d'\n'%0+5d'\n'%0+5d'", 22, -42, 1234567, -1234567);
-	test_printf("with space option (ignored with plus option)\n'% 5d'\n'% 5d'\n'% 5d'\n'% 5d'", 22, -42, 1234567, -1234567);
-	test_printf("with space/zero option (ignored with plus option)\n'%0 5d'\n'%0 5d'\n'%0 5d'\n'%0 5d'", 22, -42, 1234567, -1234567);
+	test_printf("without any flags\n'%5d'\n'%5d'\n'%5d'\n'%5d'", 22, -42,
+	            1234567, -1234567);
+	test_printf("with minus flag\n'%-5d'\n'%-5d'\n'%-5d'\n'%-5d'", 22, -42,
+	 1234567, -1234567);
+	test_printf("with plus flag\n'%+5d'\n'%+5d'\n'%+5d'\n'%+5d'", 22, -42,
+	 1234567, -1234567);
+	test_printf("with plus/minus flag\n'%+-5d'\n'%+-5d'\n'%+-5d'\n'%+-5d'", 22,
+	 -42, 1234567, -1234567);
+	test_printf("with zero flag (ignored if minus option)\n'%05d'\n'%05d'\n'\
+%05d'\n'%05d'", 22, -42, 1234567, -1234567);
+	test_printf("with zero/plus flag\n'%0+5d'\n'%0+5d'\n'%0+5d'\n'%0+5d'", 22,
+	            -42, 1234567, -1234567);
+	test_printf("with space option (ignored with plus option)\n'% 5d'\n'% 5d'\n\
+'% 5d'\n'% 5d'", 22, -42, 1234567, -1234567);
+	test_printf("with space/zero option (ignored with plus option)\n'%0 5d'\n'\
+%0 5d'\n'%0 5d'\n'%0 5d'", 22, -42, 1234567, -1234567);
 	test_printf("%d %.*s %s", 12, 3, "abcdef", "asdfghjk");
 
 	ft_printf("%#k======= TEST DES TYPES ========%k\n");
@@ -177,8 +142,10 @@ int main(void)
 	test_printf("%hhc %hhc", 1, 'c');
 	test_printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
 	test_printf("\e[36;1myolo\e[0m \e[31;1mzbra\e[0m\n");
-	test_printf("%f, %.1f, %.2f, %.3f, %.4f, %f\n", 123.456, 123.456, 123.456, 123.456, 123.456, 123.456);
-	test_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
+	test_printf("%f, %.1f, %.2f, %.3f, %.4f, %f\n", 123.456, 123.456, 123.456,\
+ 123.456, 123.456, 123.456); // can segfault
+	test_printf("'%15s' '%15.3s' '%4.3s' '%.0s' '%.3s'\n", "qwertyuiop",
+	            "qwertyuiop", "qwertyuiop", "qwertyuiop", "qwertyuiop");
 	test_printf("'%5%'' '%-5%'\n");
 	test_printf("%010x\n", 542);
 	test_printf("%lx %llx", 4294967296, 4294967651465465296);
@@ -217,11 +184,6 @@ int main(void)
 	test_printf("[%015u]\n", 4294967295);
 	test_printf("@moulitest: [%.5u]\n", 42);
 	test_printf("%lu\n", -42);
-
-	/*
-	**
-	*/
-	ft_printf("\n%#kTest errors :%k\n");
 	test_printf("%10s is a string", "");
 	test_printf("%-5.2s is a string", "");
 	test_printf("%#6o", 2500);
@@ -231,9 +193,6 @@ int main(void)
 	test_printf("%#6o", 2500);
 	test_printf("@moulitest: %5.d %5.0d", 0, 0);
 	test_printf("%lu", -42);
-
-
-
 
 	/*
 	** Test des couleurs
@@ -297,23 +256,21 @@ int main(void)
 	*/
 	ft_printf("\n%#kTest des Unefinded behavior :%k\n");
 	test_printf("%hhs\n", "c");
-	// test_printf("% ");
-	// test_printf("% h");
-	// test_printf("% hZ");
-	// test_printf("%05%");
-	// test_printf("% Z", "test");
-	// test_printf("% Z ", "test");
-	// test_printf("%010s is a string", "this");
-	// test_printf("%05c", 42);
-	// test_printf("% Z", 42);
-	// test_printf("%zhd", 4294967296);
-	// test_printf("%jhd", 9223372036854775807);
-	// test_printf("%lhl", 9223372036854775807);
-	// test_printf("%lhlz", 9223372036854775807);
-	// test_printf("%zj", 9223372036854775807);
-	// test_printf("%lhh", 2147483647);
-
-
+	test_printf("% ");
+	test_printf("% h");
+	test_printf("% hZ");
+	test_printf("%05%");
+	test_printf("% Z", "test");
+	test_printf("% Z ", "test");
+	test_printf("%010s is a string", "this");
+	test_printf("%05c", 42);
+	test_printf("% Z", 42);
+	test_printf("%zhd", 4294967296);
+	test_printf("%jhd", 9223372036854775807);
+	test_printf("%lhl", 9223372036854775807);
+	test_printf("%lhlz", 9223372036854775807);
+	test_printf("%zj", 9223372036854775807);
+	test_printf("%lhh", 2147483647);
 
 	/*
 	** Types non gérés
@@ -327,7 +284,66 @@ int main(void)
 
 	fflush(stdout);
 	ft_printf("\n\n------------------------------------\n");
-	ft_printf("%d/%d tests réussi (%*k%d errors%k)\n", test - errors, test, errors ? K_RED : K_GREEN, errors);
+	ft_printf("%d/%d tests réussi (%*k%d errors%k)\n",
+	          test - errors, test, errors ? K_RED : K_GREEN, errors);
 
 	return (0);
+}
+// ============== FIN MAIN DE TEST ============================================/
+
+/*
+** Fonctions de test
+*/
+
+static void	capture_close_saved_stdout(void)
+{
+	extern int saved_stdout;
+
+	if (saved_stdout != NO_FD_OPENED)
+	{
+		// fprintf(stderr, "== close %d ==\n", saved_stdout);
+		dup2(saved_stdout, STDOUT_FILENO);
+		close(saved_stdout); /* important ! */
+		saved_stdout = NO_FD_OPENED;
+		close(out_pipe[READ]);
+		close(out_pipe[WRITE]);
+	}
+}
+
+static void	capture_stdout(void)
+{
+	capture_close_saved_stdout();
+	if( pipe(out_pipe) != 0 ) {          /* make a pipe */
+		assert(0);
+	}
+	assert(saved_stdout < 100);
+	saved_stdout = dup(STDOUT_FILENO); /* save stdout for display later */
+	dup2(out_pipe[WRITE], STDOUT_FILENO);   /* redirect stdout to the pipe */
+}
+
+static void	capture_unblock_fd(int fd)
+{
+	int flags = fcntl(fd, F_GETFL, 0);
+	fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+}
+
+static char	*capture_stdout_get_buffer(void)
+{
+	int ret;
+	fflush(stdout);
+
+	capture_unblock_fd(out_pipe[0]);
+	*(out_buffer) = '\0';
+	ret = read(out_pipe[READ], out_buffer, 42000); /* read from pipe into buffer */
+	out_buffer[ret] = '\0';
+	return (out_buffer);
+}
+
+static void	capture_stdout_destroy(void)
+{
+	extern int saved_stdout;
+	dup2(saved_stdout, STDOUT_FILENO);  /* reconnect stdout for testing */
+	capture_close_saved_stdout();
+
+	// free(cap);
 }

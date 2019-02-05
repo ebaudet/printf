@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:41:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/04 16:31:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/05 02:25:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char		*ft_invnb(intmax_t n)
 	int		i;
 
 	i = 0;
-	str = (char *)malloc(20 * sizeof(char));
+	str = (char *)ft_memalloc(20 * sizeof(char));
 	if (n == 0)
 		str[i++] = '0';
 	while (n)
@@ -56,7 +56,7 @@ char			*ft_itoa(intmax_t n)
 	if (n < -9223372036854775807)
 		return (ft_strdup("-9223372036854775808"));
 	i = 0;
-	str = (char *)malloc(ft_nbchar(n) * sizeof(char));
+	str = (char *)ft_memalloc(ft_nbchar(n) * sizeof(char));
 	if (n < 0)
 	{
 		str[i++] = '-';
