@@ -6,20 +6,39 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:39:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/01 18:13:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/06 01:21:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include <stdlib.h>
 #include "libft.h"
+
+#include <stdio.h>
 
 /*
 ** The dtoa() function converts the initial portion of the string
 ** pointed to by <str> to int representation.
 */
 
-static int	ft_nbchar(double d, unsigned int precision)
+static int	ft_log10(long double d)
+{
+	int	i;
+
+	i = 1;
+	if (d < 0)
+		d *= -1.0;
+	if (d <= 10.0)
+		return (i);
+	while (++i)
+	{
+		d = d / 10;
+		if (d <= 10.0)
+			break ;
+	}
+	return (i);
+}
+
+static int	ft_nbchar(long double d, unsigned int precision)
 {
 	int		i;
 
@@ -31,11 +50,11 @@ static int	ft_nbchar(double d, unsigned int precision)
 		i++;
 		d = ft_fabs(d);
 	}
-	i += ceil(log10(d));
-	return (d);
+	i += ft_log10(d);
+	return (i);
 }
 
-static void	put_decimals(double d, unsigned int precision, char *str)
+static void	put_decimals(long double d, unsigned int precision, char *str)
 {
 	char	*tmp;
 	double	decimals;
@@ -54,12 +73,12 @@ static void	put_decimals(double d, unsigned int precision, char *str)
 	while (++i <= (int)precision)
 		decimals *= 10;
 	decimals += 0.5;
-	tmp = ft_itoa((int)decimals);
+	tmp = ft_itoa((intmax_t)decimals);
 	ft_strcat(str, tmp);
 	free(tmp);
 }
 
-char		*ft_dtoa(double d, unsigned int precision)
+char		*ft_dtoa(long double d, unsigned int precision)
 {
 	char	*str;
 	char	*tmp;

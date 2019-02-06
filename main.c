@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 19:43:42 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/06 01:27:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int			main(void)
 	i = 12;
 
 	ft_printf("% ");
+	ft_putstr(ft_dtoa(1126.5, 2));
+
 	// exit(0);
 
 
@@ -90,11 +92,18 @@ int			main(void)
 	test_printf("3.146 = %f", 3.146);
 	test_printf("3.144 = %f", 3.144);
 	test_printf("1111123.3456 = %f", 1111123.3456);
+	test_printf("% ");
+	test_printf("%f", 1126.5);
+
+	printf("printf %Lf\n", 123456789123.12);
+	fflush(stdout);
+
+	ft_printf("123456789123.12 = %Lf\n", 123456789123.12);
+	exit(0);
 
 	// todo: handle float 2^65 -> long long
-	// ft_printf("36893488147419103232.0 = %f\n", 36893488147419103232.0);
-	// test_printf("%f\n", 36893488147419103232.0); //14925 segmentation fault
-	// printf("%f\n", 123456789123.12);
+	test_printf("36893488147419103232.0 = %Lf\n", 36893488147419103232.0);
+	test_printf("%Lf\n", 36893488147419103232.0); //14925 segmentation fault
 	// => handle this
 	ft_printf("%#kTest différents types :%k\n");
 	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois",

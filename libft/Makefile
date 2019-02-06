@@ -29,7 +29,8 @@ DIRSRC	= $(addprefix ./ ,$(SRCS))
 OBJS	= ${SRCS:%.c=.obj/%.o}
 INC		= ./includes/
 FLAGS	= -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
-DEBUGFLG = -v -da -Q
+FLAGS	= -Wall -Wextra -Werror
+DEBUGFLG = -fsanitize=address -g3
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib

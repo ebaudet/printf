@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/04 23:49:21 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/02/06 01:13:05 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC		= -I ./includes/
 LIB		=  -L . libftprintf.a
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
-DEBUGFLG = -v -da -Q
+DEBUGFLG = -v -da -Q -fsanitize=address -g3
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib
