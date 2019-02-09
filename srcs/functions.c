@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:58:12 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/02 16:29:53 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/08 16:38:19 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "libft.h"
 
 /*
-** This function find the last numeric char of chained numeric chars.
+** This function find the last numeric char of chained numeric chars in <str>.
 */
 
-char	*find_last_nunber(const char *str)
+char	*find_last_number(const char *str)
 {
 	int		i;
 
 	i = 0;
 	while (str && str[i] && str[i] >= '0' && str[i] <= '9')
 		i++;
-	return (char *)&str[i];
+	return ((char *)&str[i]);
 }
 
 /*

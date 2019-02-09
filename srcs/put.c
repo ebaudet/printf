@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 18:17:30 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/08 21:48:07 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	precision(char *str, int precision)
 	char	tmp[BUFF_PARAMS];
 	int		i;
 
+	ft_memset(tmp, 0, BUFF_PARAMS);
 	if (precision < 0)
 		return ;
 	len = ft_strlen(str);
@@ -66,21 +67,41 @@ void	type_c(t_ftprintf *t, t_params *params)
 	}
 }
 
+int		add_to_buff(t_params *params, char *str, int len)
+{
+	char	*tmp;
+
+	len = (len >= 0) ? len : ft_strlen(str);
+	if ((params->size + len) >= BUFF_PARAMS)
+	{
+		tmp = ft_memalloc((params->size + len + 1) * sizeof(char));
+		if (params->size >= BUFF_PARAMS)
+		{
+			ft_strncpy(tmp, params->buf_extra, params->size);
+			ft_memdel((void **)&(params->buf_extra));
+		}
+		else if (params->size > 0)
+			ft_strncpy(tmp, params->buf, params->size);
+		ft_strncpy(tmp + params->size, str, len);
+		params->buf_extra = tmp;
+	}
+	else
+		ft_strncpy(params->buf, str, len);
+	params->size += len;
+	return (params->size);
+}
+
 void	type_s(t_ftprintf *t, t_params *params)
 {
 	char	*str;
 
 	str = va_arg(t->ap, char *);
 	if (str == NULL)
-		ft_strcat(params->buf, "(null)");
+		add_to_buff(params, "(null)", -1);
 	else
-	{
-		if (params->precision >= 0)
-			ft_strncpy(params->buf, str, params->precision);
-		else
-			ft_strcpy(params->buf, str);
-	}
-	fill_string(params->buf, check_flag(params, ZERO) ? '0' : ' ', params->width, check_flag(params, MINUS));
+		add_to_buff(params, str, params->precision);
+	fill_string(params->buf, check_flag(params, ZERO) ? '0' : ' ',
+		params->width, check_flag(params, MINUS));
 	params->size += ft_strlen(params->buf);
 }
 
