@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 19:26:47 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/08 21:47:30 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct			s_params
 	char				*pos;
 	int					size;
 	char				buf[BUFF_PARAMS];
+	char				*buf_extra;
 	void				(*type)(t_ftprintf *, char *, struct s_params *);
 }						t_params;
 
@@ -140,11 +141,13 @@ int						ft_printf(const char *format, ...);
 /*
 ** params.c
 */
+t_params				*params_init(t_params *params);
 t_params				*params_reset(t_params *params);
 
 /*
 ** put.c
 */
+int						add_to_buff(t_params *params, char *str, int len);
 void					type_c(t_ftprintf *t, t_params *params);
 void					type_s(t_ftprintf *t, t_params *params);
 void					type_p(t_ftprintf *t, t_params *params);
@@ -160,7 +163,7 @@ void					type_k(t_ftprintf *t, t_params *params);
 /*
 ** functions.c
 */
-char					*find_last_nunber(const char *str);
+char					*find_last_number(const char *str);
 char					*ft_strstrchr(const char *haystack, const char *needle);
 char					*fill_string(char *str, int c, size_t len, int pos);
 char					*fill_zero(char *str, size_t len);

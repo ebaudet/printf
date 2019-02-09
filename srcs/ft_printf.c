@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/05 19:48:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/08 21:45:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,13 @@ void		ft_concat_param(t_ftprintf *t, t_params *params)
 
 	tmp = ft_memalloc(t->size + params->size);
 	ft_memcpy(tmp, t->str, t->size);
-	ft_memcpy(tmp + t->size, params->buf, params->size);
+	if (params->size >= BUFF_PARAMS)
+	{
+		ft_memcpy(tmp + t->size, params->buf_extra, params->size);
+		ft_memdel((void **)&(params->buf_extra));
+	}
+	else
+		ft_memcpy(tmp + t->size, params->buf, params->size);
 	free(t->str);
 	t->size += params->size;
 	t->str = tmp;
@@ -65,7 +71,7 @@ static char	*ft_getsstr(t_ftprintf *t, const char *format)
 {
 	t_params	params;
 
-	params_reset(&params);
+	params_init(&params);
 	t->str = ft_memalloc(0);
 	t->i = 0;
 	while (format[t->i] != '\0')

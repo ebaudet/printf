@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/06 01:13:05 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/02/08 15:41:38 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ LIB		=  -L . libftprintf.a
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
 DEBUGFLG = -v -da -Q -fsanitize=address -g3
+DEBUGFLG = -fsanitize=address -g3
+# DEBUGFLG =
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib
@@ -32,7 +34,7 @@ $(NAME): make_libft $(OBJS)
 
 .obj/%.o: srcs/%.c
 	@mkdir -p .obj
-	@$(CC) -c $< -o $@ $(FLAGS_LESS) $(INC)
+	@$(CC) -c $< -o $@ $(FLAGS_LESS) $(INC) $(DEBUGFLG)
 	@echo -n .
 
 make_libft:
@@ -55,7 +57,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@cc main.c -o test $(INC) $(LIB)
+	@cc main.c -o test $(INC) $(LIB) $(DEBUGFLG)
 	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"
 
 file_right:

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:41:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/06 01:11:00 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/08 15:42:18 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char			*ft_itoa(intmax_t n)
 	if (n < -9223372036854775807)
 		return (ft_strdup("-9223372036854775808"));
 	i = 0;
-	str = (char *)ft_memalloc(ft_nbchar(n) * sizeof(char));
+	str = (char *)ft_memalloc((ft_nbchar(n) + 1) * sizeof(char));
 	if (n < 0)
 	{
 		str[i++] = '-';

@@ -31,6 +31,7 @@ INC		= ./includes/
 FLAGS	= -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS	= -Wall -Wextra -Werror
 DEBUGFLG = -fsanitize=address -g3
+# DEBUGFLG =
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib
@@ -44,7 +45,7 @@ $(NAME): $(OBJS)
 
 .obj/%.o: %.c
 	@mkdir -p .obj
-	@$(CC) -c $< -o $@ $(FLAGS) -I $(INC)
+	@$(CC) -c $< -o $@ $(FLAGS) -I $(INC) $(DEBUGFLG)
 	@echo -n .
 
 clean:
