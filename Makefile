@@ -6,12 +6,13 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/08 15:41:38 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/02/11 22:27:41 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
-FILES	= ft_printf.c put.c handler.c functions.c get_dec_lenght.c params.c
+FILES	= ft_printf.c put.c handler.c functions.c get_dec_lenght.c params.c \
+		  buffer.c
 SRCS	= $(addprefix srcs/, $(FILES))
 OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= -I ./includes/
@@ -20,7 +21,7 @@ FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
 DEBUGFLG = -v -da -Q -fsanitize=address -g3
 DEBUGFLG = -fsanitize=address -g3
-# DEBUGFLG =
+DEBUGFLG =
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib

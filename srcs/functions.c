@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:58:12 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/08 16:38:19 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:29:01 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,54 +47,55 @@ char	*ft_strstrchr(const char *haystack, const char *needle)
 ** at position <pos right:0,left:1>
 */
 
-char	*fill_string(char *str, int c, size_t len, int pos)
+void	fill_string(t_params *params, int c, size_t len, int pos)
 {
-	size_t	str_len;
 	char	*str_tmp;
+	char	*str;
 
-	str_len = ft_strlen(str);
-	if (len <= str_len)
-		return (str);
+	str = (params->size) >= BUFF_PARAMS ? params->buf_extra : params->buf;
+	if ((int)len <= (int)params->size)
+		return ;
 	str_tmp = (char *)ft_memalloc((len + 1) * sizeof(char));
 	if (pos == 0)
-		str_tmp = ft_memset(str_tmp, c, len - str_len);
-	ft_strcat(str_tmp, str);
-	if (pos != 0)
-		ft_memset(str_tmp + str_len, c, len - str_len);
-	ft_strcpy(str, str_tmp);
-	free(str_tmp);
-	return (str);
+	{
+		str_tmp = ft_memset(str_tmp, c, len - params->size);
+		ft_memcpy(str_tmp + len - params->size, str, params->size);
+	}
+	else
+	{
+		ft_memcpy(str_tmp, str, params->size);
+		ft_memset(str_tmp + params->size, c, len - params->size);
+	}
+	put_in_buff(params, str_tmp, len, 1);
 }
 
 /*
 ** Fill the string <str> to fit the size <len> with zero before numbers.
 */
 
-char	*fill_zero(char *str, size_t len)
+void	fill_zero(t_params *params, size_t len)
 {
-	size_t	str_len;
 	char	*str_tmp;
+	char	*str;
 	int		i;
 	int		j;
 
-	str_len = ft_strlen(str);
-	if (len <= str_len)
-		return (str);
+	str = (params->size) >= BUFF_PARAMS ? params->buf_extra : params->buf;
+	if ((int)len <= params->size)
+		return ;
 	str_tmp = (char *)ft_memalloc((len + 1) * sizeof(char));
 	i = -1;
 	while (str[++i] && (str[i] < '1' || str[i] > '9'))
 		str_tmp[i] = str[i];
 	j = -1;
-	while (++j < (int)(len - str_len))
+	while (++j < (int)(len - params->size))
 		str_tmp[i + j] = '0';
 	while (str[i])
 	{
 		str_tmp[i + j] = str[i];
 		i++;
 	}
-	ft_strcpy(str, str_tmp);
-	free(str_tmp);
-	return (str);
+	put_in_buff(params, str_tmp, len, 1);
 }
 
 /*

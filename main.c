@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/08 21:57:34 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/11 22:31:53 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 	{ \
 		errors++; \
 		ft_printf("\033[31;1m[ERROR]\033[0m : ft_printf(\033[34;1m%s\033[0m)\n\
-(%5d) -->%.*s<--\n(%5d) -->%.*s<--\n", #__VA_ARGS__, ft_printf_ret, BUFF_PARAMS - 1, ft_printf_out,\
-printf_ret, BUFF_PARAMS - 1, printf_out); \
+(%5d) -->%.s<--\n(%5d) -->%.s<--\n", #__VA_ARGS__, ft_printf_ret, ft_printf_out,\
+printf_ret, printf_out); \
 	} \
 	free(printf_out); \
 	free(ft_printf_out);
@@ -76,11 +76,18 @@ int			main(void)
 	ft_printf("%#k  -----------------------------------  %k\n\n");
 
 	ft_printf("%#kTest buffer depassé :%k\n");
-	ft_printf("127 : %s\n",
+	test_printf("127 : %s\n",
 "lk jdfsgks d;fgk jsd;fg kjsd;lfkg jsd;flkgjsd;lfkgjvs;dkfjg ;sdlkf jg;dslkfjgv;sdkfjgv;sdlkcfmg;skldj f;lkgjmsv;dfkjg s;dlfkgje");
-	ft_printf("128 : %s\n",
+	test_printf("128 : %s\n",
 "lk jdfsgks d;fgk djsd;fg kjsd;lfkg jsd;flkgjsd;lfkgjvs;dkfjg ;sdlkf jg;dslkfjgv;sdkfjgv;sdlkcfmg;skldj f;lkgjmsv;dfkjg s;dlfkgje");
 
+	test_printf("296 : %s\n",
+"qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm qweryuiopasdfghjklzxcvbnnm");
+
+	test_printf("%300d", 42);
+	test_printf("%0300d", 42);
+	test_printf("%0.300d\n", 42);
+	// exit(0);
 	ft_printf("\n%#kTest des float :%k\n");
 	test_printf("12.5 = %f", 12.5);
 	test_printf("-25.744 = %f", -25.744);
@@ -91,16 +98,13 @@ int			main(void)
 	test_printf("1111123.3456 = %f", 1111123.3456);
 	test_printf("% ");
 	test_printf("%f", 1126.5);
-
 	test_printf("%70.70d", 12);
 	test_printf("%150.150d", 12);
 	test_printf("%250.250d", 12);
 	test_printf("%250.250d", 12);
 	test_printf("%254.254d", 12);
 	test_printf("%250.250d", 12);
-	ft_printf("ici\n");
 	test_printf("%888.888d", 12);
-	ft_printf("la\n");
 	test_printf("%250.250d", 12);
 
 	printf("printf %f\n", 123456789123.12);
@@ -111,10 +115,10 @@ int			main(void)
 
 	// todo: handle float 2^65 -> long long
 	// test_printf("36893488147419103232.0 = %Lf\n", 36893488147419103232.0);
-	// test_printf("%Lf\n", 36893488147419103232.0); //14925 segmentation fault
+	// test_printf("%Lf\n", 368934881474191035232.0); //14925 segmentation fault
 	// => handle this
 	ft_printf("%#kTest différents types :%k\n");
-	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois",
+	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', 5"trois",
 	 'e');
 	test_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b',
 	            "trois", 'd', -12);
@@ -131,6 +135,9 @@ int			main(void)
 	            29);
 	test_printf("\n----------\n");
 	test_printf("&i = %p\n", &i);
+	test_printf("%x", 1835);
+	test_printf("%X", 1835);
+	test_printf("%p", pointer);
 	test_printf("1835 = (x)%x, (X)%X, (p)%p", 1835, 1835, pointer);
 	test_printf("1835 = (x)%#x, (X)%#X, (p)%p", 1835, 1835, pointer);
 	test_printf("octal 123 = %o %#o %o %#o", 123, 123, -123, -123);
@@ -163,7 +170,6 @@ int			main(void)
 	test_printf("%08.2f", 12.5);
 	test_printf("%08.2f", -12.5);
 	test_printf("%o %05o\n", 12, 12);
-
 	test_printf("%hhc %hhc", 1, 'c');
 	test_printf("{cyan}yolo{eoc} {red}zbra{eoc}\n");
 	test_printf("\e[36;1myolo\e[0m \e[31;1mzbra\e[0m\n");
@@ -211,6 +217,9 @@ int			main(void)
 	test_printf("%lu\n", -42);
 	test_printf("%10s is a string", "");
 	test_printf("%-5.2s is a string", "");
+	test_printf("%-2.5s is a string", "");
+	test_printf("%-.2s is a string", "");
+	test_printf("%-5s is a string", "");
 	test_printf("%#6o", 2500);
 	test_printf("@moulitest: %5.d %5.0d", 0, 0);
 	test_printf("%10s is a string", "");

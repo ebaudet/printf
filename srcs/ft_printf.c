@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/08 21:45:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:31:14 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,25 @@ void		ft_concat_param(t_ftprintf *t, t_params *params)
 
 	tmp = ft_memalloc(t->size + params->size);
 	ft_memcpy(tmp, t->str, t->size);
+	// ft_putstr_fd("{in ft_concat_param size:[", 2);
+	// ft_putnbr_fd(params->size, 2);
 	if (params->size >= BUFF_PARAMS)
 	{
+		// ft_putstr_fd("] buf_extra:[", 2);
+		// ft_putstr_fd(params->buf_extra, 2);
 		ft_memcpy(tmp + t->size, params->buf_extra, params->size);
 		ft_memdel((void **)&(params->buf_extra));
 	}
 	else
+	{
+		// ft_putstr_fd("] buf:[", 2);
+		// ft_putstr_fd(params->buf, 2);
 		ft_memcpy(tmp + t->size, params->buf, params->size);
+	}
 	free(t->str);
 	t->size += params->size;
 	t->str = tmp;
+	// ft_putstr_fd("]}", 2);
 }
 
 static char	*ft_getsstr(t_ftprintf *t, const char *format)
