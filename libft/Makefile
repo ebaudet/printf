@@ -31,7 +31,7 @@ INC		= ./includes/
 FLAGS	= -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS	= -Wall -Wextra -Werror
 DEBUGFLG = -fsanitize=address -g3
-# DEBUGFLG =
+DEBUGFLG =
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib

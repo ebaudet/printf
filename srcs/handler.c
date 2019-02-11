@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:55:04 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/08 20:02:48 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:53:19 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ int		call_handler(const char *format, t_ftprintf *t, t_params *params)
 
 void	modulo_handler(const char *format, t_ftprintf *t, t_params *params)
 {
-	ft_strncat(params->buf, format, 1);
-	fill_string(params->buf, check_flag(params, ZERO) ? '0' : ' ',
+	add_to_buff(params, (char *)format, 1);
+	fill_string(params, check_flag(params, ZERO) ? '0' : ' ',
 		params->width, check_flag(params, MINUS));
-	params->size += ft_strlen(params->buf);
 	(t->i)++;
 }
 
@@ -75,8 +74,7 @@ void	width_handler(const char *format, t_ftprintf *t, t_params *params)
 	ft_memset(number, 0, 26);
 	if (format[0] == '*' && ++t->i)
 	{
-		params->width = (int)ft_min(va_arg(t->ap, unsigned int),
-			(BUFF_PARAMS - 1));
+		params->width = (int)va_arg(t->ap, unsigned int);
 		return ;
 	}
 	last_number = find_last_number(format);
@@ -87,7 +85,7 @@ void	width_handler(const char *format, t_ftprintf *t, t_params *params)
 	}
 	ft_strncpy(number, format, last_number - format);
 	t->i += last_number - format;
-	params->width = (int)ft_min(ft_atoi(number), (BUFF_PARAMS - 1));
+	params->width = (int)ft_atoi(number);
 }
 
 void	precision_handler(const char *format, t_ftprintf *t, t_params *params)
@@ -103,8 +101,7 @@ void	precision_handler(const char *format, t_ftprintf *t, t_params *params)
 	}
 	else if (format[1] && format[1] == '*')
 	{
-		params->precision = ft_min(va_arg(t->ap, unsigned int),
-			(BUFF_PARAMS - 1));
+		params->precision = va_arg(t->ap, unsigned int);
 		(t->i) += 2;
 		return ;
 	}
@@ -116,7 +113,7 @@ void	precision_handler(const char *format, t_ftprintf *t, t_params *params)
 	}
 	ft_strncpy(number, &format[1], last_number - &format[1]);
 	(t->i) += last_number - format;
-	params->precision = (int)ft_min(ft_atoi(number), (BUFF_PARAMS - 1));
+	params->precision = (int)ft_atoi(number);
 }
 
 void	length_handler(const char *format, t_ftprintf *t, t_params *params)

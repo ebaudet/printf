@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/08 21:47:30 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:23:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ t_params				*params_reset(t_params *params);
 /*
 ** put.c
 */
-int						add_to_buff(t_params *params, char *str, int len);
 void					type_c(t_ftprintf *t, t_params *params);
 void					type_s(t_ftprintf *t, t_params *params);
 void					type_p(t_ftprintf *t, t_params *params);
@@ -165,9 +164,17 @@ void					type_k(t_ftprintf *t, t_params *params);
 */
 char					*find_last_number(const char *str);
 char					*ft_strstrchr(const char *haystack, const char *needle);
-char					*fill_string(char *str, int c, size_t len, int pos);
-char					*fill_zero(char *str, size_t len);
+void					fill_string(t_params *params, int c, size_t len, int pos);
+void					fill_zero(t_params *params, size_t len);
 int						check_flag(t_params *params, t_flag flag);
+
+/*
+** buffer.c
+*/
+int						add_to_buff(t_params *params, char *str, int len);
+void					put_in_buff(t_params *params, char *str, size_t len,
+						int alloc);
+void					precision(t_params *params, int shift);
 
 /*
 ** handler.c
