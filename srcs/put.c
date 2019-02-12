@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:02:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/11 22:23:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/12 00:42:26 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,9 @@ void	type_c(t_ftprintf *t, t_params *params)
 	if (params)
 		params->size = params->size;
 	c = (char)(va_arg(t->ap, int));
-	if (params->width <= 0)
-	{
-		params->buf[0] = c;
-		params->size = 1;
-		return ;
-	}
-	params->size = params->width;
-	if (check_flag(params, MINUS))
-	{
-		params->buf[0] = c;
-		ft_memset(&params->buf[1], check_flag(params, ZERO) ? '0' : ' ',
-		          params->width - 1);
-	}
-	else
-	{
-		ft_memset(params->buf, check_flag(params, ZERO) ? '0' : ' ',
-		          params->width - 1);
-		params->buf[params->width - 1] = c;
-	}
+	add_to_buff(params, &c, 1);
+	fill_string(params, check_flag(params, ZERO) ? '0' : ' ',
+		params->width, check_flag(params, MINUS));
 }
 
 void	type_s(t_ftprintf *t, t_params *params)
@@ -238,24 +222,23 @@ void	type_k(t_ftprintf *t, t_params *params)
 
 	t->size = t->size;
 	have_flag = 0;
-	ft_strcat(params->buf, "\e[");
+	add_to_buff(params, "\e[", -1);
 	if (params->width && ++have_flag)
 	{
 		params->width += check_flag(params, HASH) ? 10 : 0;
 		str = ft_itoa(params->width);
-		ft_strcat(params->buf, str);
+		add_to_buff(params, str, -1);
 		free(str);
 	}
 	else if (check_flag(params, HASH) && ++have_flag)
-		ft_strcat(params->buf, "7");
+		add_to_buff(params, "7", -1);
 	if (check_flag(params, PLUS) && ++have_flag)
-		ft_strcat(params->buf, ";1");
+		add_to_buff(params, ";1", -1);
 	else if (check_flag(params, ZERO) && ++have_flag)
-		ft_strcat(params->buf, ";3");
+		add_to_buff(params, ";3", -1);
 	else if (check_flag(params, MINUS) && ++have_flag)
-		ft_strcat(params->buf, ";4");
+		add_to_buff(params, ";4", -1);
 	if (!have_flag)
-		ft_strcat(params->buf, "0");
-	ft_strcat(params->buf, "m");
-	params->size += ft_strlen(params->buf);
+		add_to_buff(params, "0", -1);
+	add_to_buff(params, "m", -1);
 }
