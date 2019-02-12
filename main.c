@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/11 22:31:53 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/12 01:23:11 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int			main(void)
 	char	*pointer = NULL;
 
 	i = 12;
+	ft_printf("Hello World !\n");
+	// exit(0);
 
 	ft_printf("%#k  -----------------------------------  %k\n");
 	ft_printf("%#k |  ======= STARTING TESTS ========  | %k\n");
@@ -115,10 +117,10 @@ int			main(void)
 
 	// todo: handle float 2^65 -> long long
 	// test_printf("36893488147419103232.0 = %Lf\n", 36893488147419103232.0);
-	// test_printf("%Lf\n", 368934881474191035232.0); //14925 segmentation fault
+	// test_printf("%Lf\n", 36893488147419103232.0); //14925 segmentation fault
 	// => handle this
 	ft_printf("%#kTest différents types :%k\n");
-	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', 5"trois",
+	test_printf("char-%c-%s-%s-%c-%s-%c-\n", 'a', "un", "deux", 'b', "trois",
 	 'e');
 	test_printf("char-%c-%s-%s-%c-%s-%c-%-4i\n", 'a', "un", "deux", 'b',
 	            "trois", 'd', -12);
@@ -186,10 +188,13 @@ int			main(void)
   	test_printf("'%.x'", 0);
 	test_printf("'%.0x'", 0);
 	test_printf("'%#.x'", 0);
+	ft_printf("t1:");
 	test_printf("'%#.0x'", 0);
+	ft_printf("t2:");
 	test_printf("'%#.0x'", 1);
+	ft_printf("t3:");
 	test_printf("'%#.1x'", 1);
-	test_printf("'%#.12x'", 1);
+	test_printf( "'%#.12x'", 1);
 	test_printf("'%#12x'", 1);
 	test_printf("'%#12.5x'", 1);
 	test_printf("'%#-12.5x'", 1);
