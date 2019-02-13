@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 17:58:12 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/11 20:29:01 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/02/13 23:27:30 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	fill_zero(t_params *params, size_t len)
 		return ;
 	str_tmp = (char *)ft_memalloc((len + 1) * sizeof(char));
 	i = -1;
-	while (str[++i] && (str[i] < '1' || str[i] > '9'))
+	while (str[++i] && !((str[i] >= '1' && str[i] <= '9')
+		|| (str[i] >= 'a' && str[i] <= 'f')))
 		str_tmp[i] = str[i];
 	j = -1;
 	while (++j < (int)(len - params->size))
