@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:45:55 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/11 22:46:54 by ebaudet          ###   ########.fr       */
+/*   Updated: 2020/08/03 04:47:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,18 @@ static char	*ft_getsstr(t_ftprintf *t, const char *format)
 t_ftsprintf	*ft_sprintf(const char *format, ...)
 {
 	t_ftprintf	t;
-	char		*str;
 	t_ftsprintf	*out;
 
 	t.size = 0;
 	va_start(t.ap, format);
-	str = ft_getsstr(&t, format);
+	ft_getsstr(&t, format);
 	va_end(t.ap);
-	out = ft_memalloc(sizeof(*out));
+	out = ft_memalloc(sizeof(t_ftsprintf));
 	out->len = t.size;
-	out->str = t.str;
+	out->str = ft_strnew(t.size + 1);
+	ft_memcpy(out->str, t.str, t.size);
+	out->str[t.size] = '\0';
+	free(t.str);
 	return (out);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 22:53:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/12 00:39:36 by ebaudet          ###   ########.fr       */
+/*   Updated: 2020/08/03 04:37:59 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ typedef struct			s_ftprintf
 */
 typedef struct			s_ftsprintf
 {
-	char				*str;
 	int					len;
+	char				*str;
 }						t_ftsprintf;
 
 /*
