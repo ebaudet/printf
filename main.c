@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/21 20:41:51 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/12 01:23:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2020/08/03 04:43:37 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,6 +354,19 @@ int			main(void)
 	test_printf("%    ");
 	test_printf("% \t   ");
 	test_printf("%d",1);
+
+	ft_printf("\n%#kTest des sprintf :%k\n");
+
+	ft_printf("-> %s\n", ft_sprintf("a")->str);
+	ft_printf("-> %s\n", ft_sprintf("b")->str);
+	ft_printf("-> %s\n", ft_sprintf("c")->str);
+	ft_printf("-> %s\n", ft_sprintf("d")->str);
+	ft_printf("-> %s\n", ft_sprintf("to")->str);
+	ft_printf("-> %s\n", ft_sprintf("lu")->str);
+	ft_printf("-> %s\n", ft_sprintf("meo")->str);
+	ft_printf("-> %s\n", ft_sprintf("abc")->str);
+	ft_printf("-> %s\n", ft_sprintf("qwerty")->str);
+	ft_printf("-> %s\n", ft_sprintf("asdfgh")->str);
 
 	fflush(stdout);
 	ft_printf("\n\n------------------------------------\n");

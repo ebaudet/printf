@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/21 21:38:26 by ebaudet           #+#    #+#              #
-#    Updated: 2019/02/11 22:36:08 by ebaudet          ###   ########.fr        #
+#    Updated: 2020/08/03 04:03:31 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ INC		= -I ./includes/
 LIB		=  -L . libftprintf.a
 FLAGS	 = -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -pedantic -ansi
 FLAGS_LESS = -Wall -Wextra -Werror
+FLAGS_LESS =
 DEBUGFLG = -v -da -Q -fsanitize=address -g3
 DEBUGFLG = -fsanitize=address -g3
 # DEBUGFLG =
