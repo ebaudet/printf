@@ -6,14 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:39:09 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/02/06 01:21:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2020/08/03 02:27:47 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-
-#include <stdio.h>
 
 /*
 ** The dtoa() function converts the initial portion of the string
