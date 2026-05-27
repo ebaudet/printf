@@ -284,7 +284,7 @@ cc tests/main.c -I includes libftprintf.a -o demo
 |   |-- get_dec_lenght.c
 |   |-- params.c
 |   `-- buffer.c
-|-- tests/
+`-- tests/
     `-- main.c
 ```
 
