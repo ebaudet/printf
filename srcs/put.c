@@ -13,6 +13,23 @@
 #include "libftprintf.h"
 #include "libft.h"
 
+static char	*ft_utoa(uintmax_t n)
+{
+	char		buf[21];
+	int			i;
+
+	i = 20;
+	buf[i] = '\0';
+	if (n == 0)
+		buf[--i] = '0';
+	while (n)
+	{
+		buf[--i] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (ft_strdup(&buf[i]));
+}
+
 void	type_c(t_ftprintf *t, t_params *params)
 {
 	char	c;
@@ -77,11 +94,11 @@ void	type_d(t_ftprintf *t, t_params *params)
 void	type_o(t_ftprintf *t, t_params *params)
 {
 	char					*str;
-	unsigned long long int	value;
+	uintmax_t				value;
 
 	value = (params->length == 0)
-		? va_arg(t->ap, unsigned long long int)
-		: (unsigned long long int)get_signed_int_handler(t, params->length);
+		? va_arg(t->ap, unsigned int)
+		: get_usigned_int_handler(t, params->length);
 	str = ft_lutooct(value);
 	if (check_flag(params, HASH))
 	{
@@ -134,7 +151,7 @@ void	type_u(t_ftprintf *t, t_params *params)
 	value = (params->length == 0)
 		? va_arg(t->ap, unsigned int)
 		: get_usigned_int_handler(t, params->length);
-	str = ft_itoa(value);
+	str = ft_utoa(value);
 	add_to_buff(params, str, -1);
 	precision(params, 0);
 	if (check_flag(params, ZERO) && !check_flag(params, MINUS))
