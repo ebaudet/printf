@@ -20,6 +20,8 @@ static char		*biggerbuf(int const fd, char *buf, int *ret)
 	char	*tmp2;
 
 	*ret = read(fd, tmp, BUFF_SIZE);
+	if (*ret <= 0)
+		return (buf);
 	tmp[*ret] = '\0';
 	tmp2 = buf;
 	buf = ft_strjoin(buf, tmp);
@@ -51,5 +53,6 @@ int				get_next_line(int const fd, char **line)
 	}
 	*line = ft_strdup(buf);
 	free(buf);
+	buf = NULL;
 	return (ret);
 }
