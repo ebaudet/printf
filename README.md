@@ -215,7 +215,7 @@ make test
 Run the test executable:
 
 ```sh
-./test
+./test.out
 ```
 
 The test binary compares many `ft_printf` calls against system `printf` and
@@ -232,7 +232,7 @@ from the test harness and is not necessarily a failing test.
 
 ## Compile Your Own Program
 
-Example `main.c`:
+Example `tests/main.c`:
 
 ```c
 #include "libftprintf.h"
@@ -248,7 +248,7 @@ Compile it against the library:
 
 ```sh
 make
-cc main.c -I includes -L . -lftprintf -o demo
+cc tests/main.c -I includes -L . -lftprintf -o demo
 ```
 
 Run it:
@@ -260,7 +260,7 @@ Run it:
 Alternative direct archive link:
 
 ```sh
-cc main.c -I includes libftprintf.a -o demo
+cc tests/main.c -I includes libftprintf.a -o demo
 ```
 
 ## Project Layout

@@ -1,6 +1,6 @@
 .DS_Store
 .obj/*
-test
+test.out
 libftprintf.a
 libft/.obj/*
 libft/libft.a

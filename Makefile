@@ -52,7 +52,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f test
+	@rm -f test.out
 	make -C libft fclean
 	@rm -f includes/libft.h
 	@echo "fclean : [\033[32mDONE\033[m]"
@@ -60,7 +60,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@cc main.c -o test $(INC) $(LIB) $(DEBUGFLG) $(TEST_FLAGS)
+	@cc tests/main.c -o test.out $(INC) $(LIB) $(DEBUGFLG) $(TEST_FLAGS)
 	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"
 
 file_right:
