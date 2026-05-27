@@ -270,6 +270,8 @@ cc tests/main.c -I includes libftprintf.a -o demo
 |-- Makefile
 |-- includes/
 |   `-- libftprintf.h
+|-- documentation/
+|   `-- documentations and diagrams
 |-- libft/
 |   |-- Makefile
 |   |-- includes/libft.h
@@ -282,7 +284,8 @@ cc tests/main.c -I includes libftprintf.a -o demo
 |   |-- get_dec_lenght.c
 |   |-- params.c
 |   `-- buffer.c
-`-- main.c
+|-- tests/
+    `-- main.c
 ```
 
 ## Notes
