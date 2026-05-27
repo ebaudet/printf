@@ -23,6 +23,7 @@ FLAGS_LESS =
 DEBUGFLG = -v -da -Q -fsanitize=address -g3
 DEBUGFLG = -fsanitize=address -g3
 # DEBUGFLG =
+TEST_FLAGS = -Wno-format
 CC		= gcc
 AR		= ar rc
 RANLIB	= ranlib
@@ -59,7 +60,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@cc main.c -o test $(INC) $(LIB) $(DEBUGFLG)
+	@cc main.c -o test $(INC) $(LIB) $(DEBUGFLG) $(TEST_FLAGS)
 	@echo "\n > \033[36mtest\033[m compilation [\033[32mDONE\033[m]\n"
 
 file_right:
